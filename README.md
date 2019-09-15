@@ -1,31 +1,50 @@
 # checkonchain
-Modules for studying the on-chain behavior of Bitcoin and Decred
-
-
-# On-chain_Analysis
+Python Modules for studying the on-chain behavior of Bitcoin and Decred
 
 ## Purpose of repo
 This repo is a collection of analysis code, tools and published articles for analysing the blockchains of Bitcoin and Decred. 
 
-Based on the on-chain signiatures of BTC and DCR, there is a significant heartbeat for both of these chains which does not apprear with the same conviction for other crypto-assets at this time. These chains also represent the strongest store of value candidates based on my research and opinions to date and thus deserve further reseacrh attention.
+Based on the on-chain signiatures of BTC and DCR, there is a significant heartbeat for both of these chains. These blockchains also represent the strongest store of value candidates based on my fundamental research and opinions to date and thus deserve further research attention.
 
-This repository includes all data and code used to undertake these analyses. Note - I am not a developer, code unlikely to be perfect. Suggestions and ideas welcomed.
+This repository includes all data and code used to undertake these analyses. 
 
-## Notes
-This project is my motivation to learn how to code in Python and utilise github.
+*Note - I am not a developer, code unlikely to be perfect. Suggestions and ideas welcomed.*
 
 ## Goals for these studies
 1. Establish additional rigor for my personal fundamental investment thesis for Bitcoin and Decred
 2. Analyse the scarcity of both Bitcoin and Decred with inspiration from Plan B stock to flow ratio analysis (@100TrillionUSD)
-3. Analyse the scarcity of DCR tickets as a mechanism for scarcity
+3. Analyse the behaviour of DCR tickets as a mechanism for scarcity
 4. Assess the balance between supply issuance, scarcity, ticket behaviour and transaction flows
 5. Establish a set of charting packages with which others can replicate and follow the analysis
+6. Develop an online charting package similar to woobull.com to scratch my own itch encomapsing for both Decred and Bitcion.
 
 
 ## Repo Structure
 This repo is my first and thus structure will develop over time. All code will be Python unless otherwise noted
 
-**Folders**
+```
+checkonchain
+│   README.md
+│   LICENCE    
+│
+└───general (general tools, calling APIs, coin comparisons etc)
+│   │   __init.py__
+│   │   coinmetrics.py (pulls community API data from coinmetrics) [50%]
+|
+└───btconchain
+│   │   __init.py__
+│   │   file012.txt
+│   
+└───dcronchain
+    │   file021.txt
+    │   file022.txt
+```
+
+
+
+
+
+
 
 - **Monetary Premiums** - Article and data for [medium article located here.](https://medium.com/@_Checkmatey_/monetary-premiums-can-altcoins-compete-with-bitcoin-54c97a92c6d4)
 - **Coinmetrics** - Contains all scripts for extracting data from Coinmetrics

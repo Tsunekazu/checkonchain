@@ -10,7 +10,13 @@ import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
 
-#Set constants
+
+"""
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DECRED SUPPLY FUNCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+"""
+#Set constants for DECRED
 initial_sply = 1.68e6
 initial_W = 0
 initial_S = 0.5*initial_sply
@@ -23,6 +29,7 @@ halving = 6144
 blk_min = 1
 blk_max = 368000
 blk_time = 5 #min
+atoms = 1e8
 
 """
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -42,7 +49,7 @@ def b_rew(blk):
         response = initial_br*(100/101)**schedule(blk)
     return response
 
-def tot_sply(blk):
+def supply_function(blk):
     response=np.zeros((blk,8))
     response[0,0]=int(0)
     response[0,1]=initial_sply
@@ -65,7 +72,7 @@ def tot_sply(blk):
 
 #print(b_rew(blk_max))
 
-data = tot_sply(blk_max)
+data = supply_function(blk_max)
 columns=['blk','tot','W','S','F','br','inf','S2']
 df = pd.DataFrame(data=data,columns=columns)
 
@@ -86,13 +93,13 @@ Sply['Premne_W'] = initial_S / Sply['W']
 Sply['Premne_Tot'] = initial_S / Sply['tot']
 
 
-tic = pd.read_csv("dcr_difficulty.csv")
-tic
-tic.columns=['blk','blk2', 'axis', 'bin', 'circ', 'pool', 'time', 'part', 'count']
+tic = pd.read_csv("D:\code_development\checkonchain\checkonchain\scrap\dcr_difficulty.csv")
+tic.head(0)
+tic.columns=['blk','blk2', 'time', 'circ', 'pool','count', 'pow_hashrate', 'pow_work', 'pow_offset']
 tic['pce']=tic['pool']/tic['count']
 tic['part_tot']=tic['pool']/21e6
-
-
+tic['pool'] = tic['pool']/1e8
+tic.tail(5)
 
 """
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,52 +112,93 @@ Plot Sply curves
 #fig.show()
 
 """traces from Sply"""
-fig=go.Figure()
-fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['W'],
-    mode='lines',
-    name='PoW'))
-fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['S'],
-    mode='lines',
-    name='PoS'))
-#fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['F'],
-#    mode='lines',
-#    name='Fn'))
-#fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['tot'],
-#    mode='lines',
-#    name='Tot'))
+fig = make_subplots(specs=[[{"secondary_y": True}]])
+fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['W'],mode='lines',name='PoW'))
+fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['S'],mode='lines',name='PoS'))
+fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['F'],mode='lines',name='Treasury'))
 """traces from tic"""
-fig.add_trace(go.Scattergl(x=tic['blk'], y=tic['pool']*tic['circ'],
-    mode='lines',
-    name='Ticket Pool'))
-#fig.add_trace(go.Scattergl(x=tic['blk'], y=tic['circ'],
-#    mode='lines',
-#    name='Tc.Cir'))
-"""traces from crd"""
-#fig.add_trace(go.Scattergl(x=crd['blk'], y=crd['SplyCur'],
-#    mode='lines',
-#    name='CM.Cir'))
-fig.update_layout(
-    images=[
-        go.layout.Image(
-            source="Capture.JPG",
-            xref="paper",
-            yref="paper",
-            sizing="stretch",
-            opacity=0.5,
-            layer="above"
-        )
-    ]
-)
+fig.add_trace(go.Scattergl(x=tic['blk'], y=tic['pool'],mode='lines',name='Ticket Pool'))
 fig.update_yaxes(
-    title_text="<b>Supply (DCR)</b>", 
-    type="linear"
-)
+    title_text="<b>Block Height</b>",type="linear")
 fig.update_yaxes(
-    title_text="<b>Block Height</b>", 
-    type="linear"
-)
+    title_text="<b>Supply (DCR)</b>",type="linear")
 fig.update_layout(template="plotly_white")
 fig.show()
+
+
+
+
+
+'''$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'''
+
+
+
+
+fig = make_subplots(specs=[[{"secondary_y": True}]])
+# Add traces
+fig.add_trace(
+    go.Scatter(x=Sply['blk'], y=Sply['W'], 
+    name="PoW Sply"),
+    secondary_y=False,
+)
+fig.add_trace(
+    go.Scatter(x=Sply['blk'], y=Sply['S'], 
+    name="PoS Sply"),
+    secondary_y=False,
+)
+fig.add_trace(
+    go.Scatter(x=tic['blk'], y=tic['pool'], 
+    name="Tic Pool"),
+    secondary_y=False,
+)
+fig.add_trace(
+    go.Scatter(x=tic['blk'], y=tic['pow_hashrate'], 
+    name="PoW Hashrate"),
+    secondary_y=True
+)
+# Add figure title
+fig.update_layout(
+    title_text="Supply and Hashrate"
+)
+# Set x-axis title
+fig.update_xaxes(title_text="Block Height")
+# Set y-axes titles
+fig.update_yaxes(
+    title_text="<b>Supply (DCR)</b>",
+    type="linear",
+    secondary_y=False
+)
+fig.update_yaxes(
+    title_text="<b>PoW Hashrate</b>", 
+    type="log", 
+    secondary_y=True
+)
+fig.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 """
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -275,6 +323,13 @@ fig.update_yaxes(
 )
 fig.update_layout(template="plotly_white")
 fig.show()
+
+
+
+
+
+
+
 
 
 

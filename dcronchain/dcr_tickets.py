@@ -7,10 +7,11 @@ import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
 
+client = DcrdataClient("https://alpha.dcrdata.org/")
 
 class Extract_dcrdata():
     
-    client = DcrdataClient("https://alpha.dcrdata.org/")
+
     
     def __init__(self):
         pass
@@ -75,9 +76,9 @@ class Extract_dcrdata():
 a = Extract_dcrdata().dcr_difficulty()
 a.head(5)
 b = Extract_dcrdata().dcr_performance()
-b.tail(5)
+b.tail(50)
 
-b.to_csv(r"dcr_difficulty.csv")
+b.to_csv(r"D:\code_development\checkonchain\checkonchain\scrap\dcr_difficulty.csv")
 
 #DCRTicketData.to_csv(r'F:\Research\tic.csv')
 #Plot as an express line chart
