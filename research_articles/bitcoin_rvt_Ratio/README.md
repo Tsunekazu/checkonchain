@@ -24,11 +24,11 @@ The Volume of BTC is considered an **on-chain property** whilst the correspondin
 
 Given the fixed supply of BTC, it reasonably follows that a high or increasing demand for on-chain BTC volume should result in a corresponding increase in the networks value (and vice-versa). Indeed this is what has been observed through the first 10 years of Bitcoin history and we can see a strong correlation between on-chain transaction flows and Bitcoin Market Valuation.
 
-![Bitcoin Transaction Demand Table](01_table_concept.png)
+![Bitcoin Transaction Demand Table](images/01_table_concept.png)
 
 As can be seen in the chart below of Bitcoin's 10 year history, there is a strong correlation between demand for on-chain transactions and the market capitalisation of the Bitcoin network.
 
-![Comparison between On-chain Transactions and Bitcoing Market Capitalisation.](02_chart_valuevstransfer.png)
+![Comparison between On-chain Transactions and Bitcoing Market Capitalisation.](images/02_chart_valuevstransfer.png)
 
 ## The NVT Ratio
 
@@ -36,7 +36,7 @@ The **NVT ratio** provides a gauge to whether the current demand for Bitcoin blo
 
 The **NVT Ratio** simply calculated by dividing the Bitcoin Market Cap by the Daily On-chain Transaction Value in USD.
 
-![NVT Calculation.](03_nvt_ratio_eq.png)
+![NVT Calculation.](images/03_nvt_ratio_eq.png)
 
 Since transaction flow fluctuates on a daily basis and is a relatively noisy metric. It is advised to apply smoothing average depending on the timescale and trading strategy employed. Some useful examples are shown in the table below and demonstrated in subsequent examples.
 
@@ -45,13 +45,13 @@ In Summary:
 - The 90 day MA is useful as a macro view over Bitcoin's full history
 - The NVTS or RVTS 
 
-![Summary of NVT Calculations and smoothing averages.](04_nvt_types.png)
+![Summary of NVT Calculations and smoothing averages.](images/04_nvt_types.png)
 
 ## The RVT Ratio
 
 The **RVT Ratio** is based off the same principles as the **NVT Ratio** however utilises the **Realised Cap** rather than the **Market Cap** in the numerator. 
 
-![RVT Ratio Calculation](05_rvt_ratio_eq.png)
+![RVT Ratio Calculation](images/05_rvt_ratio_eq.png)
 
 The [**Realised Cap** is an on-chain metric](https://coinmetrics.io/realized-capitalization/) that estimates the wealth stored in Bitcoin by valuing each UTXO at the price it was last transacted. The Realised Cap is thus a Bitcoin value model that represent the average cost basis of the entire market whilst also discounting lost coins.
 
@@ -65,7 +65,7 @@ When used in tandem, these two ratios provide a powerful gauge of the Bitcoin de
 
 One of the key strengths of the RVT signal over the NVT is that the Realised Price itself is an on-chain native metric. As such, there is a relationshuip between the RVT and the Realised Cap that is native to the chain and not replicated by teh NVT and Market price. It is likely that the RVT will retain signal relevance longer than the NVT for this reason.
 
-![Comparison between NVT and RVT Ratio](06_compare_nvt_rvt.png)
+![Comparison between NVT and RVT Ratio](images/06_compare_nvt_rvt.png)
 
 ## Mental Framework for the NVT and RVT Ratios
 
@@ -73,7 +73,7 @@ A useful mental framework for studying these ratios is presented here.
 - An NVT of 25 means every 25 days, Bitcoin transacts its entire market cap in value.
 - An RVT of 10 means every 10 days, Bitcoin transacts its entire realised cap in value.
 
-![NVT and RVT Framework](07_nvtrvt_framework.png)
+![NVT and RVT Framework](images/07_nvtrvt_framework.png)
 
 
 
@@ -95,7 +95,7 @@ Key indicators confirming a Bull Market are:
 - Strong bullish signal where the NVT and RVT break below 10. 
 - consistent sideways trading of the RVT below 10 and a rangebound NVT below 18 indicate sustainable bullish demand for blockspace with changing network value.
 
-![NVT and RVT Long Term view - Confirming Bull Market](08_chart_lt_bullmarket.png)
+![NVT and RVT Long Term view - Confirming Bull Market](images/08_chart_lt_bullmarket.png)
 
 Note: Interestingly, for the early 2019 bull(?) market, the NVT and RVT approached 18 and 10 respectively, before promptly reversing in August 2019. The mechanism behind this may be linked in part to Tether (USDT), a historically constant demand for Bitcoin block-space, [transitioning to the Ethereum blockchain](https://tether.to/usd%E2%82%AE-and-eur%E2%82%AE-now-supported-on-ethereum/) as well as dominance of off-chain leveraged speculation following the April 2019 short squeeze.
 
@@ -109,7 +109,7 @@ Key indicators of market topping are:
 - The NVT breaks convincingly upwards from the 5 to 18 range signaling market valuation now exceeds transaction utililisation.
 - Confirmation of a blow-off top and transition to Bear Market conditions by the RVT (particularly the RVT Signal) breaking above 10.
 
-![NVT and RVT Long Term view - Potential Bear Market](09_chart_lt_bearmarket.png)
+![NVT and RVT Long Term view - Potential Bear Market](images/09_chart_lt_bearmarket.png)
 
 ## Capitulation and Accumulation
 
@@ -125,7 +125,7 @@ Key indicators of the capitulation and accumulation phase are:
 - Capitulation generally occurs following NVT and RVT ratios reach values above 18 to 27 suggesting the network is heavily underutilised.
 - A strong downtrend in the NVT and RVT ratio suggests a change in market character due to the combination of depressed prices, weak hands selling and smart money accumulating.
 
-![NVT and RVT Long Term view - Accumulation](10_chart_lt_accumulation.png)
+![NVT and RVT Long Term view - Accumulation](images/10_chart_lt_accumulation.png)
 
 # Concluding Remarks
 
@@ -133,7 +133,7 @@ Bitcoin is optimised for securely transferring value. The NVT and RVT ratios off
 
 The NVT and RVT ratios are best applied in tandem as a fast/noisy and slow/convincing signal pair. A summary of key metrics useful to the typical Bitcoin Hodeler are presented in the table below.
 
-![NVT and RVT General Trends](11_nvt_rvt_trends.png)
+![NVT and RVT General Trends](images/11_nvt_rvt_trends.png)
 
 ## Limitations and Notes on the Future
 
