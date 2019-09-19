@@ -55,7 +55,7 @@ The **RVT Ratio** is based off the same principles as the **NVT Ratio** however 
 
 The [**Realised Cap** is an on-chain metric](https://coinmetrics.io/realized-capitalization/) that estimates the wealth stored in Bitcoin by valuing each UTXO at the price it was last transacted. The Realised Cap is thus a Bitcoin value model that represent the average cost basis of the entire market whilst also discounting lost coins.
 
-The Realised Cap has shown to be a naturally smoother and less volatile measure of network valuation than the Market Cap as it filters out off-chain exchange volume and lightning network and sidechain transactions. As such, both the Realised Cap and the RVT Ratio are sheilded from day-to-day market sentiment, emotion and speculation that are reflected in price and Market Cap.
+The Realised Cap has shown to be a naturally smoother and less volatile measure of network valuation than the Market Cap as it filters out off-chain exchange volume and lightning network and sidechain transactions. As such, both the Realised Cap and the RVT Ratio are shielded from day-to-day market sentiment, emotion and speculation that are reflected in price and Market Cap.
 
 The RVT provides a higher conviction, albeit slower signal specially tuned to the macro sentiment of Bitcoin HODLers. The NVT Ratio in contrast is subject to daily price volatility and provides insight into the behaviour of daily market participants. 
 
@@ -63,7 +63,7 @@ When used in tandem, these two ratios provide a powerful gauge of the Bitcoin de
 - The NVT provides a **noisy but fast** indicator
 - The RVT provides a **slower but high conviction** indicator
 
-One of the key strengths of the RVT signal over the NVT is that the Realised Price itself is an on-chain native metric. As such, there is a relationshuip between the RVT and the Realised Cap that is native to the chain and not replicated by teh NVT and Market price. It is likely that the RVT will retain signal relevance longer than the NVT for this reason.
+One of the key strengths of the RVT signal over the NVT is that the Realised Price itself is an on-chain native metric. As such, there is a relationship between the RVT and the Realised Cap that is native to the chain which is not replicated by the NVT and Market price. As a result, it is likely that the RVT will retain signal relevance longer than the NVT and may act as a tool for calibrating fractals over time.
 
 ![Comparison between NVT and RVT Ratio](images/06_compare_nvt_rvt.png)
 
@@ -76,24 +76,23 @@ A useful mental framework for studying these ratios is presented here.
 ![NVT and RVT Framework](images/07_nvtrvt_framework.png)
 
 
-
 # Part 2 - NVT and RVT Market Fractals
-By studying market history, we can determine fractals in behaviour of the NVT and RVT ratio pair that present high conviction market opportunities.
+By studying market history, we can determine behaviour fractals of the NVT and RVT ratio pair that present high conviction market opportunities.
 
 In the following charts and discussions, I present horizontal levels for NVT and RVT charts of 10, 18 and 27. These values have shown historical significance for transitions in market fractals however are guides only and likely to evolve over time. 
 
 ## Confirming Bull Markets
 
-During sustainable bull markets, the value flowing through the blockchain is reasonably expected to increase both as the bitcoin value inflates and with elevated awareness and market participants. This manifests as relatively low NVT and RVT ratios with consistent sideways trading.
+During sustainable bull markets, the value flowing through the blockchain is reasonably expected to increase both as the value of bitcoin inflates and with elevated awareness of market participants. This manifests as relatively low NVT and RVT ratios with consistent sideways trading suggesting demand grows in line with price.
 
-The NVT and RVT broke below a value of 10 at the commencement of the Bull both in 2012 and again in late 2015. The RVT in particular has shown to sustain a value below 10 for the entirity of the 2012-13 and 2015-17 Bull markets maintaining this value into the early Bear.
+The NVT and RVT have historically broken below a value of 10 at the commencement of a Bull, occuring in early 2012 and again in late 2015. The RVT in particular has shown to sustain a value below 10 for the entirity of the 2012-13 and 2015-17 Bull markets, maintaining this value into the early Bear.
 
 The NVT Ratio generally oscillates between a value of around 5 to 18 through bull markets in a sideways pattern. 
 
-Key indicators confirming a Bull Market are:
-- NVT and RVT breaking below 18 indicating increased demand for Bitcoin blockspace.
+Key fractals confirming a sustainable Bull Market are:
+- NVT and RVT breaking below 10 indicating increased demand for Bitcoin blockspace.
 - Strong bullish signal where the NVT and RVT break below 10. 
-- consistent sideways trading of the RVT below 10 and a rangebound NVT below 18 indicate sustainable bullish demand for blockspace with changing network value.
+- Consistent sideways trading of the RVT below 10 and a rangebound NVT below 18 indicate sustainable bullish demand for blockspace with changing network value.
 
 ![NVT and RVT Long Term view - Confirming Bull Market](images/08_chart_lt_bullmarket.png)
 
