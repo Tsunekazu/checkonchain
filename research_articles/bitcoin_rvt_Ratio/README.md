@@ -8,17 +8,17 @@ The NVT and RVT ratios are akin to a Price to Earnings Ratio (PE Ratio) for Bitc
 
 **If you are new to on-chain analysis looking for somewhere to start or prefer video format, I cover everything you need to know about both the NVT and the RVT ratios as part of our [Ready Set Crypto Bitcoin Masterclass](https://www.youtube.com/watch?v=_Spm1c-aZmo)**.
 
-Both the NVT and RVT ratios are presented by Willy Woo at [woobull.com](http://charts.woobull.com/).
+- Both the NVT and RVT ratios are presented by Willy Woo at [woobull.com](http://charts.woobull.com/).
 
-All data presented in this paper is sourced from the [Coinmetrics.io community dataset](https://coinmetrics.io/charts/).
+- All data presented in this paper is sourced from the [Coinmetrics.io community dataset](https://coinmetrics.io/charts/).
 
-[This chart from Coinmetrics](https://coinmetrics.io/charts/#assets=btc_zoom=1284478560000,1568764800000_formula=W1siTWFya2V0IFByaWNlIiwiUmVkIiwwLCJCVEMuUHJpY2VVU0QiXSxbIlJlYWxpc2VkIFByaWNlIiwiQmx1ZSIsMCwiQlRDLkNhcFJlYWxVU0QvQlRDLlNwbHlDdXIiXSxbIk5WVF8yOCIsIk9yYW5nZSIsMSwic21hKEJUQy5DYXBNcmt0Q3VyVVNEL0JUQy5UeFRmclZhbFVTRCwyOCkiXSxbIk5WVFMiLCJWaW9sZXQiLDEsIkJUQy5DYXBNcmt0Q3VyVVNEL3NtYShCVEMuVHhUZnJWYWxVU0QsMjgpIl0sWyJSVlRfMjgiLCJQdXJwbGUiLDEsInNtYShCVEMuQ2FwUmVhbFVTRC9CVEMuVHhUZnJWYWxVU0QsMjgpIl0sWyJSVlRTIiwiRGFya1R1cnF1b2lzZSIsMSwiQlRDLkNhcFJlYWxVU0Qvc21hKEJUQy5UeFRmclZhbFVTRCwyOCkiXV0) is setup with all NVT, RVT and Pricing models considered in this paper for readers to experiment themselves.
+- [This chart from Coinmetrics](https://coinmetrics.io/charts/#assets=btc_zoom=1284478560000,1568764800000_formula=W1siTWFya2V0IFByaWNlIiwiUmVkIiwwLCJCVEMuUHJpY2VVU0QiXSxbIlJlYWxpc2VkIFByaWNlIiwiQmx1ZSIsMCwiQlRDLkNhcFJlYWxVU0QvQlRDLlNwbHlDdXIiXSxbIk5WVF8yOCIsIk9yYW5nZSIsMSwic21hKEJUQy5DYXBNcmt0Q3VyVVNEL0JUQy5UeFRmclZhbFVTRCwyOCkiXSxbIk5WVFMiLCJWaW9sZXQiLDEsIkJUQy5DYXBNcmt0Q3VyVVNEL3NtYShCVEMuVHhUZnJWYWxVU0QsMjgpIl0sWyJSVlRfMjgiLCJQdXJwbGUiLDEsInNtYShCVEMuQ2FwUmVhbFVTRC9CVEMuVHhUZnJWYWxVU0QsMjgpIl0sWyJSVlRTIiwiRGFya1R1cnF1b2lzZSIsMSwiQlRDLkNhcFJlYWxVU0Qvc21hKEJUQy5UeFRmclZhbFVTRCwyOCkiXV0) is setup with all NVT, RVT and Pricing models considered in this paper for readers to experiment themselves.
 
 # Part 1 - Background to Transaction Flow Metrics
 The utilisation of Bitcoin as a transfer and savings mechanism carries an on-chain signature as coins are transferred between addresses. Since we can monitor these on-chain transactions, it is possible to evaluate:
 
 - The **Volume of BTC** that is being transferred over the network
-- The **Value in USD** transferred by assigning a BTC price at the time of the transaction
+- The **Value in USD** transferred by assigning a price at the time of the transaction
 
 The Volume of BTC is considered an **on-chain property** whilst the corresponding value in USD is an applied measure, reliant on a data feed (price) that is external to the Bitcoin protocol.
 
@@ -43,7 +43,7 @@ Since transaction flow fluctuates on a daily basis and is a relatively noisy met
 In Summary:
 - The 28 day MA is useful as a macro view over a market cycle (2-3 years)
 - The 90 day MA is useful as a macro view over Bitcoin's full history
-- The NVTS or RVTS 
+- The NVTS or RVTS takes the average of only transaction volume making it more sensitive to movements in price. Thus is it best applied as a trading indicator and tends to adhere to basic technical analysis.
 
 ![Summary of NVT Calculations and smoothing averages.](images/04_nvt_types.png)
 
