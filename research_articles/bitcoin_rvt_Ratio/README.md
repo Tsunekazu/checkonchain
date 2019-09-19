@@ -90,22 +90,24 @@ The NVT and RVT have historically broken below a value of 10 at the commencement
 The NVT Ratio generally oscillates between a value of around 5 to 18 through bull markets in a sideways pattern. 
 
 Key fractals confirming a sustainable Bull Market are:
-- NVT and RVT breaking below 10 indicating increased demand for Bitcoin blockspace.
+- NVT and RVT breaking below 18 indicating increased demand for Bitcoin blockspace relative to market value.
 - Strong bullish signal where the NVT and RVT break below 10. 
 - Consistent sideways trading of the RVT below 10 and a rangebound NVT below 18 indicate sustainable bullish demand for blockspace with changing network value.
 
 ![NVT and RVT Long Term view - Confirming Bull Market](images/08_chart_lt_bullmarket.png)
 
-Note: Interestingly, for the early 2019 bull(?) market, the NVT and RVT approached 18 and 10 respectively, before promptly reversing in August 2019. The mechanism behind this may be linked in part to Tether (USDT), a historically constant demand for Bitcoin block-space, [transitioning to the Ethereum blockchain](https://tether.to/usd%E2%82%AE-and-eur%E2%82%AE-now-supported-on-ethereum/) as well as dominance of off-chain leveraged speculation following the April 2019 short squeeze.
+Note: Interestingly, for the early 2019 bull market, the NVT and RVT approached 18 and 10 respectively, before promptly reversing in August 2019. The mechanism behind this may be linked in part to Tether (USDT), a historically constant demand for Bitcoin block-space, [transitioning to the Ethereum blockchain](https://tether.to/usd%E2%82%AE-and-eur%E2%82%AE-now-supported-on-ethereum/) as well as dominance of off-chain leveraged speculation following the April 2019 short squeeze.
 
 ## Signalling Weakness in the Bull
 
-In general, the strongest NVT and RVT signal for a weakening Bull is a transition from sideways into a distinct uptrend. Bear markets are characterised by a dominance of off-chain exchange based trade volume which drives the reduction in the NVT and RVT denominator.  
+In general, the strongest NVT and RVT signal for a weakening Bull is a transition from sideways trading into a distinct uptrend. Bear markets are typically characterised by a dominance of off-chain exchange based trade volume that drives a reduction in the NVT and RVT denominator (increasing the ratio).  
 
-Naturally, the NVT will react first to market tops given its sensitivity to price however at the cost of more noise and more false signals (as seen in early 2013). The RVT provides a slower but higher conviction signal to confirm this transition to Bear market conditions.
+Naturally, the NVT will react first to market tops given its sensitivity to price however at the cost of more noise and more false signals (as seen in early 2013 where it triggered early). The RVT provides a slower but higher conviction signal to confirm this transition to Bear market conditions.
 
-Key indicators of market topping are:
-- The NVT breaks convincingly upwards from the 5 to 18 range signaling market valuation now exceeds transaction utililisation.
+As such, the NVT can provide early warning of a reduced demand for transactions that can be confirmed by similar weakening in the RVT ratio.
+
+Key fractals of market topping are:
+- The NVT breaks convincingly upwards from the 5 to 18 range signaling market valuation is beginning to exceed transaction utility.
 - Confirmation of a blow-off top and transition to Bear Market conditions by the RVT (particularly the RVT Signal) breaking above 10.
 
 ![NVT and RVT Long Term view - Potential Bear Market](images/09_chart_lt_bearmarket.png)
@@ -120,25 +122,25 @@ During the final capitulation, a high volume of sellers transact on-chain seekin
 
 This has shown to trigger a reversal of the NVT and RVT ratios into a downtrend until such a time that a sustainable bull is back in effect.
 
-Key indicators of the capitulation and accumulation phase are:
-- Capitulation generally occurs following NVT and RVT ratios reach values above 18 to 27 suggesting the network is heavily underutilised.
+Key fractals of the capitulation and accumulation phase are:
+- Capitulation generally occurs following NVT and RVT ratios reaching values above 18 to 27 suggesting the network is heavily under-utilised.
 - A strong downtrend in the NVT and RVT ratio suggests a change in market character due to the combination of depressed prices, weak hands selling and smart money accumulating.
 
 ![NVT and RVT Long Term view - Accumulation](images/10_chart_lt_accumulation.png)
 
 # Concluding Remarks
 
-Bitcoin is optimised for securely transferring value. The NVT and RVT ratios offer insight into the Bitcoin network valuation normalised against this demand for blockspace. Given the fixed supply nature of bitcoins, increases and decreases in demand for block-space have shown to have a corresponding signal on shifting macro market trends.
+Bitcoin is optimised for securely transferring value. The NVT and RVT ratios offer insight into the Bitcoin network valuation normalised against this demand for blockspace. Given the fixed supply nature of bitcoins, increases and decreases in demand for block-space have shown to have a corresponding signal on the macro market trends.
 
-The NVT and RVT ratios are best applied in tandem as a fast/noisy and slow/convincing signal pair. A summary of key metrics useful to the typical Bitcoin Hodeler are presented in the table below.
+The NVT and RVT ratios are best applied in tandem as a fast/noisy and slow/convincing signal pair. A summary of key metrics useful to the typical Bitcoin HODLer are presented in the table below for reference.
 
 ![NVT and RVT General Trends](images/11_nvt_rvt_trends.png)
 
 ## Limitations and Notes on the Future
 
-The NVT and RVT Ratios rely on on-chain transactions and as the Bitcoin market continues it's exponential evolution, volumes occuring on-chain signiatures will similarly evolve over time.
+The NVT and RVT Ratios rely on on-chain transactions and as the Bitcoin market continues it's exponential evolution, volumes occuring on-chain will similarly evolve over time.
 
-Volume will continue to move off-chain to layer 2 solutions like Lightning Network, Liquid sidechain and third party 'crypto banks', exchanges and custodians. As such, the fractals and key levels discussed will likely evolve over time with these shifts in demand.
+Volume will continue to move off-chain to layer 2 solutions like Lightning Network, sidechains and third party 'crypto banks', exchanges and custodians. As such, the fractals and key levels discussed will likely evolve over time with these shifts in demand.
 
 As noted, the RVT and Realised Cap will likely be more resistant to obselecence in comparison to the NVT as they are more closely native to the chain. I expect the RVT fractals will continue to provide a reasonable fractal benchmark against which the NVT can be recalibrated over time.
 
