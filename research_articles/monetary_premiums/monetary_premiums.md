@@ -26,7 +26,7 @@ Some notable examples of unforgeable costliness are:
 * Establishing and operating a gold mine requires a significant outlay of CAPEX and OPEX costs as well as significant time and human effort required from exploration through to production. Gold as an element is also of low abundance on earth due to its atomic properties **(Very Scarce)**.
 * Bitcoin’s proof-of-work ensures that bitcoin issuance is impossible without expending computational resources and electrical demands. The immaculate conception by Satoshi Nakamoto captures the unforgeable characteristics of a Unique origin story as well as the physical costs of mining creating an unparalleled digital scarcity **(Extremely Scarce)**.
 
-![Scarcity_examples](image_1.png)
+![Scarcity_examples](images/image_1.png)
 
 An unforgeable costliness is a pre-requisite for establishing a genuine monetary premium as is distinguishes hard money, store of value candidates from those where the supply may be manipulated at low cost to the creator. Fiat currencies have are not considered scarce as supply has no real cap and a centralised authority is able to control the inflation rate at near zero cost.
 
@@ -43,7 +43,7 @@ It is an underlying assumption of this paper that a crypto asset must have an un
 
 Therefore, to evaluate this problem, I selected the following large cap, fixed supply altcoins which have deterministic issuance schedules to assess if the unforgeable costliness is sufficient to develop a competitive monetary premium. The table below summarises the unforgeable costliness that is required for producing each block (and thus enable the creation of coins).
 
-![Selected_altcoins](image_2.png)
+![Selected_altcoins](images/image_2.png)
 
 ## Modelling Scarcity Against Market Value
 Recently, PlanB completed a number of exceptional studies into the relationship between Bitcoin’s stock-to-flow ratio and the network value (Market Capitalisation). What was established is that a power-law, with a correlation factor in excess of 95%, exists with a reasonable agreement to the precious metal’s markets. Further analysis showed that the model fit was robust enough that taking many sub-sets of Bitcoin’s data (accounting for lost coins, various timescales etc) returned a comparable power law distribution.
@@ -52,7 +52,7 @@ These analyses establish confidence that scarcity (as measured by stock-to-flow 
 
 Power laws are rare but important relationships which often describe natural phenomena such as the distribution of earthquake magnitude against occurrence frequency, variation of planetary orbital speed with distance and the distribution of biological variance. Power laws also appear in many observed distributions in human behaviour, population and demographic densities and even in financial wealth distributions.
 
-![Plan B modelling for the Bitcoin stock-to-flow vs market value power law](image_3.png)
+![Plan B modelling for the Bitcoin stock-to-flow vs market value power law](images/image_3.png)
 
 ## A Natural Phenomenon
 Bitcoin is one of the most organic free market assets that the world has ever seen. It has grown from its cypher-punk roots and a market value of exactly zero to a total market value that exceeded $320 Billion in less than 10 years. Bitcoin has attained value because it provides a useful service for people given its soundness as money driven by its and ever-increasing scarcity (rising S2F Ratio).
@@ -70,7 +70,7 @@ However, a position I find more compelling, is undertaking a comparison between 
 
 For this set of fixed supply altcoins, I have established the stock-to-flow ratio over time based on measured supply data as well as the Market capitalisation with data sourced from Coinmetrics.io. Given variable hashrates and other natural anomalies, I have applied a 28-day average to the calculation of stock-to-flow for a cleaner visualisation (which has little distortion to the resulting observations aside from the desired smoothing and horizontal zones of data points at halving events).
 
-![28-day Stock-to-Flow ratio vs Market Capitalisation for select fixed supply alt-coins (data source coinmetrics.io)](image_4.png)
+![28-day Stock-to-Flow ratio vs Market Capitalisation for select fixed supply alt-coins (data source coinmetrics.io)](images/image_4.png)
 
 What is intriguing with this data set is that it is based purely on the daily calculated issuance rate (projected as constant over 365 days) to determine the S2F ratio and the recorded Market Capitalisation with no additional assumptions applied. A few observations I have determined from this study comparing each coin’s data points and fractals to the ‘centre of gravity’ in white:
 * **Bitcoin’s ‘centre of gravity’** does indeed appear to be just that with almost all assets converging or attempting to converge to this trendline throughout their lifespan.
@@ -83,9 +83,9 @@ What is intriguing with this data set is that it is based purely on the daily ca
 ## Monetary Volatility
 To further formalise these observations, I calculated the number of days that each coin’s market value was above the ‘centre of gravity’ to establish the proportion of its lifespan it has held an exceptional monetary premium. I also look at the maximum and minimum deviation away from this line as gauge for **‘monetary volatility’** or the ability for each coin to maintain its monetary premium over time. This is a similar study to Plan B’s S2F Multiple metric.
 
-![Deviation from the ‘centre of gravity’ mapped onto Stock-to-flow ratio](image_5.png)
+![Deviation from the ‘centre of gravity’ mapped onto Stock-to-flow ratio](images/image_5.png)
 
-![Summary of the days above the ‘centre of gravity’ and the max/min magnitude of deviation away from this line](image_6.png)
+![Summary of the days above the ‘centre of gravity’ and the max/min magnitude of deviation away from this line](images/image_6.png)
 
 **Dash** and **Bitcoin Cash** experience significant downswings away from the mean which indicate an inability to retain a firm monetary premium over time. By far, **Bitcoin Cash** has the poorest behaviour, reaching only 36% growth above the mean, once. It can be argued that, **Bitcoin Cash** may be reasonably discounted as an asset that does not have a monetary premium and is thus unattractive as any form of scarce fixed supply money.
 
@@ -117,7 +117,7 @@ Similarly, I remain hesitant regarding **Dash** as a store of value candidate gi
 **Decred’s** observable high performance suggests that DCR may be developing a convincing monetary premium and is something that I believe is largely undervalued by the market today. However, given the fundamentals behind Decred are extremely close to those of **Bitcoin**, although with notable areas of differentiation, it is quite likely that DCR will attract substantial interest if this monetary performance continues, liquidity grows and the market catches on. 
 
 ## Signature
-> ![Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](dcr_qr.png)
+> ![Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](images/dcr_qr.png)
 
 > [Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](https://explorer.dcrdata.org/address/Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3)
 
