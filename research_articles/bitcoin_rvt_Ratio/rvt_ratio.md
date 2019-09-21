@@ -155,26 +155,16 @@ As noted, the RVT and Realised Cap will likely be more resistant to obselecence 
 ## Disclaimer
 Nothing contained in this article shall be considered as investment or trading advice.
 
-## Signature
-
-**Bitcoin**
-
->![3Eqob76zToeKf2m9JYg3Z9ZUWSVsySRewZ](images/btc_qr.png)
-
->[3Eqob76zToeKf2m9JYg3Z9ZUWSVsySRewZ](https://blockstream.info/address/3Eqob76zToeKf2m9JYg3Z9ZUWSVsySRewZ)
-
-
-
-**Decred**
->![Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](images/dcr_qr.png)
-
->[Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](https://explorer.dcrdata.org/address/Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3)
-
->Signed Message (Article Title): H9rQB6Xzh9rIpw7F4KyvZMxHaAc4EekSZaHl3XtBPwv5PkI5v0fAv85w11ez2SYHpXMK3h8oh3N4nuhJ2bE6jRM=
-
 ## Aknowledgements
-A huge thanks to Doc, Mav and the whole community at [ReadySetCrypto](readysetcrypto.com) for exploring these ideas as it happened.
+A huge thanks to Doc, Mav and the whole community at [ReadySetCrypto](readysetcrypto.com) for exploring these ideas as it happened. 
 
+Be sure to keep up to date with my latest work by following me [@_Checkmatey_](https://twitter.com/_Checkmatey_) and [@ReadySetCrypto](https://twitter.com/readysetcrypto) on twitter. 
+
+I am also developing a Masterclass for Bitcoin Fundamentals and On-chain analysis which you can find here.
+
+- [Bitcoin Realised Cap](https://www.youtube.com/watch?v=KlaZeO9iq0g)
+- [Bitcoin NVT and RVT Ratio](https://www.youtube.com/watch?v=_Spm1c-aZmo&t=4s)
+- [Bitcoin Energy Money](https://www.youtube.com/watch?v=Oka3aiJcBm4&t=3s)
 
 ## References
 
@@ -187,3 +177,17 @@ A huge thanks to Doc, Mav and the whole community at [ReadySetCrypto](readysetcr
 [4] Cryptopoiesis – [Brief Observations and questions on the Lightning Network’s effect on NVT Ratio](https://blog.goodaudience.com/brief-observations-and-questions-on-the-lightning-networks-effect-bitcoin-s-nvt-ratio-3beb4bd61f1f), 2018
 
 [5] Norupp – [NVT Ratio and NVT Signal – Detect Bitcoin Bubbles](https://www.norupp.com/nvt-ratio-and-nvt-signal-ratio-detect-bitcoin-bubbles/), 2019
+
+## Signatures
+
+**Bitcoin**
+>![3Eqob76zToeKf2m9JYg3Z9ZUWSVsySRewZ](images/btc_qr.png)
+
+>[3Eqob76zToeKf2m9JYg3Z9ZUWSVsySRewZ](https://blockstream.info/address/3Eqob76zToeKf2m9JYg3Z9ZUWSVsySRewZ)
+
+**Decred**
+>![Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](images/dcr_qr.png)
+
+>[Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](https://explorer.dcrdata.org/address/Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3)
+
+>Signed Message (Article Title): H9rQB6Xzh9rIpw7F4KyvZMxHaAc4EekSZaHl3XtBPwv5PkI5v0fAv85w11ez2SYHpXMK3h8oh3N4nuhJ2bE6jRM=
