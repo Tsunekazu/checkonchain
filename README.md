@@ -77,5 +77,6 @@ checkonchain
 
 
 ## Donations
-BTC - 34cw55q8e71613VMxepGgFXqLcpU52CZig
-DCR - DsmQRL9ZPzcVsUda6vN1aSmmCQPXdm7HwVk
+BTC - 
+
+DCR - Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE
