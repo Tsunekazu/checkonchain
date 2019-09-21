@@ -180,14 +180,9 @@ I am also developing a Masterclass for Bitcoin Fundamentals and On-chain analysi
 
 ## Signatures
 
-**Bitcoin**
->![3Eqob76zToeKf2m9JYg3Z9ZUWSVsySRewZ](images/btc_qr.png)
-
->[3Eqob76zToeKf2m9JYg3Z9ZUWSVsySRewZ](https://blockstream.info/address/3Eqob76zToeKf2m9JYg3Z9ZUWSVsySRewZ)
-
 **Decred**
->![Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](images/dcr_qr.png)
+>![Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE](images/dcr_qr.png)
 
->[Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](https://explorer.dcrdata.org/address/Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3)
+>[Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE](https://explorer.dcrdata.org/address/Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE)
 
->Signed Message (Article Title): H9rQB6Xzh9rIpw7F4KyvZMxHaAc4EekSZaHl3XtBPwv5PkI5v0fAv85w11ez2SYHpXMK3h8oh3N4nuhJ2bE6jRM=
+>Signed Message (Article Title): H3zirdA7QV5MfLCksJVT5uCS1ROmu9Gj85DgKkX15JUWDg+aJf28cE/IUcCJ6zNuvBKb/J+4LrdWU3GFJ+Y5pvE=
