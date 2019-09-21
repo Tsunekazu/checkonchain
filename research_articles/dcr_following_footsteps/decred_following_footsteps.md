@@ -3,7 +3,7 @@
 
 1. **Decred's** security model and consensus mechanism utilises an innovative Hybrid PoW/PoS system. This provides superior [lender assurances](https://medium.com/@permabullnino/introduction-to-crypto-accounting-an-analysis-of-decred-as-an-accounting-system-4d3e67fce28?source=search_post---------2) (Permabull Nino, 2019) and a [higher cost of attack per unit of market cap](https://medium.com/decred/decreds-hybrid-protocol-a-superior-deterrent-to-majority-attacks-9421bf486292) (Zubair Zia, 2018) when compared to **Bitcoin**.
 
-2. Pre-established governance mechanism which allocates decision making capacity to DCR holders. The governance system is comprised of off-chain signaling via [Politeia](https://proposals.decred.org) and soclai media channels (Matrix, Twitter, Reddit etc.) and binding on-chain voting via the **Decred** ticket system.
+2. Pre-established governance mechanism which allocates decision making capacity to DCR holders. The governance system is comprised of off-chain signaling via [Politeia](https://proposals.decred.org) and social media channels (Matrix, Twitter, Reddit etc.) and binding on-chain voting via the **Decred** ticket system.
 
 3. Distribution of block rewards allocated as 60% to Proof-of-work miners to cover CAPEX and OPEX costs, 30% to DCR ticket holders to incentivise governance participation and 10% to a **Decred** Treasury that is owned ([and soon to be operated by](https://proposals.decred.org/proposals/c96290a2478d0a1916284438ea2c59a1215fe768a87648d04d45f6b7ecb82c3f)) **Decred** stakeholders. This is in contrast to **Bitcoin's** 100% allocation to Proof-of-Work.
 

@@ -116,6 +116,14 @@ Similarly, I remain hesitant regarding **Dash** as a store of value candidate gi
 
 **Decred’s** observable high performance suggests that DCR may be developing a convincing monetary premium and is something that I believe is largely undervalued by the market today. However, given the fundamentals behind Decred are extremely close to those of **Bitcoin**, although with notable areas of differentiation, it is quite likely that DCR will attract substantial interest if this monetary performance continues, liquidity grows and the market catches on. 
 
+## Signature
+> ![Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](dcr_qr.png)
+
+> [Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3](https://explorer.dcrdata.org/address/Dskryq1zhgXBBx5Qw8fnV588iSYeY7d6JY3)
+
+> Signed Message (Article Title): HxufxXSfb2UvZSAV+sTURqntQjd0B+0yb/9quc8W4m62QMBFyyK6ndqwvEFc6IF1KuKjB4XEoudQ7ZAhTUnNVyg=
+
+
 ## References
 [1]  Modelling Bitcoin’s Value with Scarcity, https://medium.com/@100trillionUSD/modeling-bitcoins-value-with-scarcity-91fa0fc03e25 – Plan B, 2009
 
