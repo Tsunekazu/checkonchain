@@ -78,13 +78,13 @@ A useful mental framework for studying these ratios is presented here.
 # Part 2 - NVT and RVT Market Fractals
 By studying market history, we can determine fractals in the NVT and RVT ratio pair which present high conviction market opportunities.
 
-In the following charts and discussions, I present horizontal levels for NVT and RVT charts of 10, 18 and 27. These values have shown historical significance for transitions in market character however are my peronal guides only and can be expected to evolve over time.
+In the following charts and discussions, I present horizontal levels for NVT and RVT charts of 10, 18 and 27. These values have shown historical significance for transitions in market character however are my personal guides only and can be expected to evolve over time.
 
 ## Confirming Bull Markets
 
 During sustainable bull markets, the value flowing through the blockchain is reasonably expected to increase both as the value of bitcoin inflates and as awareness increases for more market participants. This manifests as relatively low NVT and RVT ratio with consistent sideways trading suggesting demand growing in line with price appreciation.
 
-The NVT and RVT have historically broken below a value of 10 at the commencement of a Bull, occuring both in early 2012 and again in late 2015. The RVT in particular has shown to sustain a value below 10 for the entirity of the 2012-13 and 2015-17 Bull markets, maintaining this value into the early Bear.
+The NVT and RVT have historically broken below a value of 10 at the commencement of a Bull, occurring both in early 2012 and again in late 2015. The RVT in particular has shown to sustain a value below 10 for the entirety of the 2012-13 and 2015-17 Bull markets, maintaining this value into the early Bear.
 
 The NVT Ratio generally oscillates between a value of around 5 to 18 through bull markets in a sideways pattern and breaks into a distinctive uptrend near the blow-off top.
 
@@ -97,9 +97,9 @@ Key fractals confirming sustainable Bull Market conditions are:
 
 Note: Interestingly, for the early 2019 bull market, the NVT and RVT approached 18 and 10 respectively, before promptly reversing in August 2019. The mechanism behind this may be linked in part to Tether (USDT), a historically constant demand for Bitcoin block-space, [transitioning to the Ethereum blockchain](https://tether.to/usd%E2%82%AE-and-eur%E2%82%AE-now-supported-on-ethereum/) as well as dominance of off-chain leveraged speculation following the April 2019 short squeeze. 
 
-There has been a distinct shift in volumes occuring on-chain compared to exchanges since early 2018 where exchange based volume now dominates, especially after the Dec 2017 capitulation.
+There has been a distinct shift in volumes occurring on-chain compared to exchanges since early 2018 where exchange based volume now dominates, especially after the Dec 2017 capitulation.
 
-There is opportunity for more diffinitive analysis on this topic as market data unfolds to assess what the mechanisms are driving this behaviour.
+There is opportunity for more definitive analysis on this topic as market data unfolds to assess what the mechanisms are driving this behaviour.
 
 ![Onchain vs Exchange based Volumes](images/12_chain_exchange_volume.png)
 
@@ -146,16 +146,16 @@ The NVT and RVT ratios are best applied in tandem as a fast/noisy and slow/convi
 
 ## Limitations and Notes on the Future
 
-The NVT and RVT Ratios rely on on-chain transactions and as the Bitcoin market continues it's exponential evolution, volumes occuring on-chain will similarly evolve over time.
+The NVT and RVT Ratios rely on on-chain transactions and as the Bitcoin market continues it's exponential evolution, volumes occurring on-chain will similarly evolve over time.
 
 Volume will continue to move off-chain to layer 2 solutions like Lightning Network, sidechains and third party 'crypto banks', exchanges and custodians. As such, the fractals and key levels discussed will likely evolve over time with these shifts in demand.
 
-As noted, the RVT and Realised Cap will likely be more resistant to obselecence in comparison to the NVT as they are more closely native to the chain. I expect the RVT fractals will continue to provide a reasonable fractal benchmark against which the NVT can be recalibrated over time.
+As noted, the RVT and Realised Cap will likely be more resistant to obsolescence in comparison to the NVT as they are more closely native to the chain. I expect the RVT fractals will continue to provide a reasonable fractal benchmark against which the NVT can be re-calibrated over time.
 
 ## Disclaimer
 Nothing contained in this article shall be considered as investment or trading advice.
 
-## Aknowledgements
+## Acknowledgements
 A huge thanks to Doc, Mav and the whole community at [ReadySetCrypto](readysetcrypto.com) for exploring these ideas as it happened. 
 
 Be sure to keep up to date with my latest work by following me [@_Checkmatey_](https://twitter.com/_Checkmatey_) and [@ReadySetCrypto](https://twitter.com/readysetcrypto) on twitter. 
