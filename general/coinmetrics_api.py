@@ -1,6 +1,7 @@
 # Import Coinmetrics API
 import coinmetrics
 import pandas as pd
+import numpy as np
 import datetime as dt
 from datetime import date
 from functools import reduce
@@ -54,14 +55,19 @@ class Coinmetrics_df:
         df.index.name = 'date'
         df.reset_index(inplace=True)
         df['date'] = pd.to_datetime(df['date'])
-        #df['date'] = df['date'].dt.strftime('%d-%m-%Y')
         return df
 
     def add_metrics(self):
         #Add metrics for block, btc_block, inflation rate, S2F Ratio
         df = Coinmetrics_df.convert_to_pd(self)
+        #Calc - block height
         df['blk']=df['BlkCnt'].cumsum()
-        df['btc_blk'] = df.loc[0,['date']]# - dt.datetime(2009,1,9)))*(24*6)
+        #Calc - approx btc block height (Noting BTC blocks were mined from 9/Jan/09)
+        df['btc_blk'] = (df['date'] - pd.to_datetime(np.datetime64('2009-01-09'),utc=True))
+        df['btc_blk'] = df['btc_blk']/np.timedelta64(1, 'D') #convert from timedelta to Days (float)
+        df['btc_blk'] = df['btc_blk'] * (24*6)
+        #Calc - inflation Rate
+        for i
         return df
 
 
@@ -77,10 +83,8 @@ class Coinmetrics_df:
 
 DCR = Coinmetrics_df('dcr',"2016-02-08",today).add_metrics()
 DCR.dtypes
-DCR.tail(5)
+DCR.head(5)
 
-DCR['btc_blk']= pd.to_datetime('2009-01-03')
-DCR['check'] = DCR['date'] - DCR['btc_blk']
 
 
 
