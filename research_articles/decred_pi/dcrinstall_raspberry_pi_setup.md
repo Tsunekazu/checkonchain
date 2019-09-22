@@ -1,17 +1,18 @@
 # Running a Decred Raspberry Pi Node
 
-Running a full node is one of the **strongest actions of support** you can do for a peer-to-peer distributed protocol. Every single node that runs on the network adds strength and resilience to the consensus mechanism and is the embodiment of strength in numbers.
+Running a full node is one of the **strongest actions of support you can do for a peer-to-peer distributed protocol**. Every single node that runs on the network adds strength and resilience to the consensus mechanism and is the embodiment of strength in numbers.
 
-At a personal level, running your own node is an excellent way to get hands on with the Decred protocol, Linux and the Raspberry Pi. Its a cheap project with a large impact.
-![Decred Pi](image_01_.png)
+At a personal level, running your own node is an excellent way to get hands on with the Decred protocol, Linux and the Raspberry Pi.
+This is an inexpensive learning project with a large impact and a great learning curve.
+![Decred Pi](images/image_01_.png)
 
 ## Purpose of this Guide
 
-This guide will be a no fluff guide on how to setup a raspberry pi Decred full node on a Raspberry Pi from start to finish. Anyone who can operate a Decred wallet is more than capable of setting up a Raspberry Pi DCR node.
+This guide is will show you how to setup a Raspberry Pi Decred full node on a Raspberry Pi from start to finish. **Anyone who can operate a Decred wallet is more than capable of setting up a Raspberry Pi DCR node.**
 
-Setting up a raspberry pi is well documented elsewhere so I will keep these details brief and focus more on the steps relating to the node setup (although will provide links to help you along the way).
+Setting up a Raspberry Pi is well documented elsewhere so I will provide relevant links to help you along the way.
 
-I intend this module to be accessible for all skill levels. As such I use a VNC server (remote Pi desktop) which may help people ease into using SSH only command line. Skill should not prevent anyone running a Decred node!
+I intend this module to be accessible for all skill levels. As such I use a VNC server (remote desktop) which may help people ease into using SSH only command line. **Skill should not prevent anyone running a Decred node!**
 
 ## Useful References
 
@@ -38,30 +39,32 @@ Installing the latest Raspbian operating system is well documented elsewhere on 
 ## Step 2 - Setting up Remote SSH Connection
 Here we will establish a remote connection to the pi via SSH using PuTTy.
 
-1. Check the IP address of your raspberry pi. Usually you can check this by logging into your router and looking at the list of clients (if WiFi is setup for your Pi or it is connected via ethernet, the Pi should show up as a client with an assigned IP.)
+1. Check the IP address of your Pi. Usually you can check this by logging into your router and looking at the list of clients if your Pi is properly connected.
 
-2. Connect via SSH to your Raspberry pi using PuTTy with this IP address (default settings are fine). Login using the raspberry pi defaults (username = *pi*, password = *raspberry*)
+2. Wilst you are logged into your router, setup port forwarding for 9108 on your router [(a guide here)](https://m.wikihow.com/Set-Up-Port-Forwarding-on-a-Router). If you find that once dcrd is running you are not connecting to peers (in Step-5), you may need to set your external IP in the router config and change firewall rules to properly get inbounds (without this your node will be outbound-only, which is less useful).
 
-![PuTTy Login](image_02.png) 
+3. Connect via SSH to your Raspberry pi using PuTTy with this IP address (default settings are fine). Login using the raspberry pi defaults (username = *pi*, password = *raspberry*)
 
-3. Run the following commands to update your pi and install VNC Server
+![PuTTy Login](images/image_02.png) 
+
+4. Run the following commands to update your pi and install VNC Server
 ```
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer
 ```
-4.  Harden your Pi. This boosts the security of your pi and makes it much harder for attackers to get in. [This process is covered in depth in this guide]("https://www.raspberrypi.org/documentation/configuration/security.md").
+5.  Harden your Pi. This boosts the security of your pi and makes it much harder for attackers to get in. [This process is covered in depth in this guide]("https://www.raspberrypi.org/documentation/configuration/security.md").
 
-5. Next we will edit the screen resolution settings in this config file so that it appears nicely on a standard Laptop screen when we connect via the VNC server.
+6. Next we will edit the screen resolution settings in this config file so that it appears nicely on a standard Laptop screen when we connect via the VNC server.
 ```
 sudo nano /boot/config.txt
 ```
-6. Edit the lines as shown in the image below (white) by deleting the # and updating the resolution numbers. Hit ```Ctrl + O``` to write out the file and then ```Ctrl + X``` to exit back to console.
+7. Edit the lines as shown in the image below (white) by deleting the # and updating the resolution numbers. Hit ```Ctrl + O``` to write out the file and then ```Ctrl + X``` to exit back to console.
 
-![Image_03.PNG](image_03.png)
+![Image_03.PNG](images/image_03.png)
 
 
-7. Next we need to enable VNC on the pi by following the first few steps of [this guide]("https://www.raspberrypi.org/documentation/remote-access/vnc/README.md").
+8. Next we need to enable VNC on the pi by following the first few steps of [this guide]("https://www.raspberrypi.org/documentation/remote-access/vnc/README.md").
 
     ```
     sudo raspi-config
@@ -69,37 +72,39 @@ sudo nano /boot/config.txt
     ```Interfacing Options --> VNC --> YES ```
 
 
-8. It is worthwhile rebooting your pi at this stage, confirm you can login using your new credentials and changed password and connect both PuTTy SSH and VNC Viewer.
+9. It is worthwhile rebooting your pi at this stage, confirm you can login using your new credentials and changed password and connect both PuTTy SSH and VNC Viewer.
 
 ## Step 3 - Download and install dcrinstall
 1. Login to your Pi via VNC viewer using the same IP address as you did earlyer for SSH. 
 
 2. Once you have logged into VNC and can see your pi's desktop, navigate to the [dcrinstall github page]("https://github.com/decred/decred-release/releases") and download the latest ARM release.
 
-![dcrinstall Github](image_04.png)
+![dcrinstall Github](images/image_04.png)
 
-3. Now that the file has downloaded, it will be located in your home directory ```Downloads``` folder. We will now navigate there via the command line (SSH or using terminal on your pi).
+3. Once the file has downloaded, it will be located in your Downloads folder. Navigate here via the SSH command line (via PuTTy).
 
-4. We need to set the file to be an executable before we can run it and then we will run the ```dcrinstall``` script. This will initiate the download and install of the required files. (Note, be sure to update the file version as required in the script below)
+*Note — From this point on, you do not require the VNC remote desktop and can do it all via SSH. However, I prefer to use VNC and then open up terminal within the Pi so I can see how dcrd is tracking and not lose my session when I close PuTTy.)*
+
+4. We need to set the file to be an executable before we can run it. dcrinstall will initiate the download and install of the required files for your node. (Note, be sure to update the file version as required in the script below if it is different, v1.4.0 at the time of writing).
 ```
 cd ~/Downloads/
 chmod u+x dcrinstall-linux-amd64-v1.4.0
 ./dcrinstall-linux-amd64-v1.4.0
 ```
 
-6. A folder called ```./decred``` has now been placed in your home directory. It will take a short while (5-10mins) to download and setup all files.
+6. A folder called ```./decred``` has now been placed in your home directory. It will take a short while (5mins) to download and setup all files.
 
 ## Step 4 - Get dcrd running
-1. Now we navigate to the new decred folder to start up the node deamon.
+1. Now we navigate to the new decred folder to start up the node daemon dcrd (update version number as before if needed).
 ```
 cd
 cd ./decred/decred-linux-arm-v1.4.0
 ./dcrd
 ```
 2. The Decred deamon will boot up and start connecting to peers
-![Operational dcrd Node](image_05.png)
+![Operational dcrd Node](images/image_05.png)
 
-3. If you wish to setup a wallet on this node, open up a new version of terminal and run:
+3. If you wish to setup a wallet on this node, open up a new version of terminal and run to following command and follow the prompts.
 ```
 ./dcrwallet --create
 ```
@@ -115,7 +120,20 @@ cd ./decred/decred-linux-arm-v1.4.0
 ```
 Decred has a [guide for accessing all functions](https://docs.decred.org/wallets/cli/dcrctl-basics/) 
 
-# Closing thoughts
+## Closing Thoughts
+Hopefully this was a useful step by step guide for setting up your first Decred full node. This is a great way to start learning and getting comfortable with command line, IoT and most importantly, contributing a small but powerful CPU to the Decred consensus engine.
+
+The full node setup guide by [Stakey.club](https://stakey.club/en/installing-dcrd/) remains a useful reference for additional and more advanced steps including setting up your node to run via TOR which is a recommended next step. Experiment and have fun learning along the way!
+
+
+## Signature
+
+**Decred**
+> ![Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE](images/dcr_qr.png)
+
+> [Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE](https://explorer.dcrdata.org/address/Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE)
+
+> Signed Message (Article Title): HzcfJgaawdcUs30LOi7IQisgp9KunzOQrTQjwolhcE4gXbnS08RBYr+ukzGY4K3fKwWRBPo37sn1bLloo0EmFs4=
 
 
 

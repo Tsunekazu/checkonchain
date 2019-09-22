@@ -180,6 +180,11 @@ I am also developing a Masterclass for Bitcoin Fundamentals and On-chain analysi
 
 ## Signatures
 
+**Bitcoin**
+>![3FJaqvbMUTPZ6f7rdca8tifS5PnVDFtN6P](images/btc_qr.png)
+
+>[3FJaqvbMUTPZ6f7rdca8tifS5PnVDFtN6P](https://blockstream.info/address/3FJaqvbMUTPZ6f7rdca8tifS5PnVDFtN6P)
+
 **Decred**
 >![Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE](images/dcr_qr.png)
 
