@@ -8,7 +8,7 @@ The NVT and RVT ratios are akin to a Price to Earnings Ratio (PE Ratio) for Bitc
 
 **If you are new to on-chain analysis and looking for somewhere to start or prefer video format, I cover everything regarding the NVT and the RVT ratios as part the [Ready Set Crypto Bitcoin Masterclass Ep-3](https://www.youtube.com/watch?v=_Spm1c-aZmo)**.
 
-- The NVT and RVT ratio charts are presented by Willy Woo at [woobull.com](http://charts.woobull.com/).
+- The NVT and RVT ratio charts are presented by Willy Woo at [woobull.com](http://charts.woobull.com/). **Please note that Willy calculates RVT and NVT as the inverse ratio to this paper. As such, high values and ascending trends here, equate to low values and descending trends in Willys charts.**
 
 - All data presented in this paper is sourced from the [Coinmetrics.io community dataset](https://coinmetrics.io/charts/).
 

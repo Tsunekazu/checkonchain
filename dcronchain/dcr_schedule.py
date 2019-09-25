@@ -33,6 +33,26 @@ atoms = 1e8
 
 """
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+VARIOUS SUPPLY FUNCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#Set constants for BTC, LTC, BCH, DASH, DCR, XMR, ZEC
+initial_sply = [0, 150, 1.68e6]
+initial_W = [0, 0, 1, DASH, 0, XMR, ZEC]
+initial_S = 0.5*initial_sply
+initial_F = 0.5*initial_sply
+initial_br = [50, 50, 12.5, DASH, 31.19582664, XMR, ZEC]
+br_W = 0.6
+br_S = 0.3
+br_F = 0.1
+halving = [210000, 840000, 210000, DASH, 6144, XMR, ZEC]
+blk_min = 1
+blk_max = 368000
+blk_time = [10, 2.5, 10, DASH, 5, XMR, ZEC] #min
+atoms = [1e8, 1e8, 1e8, Dash, 1e8, XMR, ZEC]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Define Sply Functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 """

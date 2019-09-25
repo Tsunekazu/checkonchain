@@ -2,9 +2,9 @@
 import coinmetrics
 import pandas as pd
 import numpy as np
-import datetime as dt
-from datetime import date
+import datetime as date
 from functools import reduce
+import math
 
 #Plotly libraries
 import plotly.graph_objects as go
@@ -22,7 +22,6 @@ cm = coinmetrics.Community()
 Initial API calls
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 """
-today = datetime.datetime.now().strftime('%Y-%m-%d')
 # List the assets Coin Metrics has data for.
 supported_assets = cm.get_supported_assets()
 #print("supported assets:\n", supported_assets)
@@ -33,11 +32,12 @@ supported_assets = cm.get_supported_assets()
 #print(metric_list)
 class Coinmetrics_df:
        
-    def __init__(self,asset,begin_timestamp,end_timestamp):
+    def __init__(self,asset,begin_timestamp,end_timestamp,topcapconst):
         # List all available metrics for BTC.
         self.asset = asset
         self.begin_timestamp=begin_timestamp
         self.end_timestamp=end_timestamp
+        self.topcapconst = topcapconst
 
     def collect_data(self):
         available_data_types = cm.get_available_data_types_for_asset(self.asset)
@@ -55,71 +55,78 @@ class Coinmetrics_df:
         df.index.name = 'date'
         df.reset_index(inplace=True)
         df['date'] = pd.to_datetime(df['date'])
-        return df
+        return df.fillna(0.001) #Fill not quite to zero for Log charts/calcs
 
     def add_metrics(self):
         #Add metrics for block, btc_block, inflation rate, S2F Ratio
         df = Coinmetrics_df.convert_to_pd(self)
+        
         #Calc - block height
         df['blk']=df['BlkCnt'].cumsum()
+        
         #Calc - approx btc block height (Noting BTC blocks were mined from 9/Jan/09)
-        df['btc_blk'] = (df['date'] - pd.to_datetime(np.datetime64('2009-01-09'),utc=True))
-        df['btc_blk'] = df['btc_blk']/np.timedelta64(1, 'D') #convert from timedelta to Days (float)
-        df['btc_blk'] = df['btc_blk'] * (24*6)
-        #Calc - inflation Rate
-        for i
+        df['btc_blk_est'] = (df['date'] - pd.to_datetime(np.datetime64('2009-01-09'),utc=True))
+        df['btc_blk_est'] = df['btc_blk_est']/np.timedelta64(1, 'D') #convert from timedelta to Days (float)
+        df['btc_blk_est'] = df['btc_blk_est']*(24*6) #Note - corrected for neg values in loop below
+        
+        #Realised Price
+        df['PriceRealised'] = df['CapRealUSD']/df['SplyCur']
+        # Average Cap and Average Price
+        df['CapAvg'] = df['CapMrktCurUSD'].expanding().mean()
+        df['PriveAvg'] = df['CapAvg']/df['SplyCur']
+        # Delta Cap and Delta Price
+        df['CapDelta'] = df['CapRealUSD'] - df['CapAvg']
+        df['PriceDelta'] =df['CapDelta']/df['SplyCur']
+        # Top Cap and Top Price
+        df['CapTop'] = df['CapAvg']*self.topcapconst
+        df['PriceTop'] =df['CapTop']/df['SplyCur']
+
+
+        #Calc - NVT_28, NVT_90, NVTS, RVT_28, RVT_90, RVTS
+        transactions =  df['TxTfrValUSD']
+        df['NVT_28'] = df['CapMrktCurUSD'].rolling(28).mean()/transactions.rolling(28).mean()
+        df['NVT_90'] = df['CapMrktCurUSD'].rolling(90).mean()/transactions.rolling(90).mean()
+        df['NVTS'] = df['CapMrktCurUSD']/transactions.rolling(28).mean()
+        df['RVT_28'] = df['CapRealUSD'].rolling(28).mean()/transactions.rolling(28).mean()
+        df['RVT_90'] = df['CapRealUSD'].rolling(90).mean()/transactions.rolling(90).mean()
+        df['RVTS'] = df['CapRealUSD']/transactions.rolling(28).mean()
+
+        #Calc - Daily Issuance
+        for i in range(0,len(df.index)):
+            #Correct btc_blk_est
+            df.loc[i,'btc_blk_est'] = max(0,df.loc[i,'btc_blk_est'])
+            
+            if i == 0:
+                df.loc[i,'DailyIssuedNtv'] = df.loc[i,'SplyCur']
+            else:
+                df.loc[i,'DailyIssuedNtv'] = df.loc[i,'SplyCur'] - df.loc[i-1,'SplyCur']
+        
+        # Calc - inflation Rate,  S2F, S2F Model, S2F Price
+        df['DailyIssuedUSD'] = df['DailyIssuedNtv'] * df['PriceUSD']            
+        df['inf_pct_ann'] = df['DailyIssuedNtv']*365/df['SplyCur']
+        df['S2F'] = 1/df['inf_pct_ann']
+        df['CapS2Fmodel'] = np.exp(3.31954*np.log(df['S2F'])+14.6227)
+        df['PriceS2Fmodel'] = df['CapS2Fmodel']/df['SplyCur']
+        # Inflow Cap and Inflow Price
+        df['CapInflow'] = df['DailyIssuedUSD'].expanding().sum()
+        df['PriceInflow'] =df['CapInflow']/df['SplyCur']
+        # Fee Cap and Fee Price
+        df['CapFee'] = df['FeeTotUSD'].expanding().sum()
+        df['PriceFee'] =df['CapFee']/df['SplyCur']
+        #Difficulty Regression (24Sept2019)
+        df['CapDiffRegression'] = 10**(0.4981*np.log10(df['DiffMean'])+4.6509)
+        df['PriceDiffRegression'] =df['CapDiffRegression']/df['SplyCur']
+
+        #Calculate Miner Income
+        df['MinerIncome'] = df['CapInflow'] + df['CapFee']
+        df['FeesPct'] =  df['CapFee']/df['MinerIncome']
+
         return df
 
-
-#Pull BTC Data, reduce down to mining related Fees and Income 
-#BTC = Coinmetrics_df('btc',"2009-01-03",today).convert_to_pd()
-#LTC = Coinmetrics_df('ltc',"2011-10-07",today).convert_to_pd()
-#BCH = Coinmetrics_df('bch',"2017-08-01",today).convert_to_pd()
-#DASH = Coinmetrics_df('dash',"2014-01-19",today).convert_to_pd()
-#DCR = Coinmetrics_df('dcr',"2016-02-08",today).convert_to_pd()
-#XMR = Coinmetrics_df('xmr',"2014-04-18",today).convert_to_pd()
-#ZEC = Coinmetrics_df('zec',"2016-10-28",today).convert_to_pd()
-#ETH = Coinmetrics_df('eth',"2015-07-30",today).convert_to_pd()
-
-DCR = Coinmetrics_df('dcr',"2016-02-08",today).add_metrics()
-DCR.dtypes
-DCR.head(5)
-
-
-
-
-DCR['btc_blk']=DCR['date']-pd.Timestamp('2009-01-09')
-
-DCR['btc_blk'] = DCR.loc[10,['date']]
-DCR['btc_blk'] = DCR.loc[0,['date']] - pd.Timestamp('2009-01-09')
-
-DCR.dtypes
-
-
-DCR['dcr_btc']  = DCR["CapMrktCurUSD"]/ BTC["CapMrktCurUSD"]
-DCR['dcr_ltc']  = DCR["CapMrktCurUSD"]/ LTC["CapMrktCurUSD"]
-DCR['dcr_bch']  = DCR["CapMrktCurUSD"]/ BCH["CapMrktCurUSD"]
-DCR['dcr_dash'] = DCR["CapMrktCurUSD"]/DASH["CapMrktCurUSD"]
-DCR['dcr_xmr']  = DCR["CapMrktCurUSD"]/ XMR["CapMrktCurUSD"]
-DCR['dcr_zec']  = DCR["CapMrktCurUSD"]/ ZEC["CapMrktCurUSD"]
-DCR['dcr_eth']  = DCR["CapMrktCurUSD"]/ ETH["CapMrktCurUSD"]
-
-
-
-
-fig = make_subplots(specs=[[{"secondary_y": True}]])
-fig.add_trace(go.Scattergl(x=DCR.index, y=DCR['dcr_btc'],mode='lines',name='BTC'))
-fig.add_trace(go.Scattergl(x=DCR.index, y=DCR['dcr_ltc'],mode='lines',name='LTC'))
-fig.add_trace(go.Scattergl(x=DCR.index, y=DCR['dcr_bch'],mode='lines',name='BCH'))
-fig.add_trace(go.Scattergl(x=DCR.index, y=DCR['dcr_dash'],mode='lines',name='DASH'))
-fig.add_trace(go.Scattergl(x=DCR.index, y=DCR['dcr_xmr'],mode='lines',name='XMR'))
-fig.add_trace(go.Scattergl(x=DCR.index, y=DCR['dcr_zec'],mode='lines',name='ZEC'))
-fig.add_trace(go.Scattergl(x=DCR.index, y=DCR['dcr_eth'],mode='lines',name='ETH'))
-
-
-fig.update_yaxes(
-    title_text="<b>Date</b>",type="linear")
-fig.update_yaxes(
-    title_text="<b>DCR / Coin Market Cap</b>",type="log")
-fig.update_layout(template="plotly_white")
-fig.show()
+#Pull Asset Data
+#'asset'
+# start timestamp 'yyyy-mm-dd'
+# end timestamp 'yyyy-mm-dd'
+# top cap constant (Top cap = Average Cap * Const)
+#BTC = Coinmetrics_df('btc',"2009-01-03",today,35).add_metrics()
+#BTC.head(5)
