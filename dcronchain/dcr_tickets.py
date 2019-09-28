@@ -1,5 +1,4 @@
 #Extract key ticket data from dcrdata
-import coinmetrics as cm
 import pandas as pd
 import json
 from tinydecred.pydecred.dcrdata import DcrdataClient
@@ -10,9 +9,7 @@ from plotly.subplots import make_subplots
 client = DcrdataClient("https://alpha.dcrdata.org/")
 
 class Extract_dcrdata():
-    
-
-    
+        
     def __init__(self):
         pass
     
@@ -77,35 +74,3 @@ a = Extract_dcrdata().dcr_difficulty()
 a.head(5)
 b = Extract_dcrdata().dcr_performance()
 b.tail(50)
-
-b.to_csv(r"D:\code_development\checkonchain\checkonchain\scrap\dcr_difficulty.csv")
-
-#DCRTicketData.to_csv(r'F:\Research\tic.csv')
-#Plot as an express line chart
-#fig = px.line(TicketStake,x='time',y='circulation')
-#fig.show()
-
-#fig = make_subplots(specs=[[{"secondary_y": True}]])
-## Add traces
-#fig.add_trace(
-#    go.Scatter(x=TicketPrice['time'], y=TicketPrice['price'], 
-#    name="Ticket Price"),
-#    secondary_y=False,
-#)
-#fig.add_trace(
-#    go.Scatter(x=TicketStakePart['time'], y=TicketStakePart['participation'], 
-#    name="Stake Participation"),
-#    secondary_y=True,
-#)
-## Add figure title
-#fig.update_layout(
-#    title_text="StakePool"
-#)
-## Set x-axis title
-#fig.update_xaxes(title_text="Time")
-## Set y-axes titles
-#fig.update_yaxes(title_text="<b>Ticket Price</b>",type="linear", secondary_y=False)
-#fig.update_yaxes(title_text="<b>% Locked Up</b>", type="linear", secondary_y=True)
-#
-#
-#fig.show()

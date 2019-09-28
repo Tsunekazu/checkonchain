@@ -1,16 +1,4 @@
-#Extracting Data
-#data Science
-import numpy as np
-import pandas as pd
-import math
-import matplotlib.pyplot as plt
-
-#Plotly libraries
-import plotly.graph_objects as go
-import plotly.express as px
-from plotly.subplots import make_subplots
-
-
+#Produce Decred Supply Schedule
 """
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 DECRED SUPPLY FUNCTION
@@ -31,42 +19,16 @@ blk_max = 368000
 blk_time = 5 #min
 atoms = 1e8
 
-"""
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-VARIOUS SUPPLY FUNCTION
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-#Set constants for BTC, LTC, BCH, DASH, DCR, XMR, ZEC
-initial_sply = [0, 150, 1.68e6]
-initial_W = [0, 0, 1, DASH, 0, XMR, ZEC]
-initial_S = 0.5*initial_sply
-initial_F = 0.5*initial_sply
-initial_br = [50, 50, 12.5, DASH, 31.19582664, XMR, ZEC]
-br_W = 0.6
-br_S = 0.3
-br_F = 0.1
-halving = [210000, 840000, 210000, DASH, 6144, XMR, ZEC]
-blk_min = 1
-blk_max = 368000
-blk_time = [10, 2.5, 10, DASH, 5, XMR, ZEC] #min
-atoms = [1e8, 1e8, 1e8, Dash, 1e8, XMR, ZEC]
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Define Sply Functions
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-"""
-
-def schedule(blk):
+def dcr_schedule(blk):
     response = int(math.floor(blk/halving))
     return response
 
-def b_rew(blk):
+def dcr_blk_rew(blk):
     #for i in range(0,blk): 
     if blk == 0:
         response = initial_sply
     else:
-        response = initial_br*(100/101)**schedule(blk)
+        response = initial_br*(100/101)**dcr_schedule(blk)
     return response
 
 def supply_function(blk):
@@ -76,126 +38,21 @@ def supply_function(blk):
     response[0,2]=initial_W
     response[0,3]=initial_S
     response[0,4]=initial_F
-    response[0,5]=b_rew(0)
-    response[0,6]=b_rew(0)*(365*24*60/blk_time)/initial_sply
+    response[0,5]=dcr_blk_rew(0)
+    response[0,6]=dcr_blk_rew(0)*(365*24*60/blk_time)/initial_sply
     response[0,7]=1/response[0,6]   
     for i in range (1, blk):
         response[i,0] = int(i)
-        response[i,1] = response[i-1,1]+b_rew(i)
-        response[i,2] = response[i-1,2]+b_rew(i)*br_W
-        response[i,3] = response[i-1,3]+b_rew(i)*br_S
-        response[i,4] = response[i-1,4]+b_rew(i)*br_F
-        response[i,5] = b_rew(i)
-        response[i,6] = b_rew(i)*(365*24*60/blk_time)/response[i,1]
+        response[i,1] = response[i-1,1]+dcr_blk_rew(i)
+        response[i,2] = response[i-1,2]+dcr_blk_rew(i)*br_W
+        response[i,3] = response[i-1,3]+dcr_blk_rew(i)*br_S
+        response[i,4] = response[i-1,4]+dcr_blk_rew(i)*br_F
+        response[i,5] = dcr_blk_rew(i)
+        response[i,6] = dcr_blk_rew(i)*(365*24*60/blk_time)/response[i,1]
         response[i,7] = 1/response[i,6]
     return response
 
-#print(b_rew(blk_max))
-
-data = supply_function(blk_max)
-columns=['blk','tot','W','S','F','br','inf','S2']
-df = pd.DataFrame(data=data,columns=columns)
-
-
-
-
-
-"""
-Sply=df[['tot','W','S','F']]
-print(Sply.tail(5))
-print(Sply.loc[10000:10010]) #index rows using .loc using only one set of []
-print(Sply[['W','S']]) #index columns using using double  set of [[]] and no .loc
-print(Sply.loc[10000:10010,['W','S']]) # Index rows AND Columns (note cols in double [])
-"""
-
-Sply=df.loc[blk_min:blk_max,['blk','tot','W','S','F']]
-Sply['Premne_W'] = initial_S / Sply['W']
-Sply['Premne_Tot'] = initial_S / Sply['tot']
-
-
-tic = pd.read_csv("D:\code_development\checkonchain\checkonchain\scrap\dcr_difficulty.csv")
-tic.head(0)
-tic.columns=['blk','blk2', 'time', 'circ', 'pool','count', 'pow_hashrate', 'pow_work', 'pow_offset']
-tic['pce']=tic['pool']/tic['count']
-tic['part_tot']=tic['pool']/21e6
-tic['pool'] = tic['pool']/1e8
-tic.tail(5)
-
-"""
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Plot Sply curves
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-"""
-
-#Plot as an express line chart
-#fig = px.line(Sply,x='blk',y='W')
-#fig.show()
-
-"""traces from Sply"""
-fig = make_subplots(specs=[[{"secondary_y": True}]])
-fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['W'],mode='lines',name='PoW'))
-fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['S'],mode='lines',name='PoS'))
-fig.add_trace(go.Scattergl(x=Sply['blk'], y=Sply['F'],mode='lines',name='Treasury'))
-"""traces from tic"""
-fig.add_trace(go.Scattergl(x=tic['blk'], y=tic['pool'],mode='lines',name='Ticket Pool'))
-fig.update_yaxes(
-    title_text="<b>Block Height</b>",type="linear")
-fig.update_yaxes(
-    title_text="<b>Supply (DCR)</b>",type="linear")
-fig.update_layout(template="plotly_white")
-fig.show()
-
-
-
-
-
-'''$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'''
-
-
-
-
-fig = make_subplots(specs=[[{"secondary_y": True}]])
-# Add traces
-fig.add_trace(
-    go.Scatter(x=Sply['blk'], y=Sply['W'], 
-    name="PoW Sply"),
-    secondary_y=False,
-)
-fig.add_trace(
-    go.Scatter(x=Sply['blk'], y=Sply['S'], 
-    name="PoS Sply"),
-    secondary_y=False,
-)
-fig.add_trace(
-    go.Scatter(x=tic['blk'], y=tic['pool'], 
-    name="Tic Pool"),
-    secondary_y=False,
-)
-fig.add_trace(
-    go.Scatter(x=tic['blk'], y=tic['pow_hashrate'], 
-    name="PoW Hashrate"),
-    secondary_y=True
-)
-# Add figure title
-fig.update_layout(
-    title_text="Supply and Hashrate"
-)
-# Set x-axis title
-fig.update_xaxes(title_text="Block Height")
-# Set y-axes titles
-fig.update_yaxes(
-    title_text="<b>Supply (DCR)</b>",
-    type="linear",
-    secondary_y=False
-)
-fig.update_yaxes(
-    title_text="<b>PoW Hashrate</b>", 
-    type="log", 
-    secondary_y=True
-)
-fig.show()
-
-
+#print(dcr_b_rew(blk_max))
 
 
 
