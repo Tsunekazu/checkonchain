@@ -1,10 +1,4 @@
 #Extract key ticket data from dcrdata
-import pandas as pd
-import json
-from tinydecred.pydecred.dcrdata import DcrdataClient
-import plotly.graph_objects as go
-import plotly.express as px
-from plotly.subplots import make_subplots
 
 client = DcrdataClient("https://alpha.dcrdata.org/")
 

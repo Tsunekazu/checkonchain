@@ -1,8 +1,9 @@
 # Import Coinmetrics API
+
+#Project specific Modules
 import coinmetrics
 import pandas as pd
 import numpy as np
-
 # Initialize a reference object, in this case `cm` for the Community API
 cm = coinmetrics.Community()
 
@@ -44,22 +45,21 @@ class Coinmetrics_api:
         df.index.name = 'date'
         df.reset_index(inplace=True)
         df['date'] = pd.to_datetime(df['date'])
+        
+        #Calc - block height
+        df['blk']=df['BlkCnt'].cumsum()
+        #Realised Price
+        df['PriceRealised'] = df['CapRealUSD']/df['SplyCur']
         return df.fillna(0.0001) #Fill not quite to zero for Log charts/calcs
 
     def add_metrics(self):
         #Add metrics for block, btc_block, inflation rate, S2F Ratio
         df = Coinmetrics_api.convert_to_pd(self)
-        
-        #Calc - block height
-        df['blk']=df['BlkCnt'].cumsum()
-        
         #Calc - approx btc block height (Noting BTC blocks were mined from 9/Jan/09)
         df['btc_blk_est'] = (df['date'] - pd.to_datetime(np.datetime64('2009-01-09'),utc=True))
         df['btc_blk_est'] = df['btc_blk_est']/np.timedelta64(1,'D') #convert from timedelta to Days (float)
         df['btc_blk_est'] = df['btc_blk_est']*(24*6) #Note - corrected for neg values in loop below
         
-        #Realised Price
-        df['PriceRealised'] = df['CapRealUSD']/df['SplyCur']
         # Average Cap and Average Price
         df['CapAvg'] = df['CapMrktCurUSD'].expanding().mean()
         df['PriceAvg'] = df['CapAvg']/df['SplyCur']

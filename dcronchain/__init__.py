@@ -1,14 +1,13 @@
-#data Science
-import numpy as np
+# Init - checkonchain/dcronchain
+
+#Data Science
 import pandas as pd
-import math
-import datetime as date
-today = date.datetime.now().strftime('%Y-%m-%d')
+import numpy as np
+
+#Project specific modules
+import json
+from tinydecred.pydecred.dcrdata import DcrdataClient
 
 #Internal Modules
-import checkonchain.general.coinmetrics_api
-
-# Plotting to browser
-import plotly.io as pio
-pio.renderers.default = "browser"
+from checkonchain.general.coinmetrics_api import *
 
