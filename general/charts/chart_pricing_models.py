@@ -11,17 +11,17 @@ fig = make_subplots(specs=[[{"secondary_y": True}]])
 fig.add_trace(
     go.Scatter(x=asset['date'], y=asset['PriceUSD'], 
     name="Price USD"),
-    secondary_y=False,
+    secondary_y=False
 )
 fig.add_trace(
     go.Scatter(x=asset['date'], y=asset['PriceRealised'], 
     name="Realised Price"),
-    secondary_y=False,
+    secondary_y=False
 )
 fig.add_trace(
     go.Scatter(x=asset['date'], y=asset['PriceAvg'], 
     name="Average Price"),
-    secondary_y=False,
+    secondary_y=False
 )
 fig.add_trace(
     go.Scatter(x=asset['date'], y=asset['PriceDelta'], 
