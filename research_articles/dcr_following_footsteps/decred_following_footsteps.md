@@ -28,7 +28,7 @@ In addition to the protocol level differences noted above, there are crucial sim
 
 Decred's overall supply curve actually approaches that of **Bitcoin** with near identical circulating supply estimated around Mar 2038 (Bitcoin Block 1,534,712 ~ Decred Block 2,272,240).
 
-![DCR Supply Chart](01_dcr_supplycurves.png)
+![DCR Supply Chart](images/01_dcr_supplycurves.png)
 
 **Block Rewards** - The initial **Decred** block reward starts at 31.19582664 DCR per ~5min block time and the reward is distributed at a rate of 60% / 30% / 10% to Proof-of-Work miners, Proof-of-Stake Stakeholders and the **Decred** Treasury Fund, respectively. This compares to **Bitcoin** which starts at 50 BTC per block issued every ~10mins allocated in full to Proof-of-Work miners.
 
@@ -36,11 +36,11 @@ The **Decred** block reward is designed to incentives security, governance and b
 
 **%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%**
 
-![Monetary Policy Comparison](02_monetary_policy.png)
+![Monetary Policy Comparison](images/02_monetary_policy.png)
 
 
 
 
-![BTC and DCR Supply Chart](03_btcdcr_supplycurves.png)
+![BTC and DCR Supply Chart](images/03_btcdcr_supplycurves.png)
 
-![BTC and DCR S2F Estimate Chart](04_btcdcr_s2chart.png)
+![BTC and DCR S2F Estimate Chart](images/04_btcdcr_s2chart.png)

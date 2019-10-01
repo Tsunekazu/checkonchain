@@ -10,6 +10,7 @@ ZEC = Coinmetrics_api('zec',"2016-10-28",today,35).convert_to_pd()
 ETH = Coinmetrics_api('eth',"2015-07-30",today,35).convert_to_pd()
 
 
+
 DCR['dcr_btc']  = DCR["CapMrktCurUSD"]/ BTC["CapMrktCurUSD"]
 DCR['dcr_ltc']  = DCR["CapMrktCurUSD"]/ LTC["CapMrktCurUSD"]
 DCR['dcr_bch']  = DCR["CapMrktCurUSD"]/ BCH["CapMrktCurUSD"]

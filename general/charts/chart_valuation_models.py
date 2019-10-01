@@ -1,6 +1,18 @@
 # Plot Coin Valuation Models
+
+#Data science
+import pandas as pd
+import numpy as np
+import math
+import datetime as date
+today = date.datetime.now().strftime('%Y-%m-%d')
+
+#Internal Modules
+from checkonchain.general.coinmetrics_api import *
+
 BTC = Coinmetrics_api('btc',"2009-01-03",today,35).add_metrics()
 DCR = Coinmetrics_api('dcr',"2016-02-08",today,12).add_metrics()
+
 
 asset = DCR
 

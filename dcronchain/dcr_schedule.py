@@ -65,4 +65,3 @@ class dcr_supply_schedule:
         df = pd.DataFrame(data=response,columns=columns)
         return df
 
-DCR=dcr_supply_schedule(38000).dcr_supply_function()

@@ -1,9 +1,25 @@
 #Extract key ticket data from dcrdata
 
+""" DATA IS EXTRACTED FROM DCRDATA.ORG IN TWO MODULES
+1) dcr_difficulty()  ---> For both PoS and PoW. Rows by Ticket window
+blk, window, time, ticket_count, ticket_price, missed, pow_diff
+
+2) dcr_performance() ---> data by block height on actual blockchain performance 
+  blk, time, circulation, ticket_pool, ticket_count, pow_hashrate, pow_work, pow_offset
+"""
+
+#Data Science
+import pandas as pd
+import numpy as np
+
+#Project specific modules
+import json
+from tinydecred.pydecred.dcrdata import DcrdataClient
+
 client = DcrdataClient("https://alpha.dcrdata.org/")
 
 class Extract_dcrdata():
-        
+
     def __init__(self):
         pass
     
@@ -64,7 +80,7 @@ class Extract_dcrdata():
         response = response[['blk','time','circulation','ticket_pool','ticket_count','pow_hashrate','pow_work','pow_offset']]
         return response
 
-a = Extract_dcrdata().dcr_difficulty()
-a.head(5)
-b = Extract_dcrdata().dcr_performance()
-b.tail(50)
+#a = Extract_dcrdata().dcr_difficulty()
+#a.head(5)
+#b = Extract_dcrdata().dcr_performance()
+#b.tail(5)
