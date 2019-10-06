@@ -61,7 +61,7 @@ class dcr_supply_schedule:
             response[i,6] = self.dcr_blk_rew(i)*(365*24*60/self.blk_time)/response[i,2]
             response[i,7] = 1/response[i,6]
     
-        columns=['blk','blk_reward','SplyCur','PoWSplyCur','PoSSplyCur','FundSplyCur','inflation','S2F']
+        columns=['blk','blk_reward','Sply_ideal','PoWSply_ideal','PoSSply_ideal','FundSply_ideal','inflation_ideal','S2F_ideal']
         df = pd.DataFrame(data=response,columns=columns)
         return df
 

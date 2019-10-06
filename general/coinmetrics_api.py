@@ -45,16 +45,34 @@ class Coinmetrics_api:
         df.reset_index(inplace=True)
         df['date'] = pd.to_datetime(df['date'])
         
+        
         #Calc - block height
         df['blk']=df['BlkCnt'].cumsum()
         
-        #Realised Price
-        df['PriceRealised'] = df['CapRealUSD']/df['SplyCur']
+        #Realised Price (Only if present, excludes XMR and ZEC et al.)
+        if 'CapRealUSD' in df:
+            df['PriceRealised'] = df['CapRealUSD']/df['SplyCur']
         
         #Calc - approx btc block height (Noting BTC blocks were mined from 9/Jan/09)
         df['btc_blk_est'] = (df['date'] - pd.to_datetime(np.datetime64('2009-01-09'),utc=True))
         df['btc_blk_est'] = df['btc_blk_est']/np.timedelta64(1,'D') #convert from timedelta to Days (float)
         df['btc_blk_est'] = df['btc_blk_est']*(24*6) #Note - corrected for neg values in loop below
+
+        #Calc - Daily Issuance
+        for i in range(0,len(df.index)):
+            #Correct btc_blk_est
+            df.loc[i,'btc_blk_est'] = max(0,df.loc[i,'btc_blk_est'])
+            
+            if i == 0:
+                df.loc[i,'DailyIssuedNtv'] = df.loc[i,'SplyCur']
+            else:
+                df.loc[i,'DailyIssuedNtv'] = df.loc[i,'SplyCur'] - df.loc[i-1,'SplyCur']
+        
+        # Calc - inflation Rate,  S2F, S2F Model, S2F Price
+        df['DailyIssuedUSD'] = df['DailyIssuedNtv'] * df['PriceUSD']            
+        df['inf_pct_ann'] = df['DailyIssuedNtv']*365/df['SplyCur']
+        df['S2F'] = 1/df['inf_pct_ann']        
+
         return df
     
     
@@ -81,20 +99,7 @@ class Coinmetrics_api:
         df['RVT_90'] = df['CapRealUSD'].rolling(90).mean()/df['TxTfrValUSD'].rolling(90).mean()
         df['RVTS']   = df['CapRealUSD']/ df['TxTfrValUSD'].rolling(28).mean()
 
-        #Calc - Daily Issuance
-        for i in range(0,len(df.index)):
-            #Correct btc_blk_est
-            df.loc[i,'btc_blk_est'] = max(0,df.loc[i,'btc_blk_est'])
-            
-            if i == 0:
-                df.loc[i,'DailyIssuedNtv'] = df.loc[i,'SplyCur']
-            else:
-                df.loc[i,'DailyIssuedNtv'] = df.loc[i,'SplyCur'] - df.loc[i-1,'SplyCur']
-        
-        # Calc - inflation Rate,  S2F, S2F Model, S2F Price
-        df['DailyIssuedUSD'] = df['DailyIssuedNtv'] * df['PriceUSD']            
-        df['inf_pct_ann'] = df['DailyIssuedNtv']*365/df['SplyCur']
-        df['S2F'] = 1/df['inf_pct_ann']
+        #Calc S2F Model
         df['CapS2Fmodel'] = np.exp(3.31954*np.log(df['S2F'])+14.6227)
         df['PriceS2Fmodel'] = df['CapS2Fmodel']/df['SplyCur']
 

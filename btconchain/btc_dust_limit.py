@@ -7,7 +7,6 @@ today = date.datetime.now().strftime('%Y-%m-%d')
 
 # Plotly Libraries (+ force browser charts)
 import plotly.graph_objects as go
-import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.io as pio
 pio.renderers.default = "browser"
@@ -21,8 +20,8 @@ dustlim = 172 #sats
 sats = 1e8 #sats per BTC
 
 #Pull Coinmetrics data
-BTC_data = Coinmetrics_api('btc',"2009-01-03",today,35).convert_to_pd()
-BTC_data = BTC_data.loc[:,[
+BTC_coin = Coinmetrics_api('btc',"2009-01-03",today,35).convert_to_pd()
+BTC_coin = BTC_coin.loc[:,[
     'date','blk',
     'PriceUSD','PriceRealised','SplyCur',
     'BlkCnt','BlkSizeByte','BlkSizeMeanByte	',
@@ -34,18 +33,18 @@ BTC_data = BTC_data.loc[:,[
 
 
 #Calculate Actual Fee performance
-BTC_data['DustPrice']=dustlim/sats * BTC_data['PriceUSD']
-BTC_data['FeeSatsMean']=BTC_data['FeeMeanUSD']/BTC_data['PriceUSD']
-BTC_data['FeeSatsMed']=BTC_data['FeeMedUSD']/BTC_data['PriceUSD']
-BTC_data['TxCntSizeByte']=BTC_data['BlkSizeByte']/BTC_data['TxCnt']
-BTC_data['TxTfrSizeByte']=BTC_data['BlkSizeByte']/BTC_data['TxTfr']
-BTC_data['DustSizeByte']=dustlim
-BTC_data['DustSizeByte']=dustlim
-BTC_data['FeeTxCnt']=BTC_data['TxCntSizeByte']/sats*BTC_data['PriceUSD']
-BTC_data['FeeTxTfr']=BTC_data['TxTfrSizeByte']/sats*BTC_data['PriceUSD']
+BTC_coin['DustPrice']=dustlim/sats * BTC_coin['PriceUSD']
+BTC_coin['FeeSatsMean']=BTC_coin['FeeMeanUSD']/BTC_coin['PriceUSD']
+BTC_coin['FeeSatsMed']=BTC_coin['FeeMedUSD']/BTC_coin['PriceUSD']
+BTC_coin['TxCntSizeByte']=BTC_coin['BlkSizeByte']/BTC_coin['TxCnt']
+BTC_coin['TxTfrSizeByte']=BTC_coin['BlkSizeByte']/BTC_coin['TxTfr']
+BTC_coin['DustSizeByte']=dustlim
+BTC_coin['DustSizeByte']=dustlim
+BTC_coin['FeeTxCnt']=BTC_coin['TxCntSizeByte']/sats*BTC_coin['PriceUSD']
+BTC_coin['FeeTxTfr']=BTC_coin['TxTfrSizeByte']/sats*BTC_coin['PriceUSD']
 
-BTC_data['FeeSatsMean']
-BTC_data['FeeMeanNtv']
+BTC_coin['FeeSatsMean']
+BTC_coin['FeeMeanNtv']
 
 #Calculate supply function
 BTC_sply = btc_supply_schedule(blk_max).btc_supply_function()
@@ -72,13 +71,13 @@ DUST COMPARED TO FEE LIMITS
 x_data = [
     BTC_sply['blk'],BTC_sply['blk'],BTC_sply['blk'],
     BTC_sply['blk'],BTC_sply['blk'],BTC_sply['blk'],
-    BTC_data['blk'],BTC_data['blk'],BTC_data['blk']
+    BTC_coin['blk'],BTC_coin['blk'],BTC_coin['blk']
     ]
 
 y_data = [
     BTC_sply['S2F_1sats_byte'],BTC_sply['S2F_2sats_byte'],BTC_sply['S2F_10sats_byte'],
     BTC_sply['S2F_30sats_byte'],BTC_sply['S2F_100sats_byte'],BTC_sply['S2F_200sats_byte'],
-    BTC_data['DustPrice'],BTC_data['FeeMeanUSD'],BTC_data['FeeMedUSD']
+    BTC_coin['DustPrice'],BTC_coin['FeeMeanUSD'],BTC_coin['FeeMedUSD']
 ]
 
 names = [
@@ -111,7 +110,7 @@ for i in range(6,9):
     fig_01.add_trace(go.Scatter(x=x_data[i], y=y_data[i],mode='lines',  name=names[i],line=dict(color=color_data[i], width=line_size[i])))
 
 fig_01.add_trace(go.Scatter(
-    x=BTC_data['blk'], y=BTC_data['PriceUSD'],
+    x=BTC_coin['blk'], y=BTC_coin['PriceUSD'],
     name="BTCUSD Price",line=dict(width=2,color='rgb(102, 102, 153)')),
     secondary_y=True)
 fig_01.add_trace(go.Scatter(
@@ -150,16 +149,16 @@ FEE RATE OVER TIME IN SATS
 fig_02 = make_subplots(specs=[[{"secondary_y": True}]])
 fig_02.update_layout(template="plotly_dark",title="Fee Rates")
 fig_02.add_trace(go.Scatter(
-    x=BTC_data['blk'], y=BTC_data['FeeMeanNtv'].rolling(14).mean()*sats/dustlim,
+    x=BTC_coin['blk'], y=BTC_coin['FeeMeanNtv'].rolling(14).mean()*sats/dustlim,
     name="Mean Fee Rate",line=dict(width=2,color='rgb(102, 255, 153)')),
     secondary_y=False)
 fig_02.add_trace(go.Scatter(
-    x=BTC_data['blk'], y=BTC_data['FeeMedNtv'].rolling(14).mean()*sats/dustlim,
+    x=BTC_coin['blk'], y=BTC_coin['FeeMedNtv'].rolling(14).mean()*sats/dustlim,
     name="Median Fee Rate",line=dict(width=2,color='rgb(255, 204, 102)')),
     secondary_y=False)
 
 fig_02.add_trace(go.Scatter(
-    x=BTC_data['blk'], y=BTC_data['PriceUSD'],
+    x=BTC_coin['blk'], y=BTC_coin['PriceUSD'],
     name="BTCUSD Price",line=dict(width=2,color='rgb(255, 255, 255)')),
     secondary_y=True)
 fig_02.add_trace(go.Scatter(
@@ -198,7 +197,7 @@ fig_03 = make_subplots(specs=[[{"secondary_y": False}]])
 fig_03.update_layout(template="plotly_dark",title="Average Transaction Size (bytes)")
 #Create plot for average and median transaction size in bytes
 fig_03.add_trace(go.Scatter(
-    x=BTC_data['blk'], y=BTC_data['TxCntSizeByte'].rolling(14).mean(),
+    x=BTC_coin['blk'], y=BTC_coin['TxCntSizeByte'].rolling(14).mean(),
     name="Average Transaction Size",line=dict(width=1,color='rgb(255, 204, 102)')),
     secondary_y=False)
 fig_03.update_xaxes(
@@ -225,7 +224,7 @@ fig_04 = make_subplots(specs=[[{"secondary_y": False}]])
 fig_04.update_layout(template="plotly_dark")
 #Create plot for average and median transaction size in bytes
 fig_04.add_trace(go.Scatter(
-    x=BTC_data['blk'], y=BTC_data['BlkSizeByte'].cumsum()/1048576,
+    x=BTC_coin['blk'], y=BTC_coin['BlkSizeByte'].cumsum()/1048576,
     name="Blockchain Size (MB)",
     line=dict(color='rgb(255, 204, 102)',width=3)),
     secondary_y=False)
