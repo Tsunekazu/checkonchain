@@ -23,9 +23,8 @@ In this light, **Decred** has a uniquely differentiated value proposition amongs
 These sections compare the performance of **Decred** and **Bitcoin** across the following key value metrics:
 
 1. Monetary policy
+2. Cost of Security
 2. Scarcity and Unforgeable Costliness
-3. Coin distribution and user participation
-2. Security growth and incentives
 
 ## Monetary Policy
 
@@ -51,7 +50,7 @@ Material differences between **Decred** and **Bitcoin** monetary policies can be
 
 To illustrate the similarity between monetary policies, we can superimpose **Decred** launching at the block-height when **Bitcoins** circulating supply reached 1.68million BTC (equivalent to **Decreds** initial pre-mine) to compare progression of the stock-to-flow ratios and supply curves.
 
-What is immediately observable is that **Decreds** stock-to-flow development approximates the mean trajectory of **Bitcoin** and traverse the same set of stock-to-fow values.
+What is immediately observable is that **Decreds** stock-to-flow development approximates the mean trajectory of **Bitcoin** and traverse the same set of stock-to-flow values.
 
 As such, if the fundamental relationship between stock-to-flow and value developed by Plan B is proven valid only for Bitcoin, it must be reasonably attributed to the combined influence of Satoshi's immaculate conception, first mover advantage and halving events.
 

@@ -1,4 +1,4 @@
-date,hashrate_THs,blk
+date,pow_hashrate_THs,blk
 03-01-09 0:00,4.97E-08,0
 06-01-09 0:00,0,0
 09-01-09 0:00,6.96E-07,19

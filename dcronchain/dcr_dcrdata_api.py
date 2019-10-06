@@ -66,7 +66,7 @@ class Extract_dcrdata():
 
         #Mining Hashrate
         min_hash = pd.DataFrame(client.chart("hashrate", bin="block", axis="time"))
-        min_hash.columns = ['axis','bin','pow_offset','pow_hashrate','time']
+        min_hash.columns = ['axis','bin','pow_offset','pow_hashrate_THs','time']
 
         #Total Work
         tot_work = pd.DataFrame(client.chart("chainwork", bin="block", axis="time"))
@@ -74,10 +74,10 @@ class Extract_dcrdata():
 
         #Combine into single dataset
         response=tic_stake_part.join(tic_pool['ticket_count'],how='outer')
-        response=response.join(min_hash[['pow_hashrate','pow_offset']],how='outer')
+        response=response.join(min_hash[['pow_hashrate_THs','pow_offset']],how='outer')
         response=response.join(tot_work[['pow_work']],how='outer')
         response['blk'] = response.index
-        response = response[['blk','time','circulation','ticket_pool','ticket_count','pow_hashrate','pow_work','pow_offset']]
+        response = response[['blk','time','circulation','ticket_pool','ticket_count','pow_hashrate_THs','pow_work','pow_offset']]
         return response
 
 #a = Extract_dcrdata().dcr_difficulty()
