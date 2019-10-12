@@ -1,15 +1,6 @@
 #Consolidate Coinmetrics with Supply Curve and Ticket Data
-
-#Data Science
-import pandas as pd
-import numpy as np
-import datetime as date
-today = date.datetime.now().strftime('%Y-%m-%d')
-
-#Internal Modules
-from checkonchain.general.coinmetrics_api import *
-from checkonchain.dcronchain.dcr_dcrdata_api import *
-from checkonchain.dcronchain.dcr_schedule import *
+from checkonchain.dcronchain.__init__ import *
+from checkonchain.dcronchain.dcr_add_metrics import *
 
 #Plotly libraries
 import plotly.graph_objects as go
@@ -20,6 +11,7 @@ from plotly.subplots import make_subplots
 lifetimes = 1
 
 #Coinmetrics Data
+DCR_real = dcr_add_metrics().dcr_pricing_models()
 DCR_coin = Coinmetrics_api('dcr',"2016-02-08",today,12).add_metrics()
 blk_max = int(DCR_coin['blk'][DCR_coin.index[-1]]*lifetimes)
 

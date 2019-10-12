@@ -10,6 +10,7 @@ import plotly.io as pio
 pio.renderers.default = "browser"
 
 from checkonchain.general.coinmetrics_api import *
+from checkonchain.general.standard_charts import *
 from checkonchain.btconchain.btc_schedule import *
 from checkonchain.dcronchain.dcr_schedule import *
 from checkonchain.btconchain.ltc_schedule import *
@@ -20,9 +21,9 @@ from checkonchain.dcronchain.dcr_dcrdata_api import *
 
 """##### PULL INITIAL DATSETS #####"""
 #Pull BTC and DCR data from Coinmetrics
-BTC_coin = Coinmetrics_api('btc',"2009-01-03",today,35).add_metrics()
-DCR_coin = Coinmetrics_api('dcr',"2016-02-08",today,35).add_metrics()
-LTC_coin = Coinmetrics_api('ltc',"2011-10-07",today,35).add_metrics()
+BTC_coin = Coinmetrics_api('btc',"2009-01-03",today).add_metrics()
+DCR_coin = Coinmetrics_api('dcr',"2016-02-08",today).add_metrics()
+LTC_coin = Coinmetrics_api('ltc',"2011-10-07",today).add_metrics()
 print('Coinmetrics')
 print(BTC_coin.columns)
 
@@ -74,6 +75,7 @@ BTC_hash.reset_index(drop=True)
 """**************************************************************************
                             Part 1 - Monetary Policy
 ***************************************************************************"""
+
 class dcrbtc_monetary_policy():
     
     def __init__(self):
@@ -86,11 +88,10 @@ class dcrbtc_monetary_policy():
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"""
         x_data = [
             BTC_sply['blk'],
+            DCR_sply['btc_blk_est'],
             DCR_sply['btc_blk'],
             DCR_sply['btc_blk'],
-            DCR_sply['btc_blk'],
-            DCR_sply['btc_blk'],
-
+            DCR_sply['btc_blk']
         ]
         y_data = [
             BTC_sply['Sply_ideal'],
@@ -165,7 +166,7 @@ class dcrbtc_monetary_policy():
             DCR_sply['btc_blk'],
             DCR_real['btc_blk'],
             BTC_half['blk']
-        ]
+            ]
         y_data = [
             BTC_sply['Sply_ideal'],
             BTC_sply['S2F_ideal'],
@@ -194,59 +195,57 @@ class dcrbtc_monetary_policy():
             'rgb(237, 109, 71)','rgb(237, 109, 71)','rgb(237, 109, 71)',
             'rgb(112, 203, 255)','rgb(112, 203, 255)','rgb(112, 203, 255)',
             'rgb(46, 214, 161)','rgb(46, 214, 161)','rgb(46, 214, 161)',
-            'rgb(255, 255, 255)' 
+            'rgb(200, 92, 92)' 
             ]
         dash_data = [
             'solid','dot','solid',
             'solid','dot','solid',
             'solid','dot','solid',
-            'solid'
+            'dash'
             ]
         width_data = [
-            5,5,1,4,4,1,4,4,1,0.5
+            5,5,1,4,4,1,4,4,1,1
             ]
         opacity_data = [
             1,1,0.75,
             1,1,0.75,
             1,1,0.75,
-            0.5
-        ]
-        name_data[6]
+            1
+            ]
+        legend_data = [
+            True,True,True,
+            True,True,True,
+            True,True,True,
+            True
+            ]
+        title_data = [
+            '<b>Bitcoin and Decred Monetary Policy</b>',
+            '<b>Bitcoin Block Height</b>',
+            '<b>Coin Supply</b>',
+            '<b>Stock-to-Flow Ratio</b>'
+            ]
+        loop_data = [[0,3,6],[1,2,4,5,7,8,9]]
+        range_data = [[0,1200000],[0,21000000],[-1,5]]
+        type_data = ['linear','linear','log']
+        autorange_data = [False,False,False]
 
-        fig = make_subplots(specs=[[{"secondary_y": True}]])
-        for i in [0,3,6]:
-            fig.add_trace(go.Scatter(
-                x=x_data[i], y=y_data[i],
-                name=name_data[i],
-                opacity=opacity_data[i],
-                line=dict(width=width_data[i],color=color_data[i],dash=dash_data[i])),
-                secondary_y=False)
-        for i in [1,2,4,5,7,8,9]:
-            fig.add_trace(go.Scatter(
-                x=x_data[i], y=y_data[i],
-                name=name_data[i],
-                opacity=opacity_data[i],
-                line=dict(width=width_data[i],color=color_data[i],dash=dash_data[i])),
-                secondary_y=True)
-        """$$$$$$$$$$$$$$$ FORMATTING $$$$$$$$$$$$$$$$"""
-        # Add figure title
-        fig.update_layout(title_text="Bitcoin and Decred Monetary Policy")
-        fig.update_xaxes(
-            title_text="<b>Bitcoin Block Height</b>",
-            type='linear',
-            range=[0,1200000]
-            )
-        fig.update_yaxes(
-            title_text="<b>Coin Supply</b>",
-            type="linear",
-            range=[0,21000000],
-            secondary_y=False)
-        fig.update_yaxes(
-            title_text="<b>Stock-to-Flow Ratio</b>",
-            type="log",
-            range=[-1,5],
-            secondary_y=True)
-        fig.update_layout(template="plotly_dark")
+        fig=check_standard_charts(
+            title_data,
+            range_data,
+            type_data,
+            autorange_data
+            ).subplot_lines_doubleaxis(
+                loop_data,
+                x_data,
+                y_data,
+                name_data,
+                color_data,
+                dash_data,
+                width_data,
+                opacity_data,
+                legend_data
+                )
+
         return fig
 
 
@@ -281,7 +280,7 @@ class dcrbtc_monetary_policy():
             'rgb(237, 109, 71)','rgb(237, 109, 71)','rgb(237, 109, 71)',
             'rgb(46, 214, 161)','rgb(46, 214, 161)','rgb(46, 214, 161)',
             'rgb(255, 192, 0)','rgb(255, 192, 0)','rgb(255, 192, 0)',
-            'rgb(255, 255, 255)' 
+            'rgb(200, 92, 92)' 
             ]
         dash_data = [
             'solid','dash','solid',
@@ -293,7 +292,7 @@ class dcrbtc_monetary_policy():
             2,2,1,
             2,2,1,
             2,2,1,
-            0.5
+            1
             ]
         opacity_data = [
             1,1,0.5,
@@ -304,36 +303,40 @@ class dcrbtc_monetary_policy():
         legend_data = [
             True,True,True,
             True,True,True,
-            True,True,True,
+            False,False,False,
             True
         ]
 
-        fig = make_subplots(specs=[[{"secondary_y": False}]])
-        for i in range(0,10):
-            fig.add_trace(go.Scatter(
-                x=x_data[i], y=y_data[i],
-                name=name_data[i],
-                opacity=opacity_data[i],
-                showlegend=legend_data[i],
-                line=dict(width=width_data[i],color=color_data[i],dash=dash_data[i])),
-                secondary_y=False)
+        title_data = [
+            '<b>Market Capitalisation vs Supply Mined</b>',
+            '<b>Coin Supply Issued</b>',
+            '<b>Coin Market Cap</b>'
+        ]
+        range_data = [[0,1],[4,15]]
+        type_data = ['linear','log']
+        autorange_data = [False,False]
+        loop_data = [range(0,10)]
 
-        """$$$$$$$$$$$$$$$ FORMATTING $$$$$$$$$$$$$$$$"""
-        # Add figure title
-        fig.update_layout(title_text="Market Capitalisation vs Supply Mined")
-        fig.update_xaxes(
-            title_text="<b>Coin Supply Issued</b>",
-            type='linear',
-            range=[0,1]
-            )
-        fig.update_yaxes(
-            title_text="<b>Coin Market Cap</b>",
-            type="log",
-            range=[4,15],
-            secondary_y=False)
-        fig.update_layout(template="plotly_dark")
+        fig=check_standard_charts(
+            title_data,
+            range_data,
+            type_data,
+            autorange_data
+            ).subplot_lines_singleaxis(
+                loop_data,
+                x_data,
+                y_data,
+                name_data,
+                color_data,
+                dash_data,
+                width_data,
+                opacity_data,
+                legend_data
+                )
+        fig.update_xaxes(dtick=0.1)
+        fig.update_layout(title_text=title_data[0])
+
         return fig
-
 
     def chart_dcrbtc_s2f_model(self):
         """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -375,7 +378,7 @@ class dcrbtc_monetary_policy():
             4,4,4,2,2
             ]
         legend_data = [
-            True,True,True,
+            True,True,False,
             True,True
         ]
         fig = make_subplots(specs=[[{"secondary_y": False}]])
@@ -412,10 +415,10 @@ class dcrbtc_monetary_policy():
         return fig
 
 
-dcrbtc_monetary_policy().chart_dcrbtc_sply_area().show()
+#dcrbtc_monetary_policy().chart_dcrbtc_sply_area().show()
 dcrbtc_monetary_policy().chart_dcrbtc_sply_s2f().show()
 dcrbtc_monetary_policy().chart_dcrbtc_sply_marketcap().show()
-dcrbtc_monetary_policy().chart_dcrbtc_s2f_model().show()
+#dcrbtc_monetary_policy().chart_dcrbtc_s2f_model().show()
 
 
 class ltcbtc_monetary_policy():
@@ -577,48 +580,71 @@ class ltcbtc_monetary_policy():
         fig.update_layout(template="plotly_dark")
         return fig
 
-
     def chart_ltcbtc_sply_marketcap(self):
         """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                         CREATE PLOT 03
             SUPPLY AND DEMAND - % of Supply Mined VS Market Cap
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"""
 
+        BTC_sply['CapS2Fmodel_ideal'] = np.exp(3.31954*np.log(BTC_sply['S2F_ideal'])+14.6227)
+        DCR_sply['CapS2Fmodel_ideal'] = np.exp(3.31954*np.log(DCR_sply['S2F_ideal'])+14.6227)
+        LTC_sply['CapS2Fmodel_ideal'] = np.exp(3.31954*np.log(LTC_sply['S2F_ideal'])+14.6227)
         x_data = [
-            BTC_real['SplyCur']/21000000,BTC_real['SplyCur']/21000000,
-            LTC_real['SplyCur']/84000000,LTC_real['SplyCur']/84000000,
+            BTC_real['SplyCur']/21e6,BTC_real['SplyCur']/21e6,BTC_sply['Sply_ideal']/21e6,
+            DCR_real['SplyCur']/21e6,DCR_real['SplyCur']/21e6,DCR_sply['Sply_ideal']/21e6,
+            LTC_real['SplyCur']/84e6,LTC_real['SplyCur']/84e6,LTC_sply['Sply_ideal']/84e6,
             BTC_half['end_pct_totsply']
         ]
         y_data = [
-            BTC_real['CapMrktCurUSD'],BTC_real['CapRealUSD'],
-            LTC_real['CapMrktCurUSD'],LTC_real['CapRealUSD'],
+            BTC_real['CapMrktCurUSD'],BTC_real['CapRealUSD'],BTC_sply['CapS2Fmodel_ideal'],
+            DCR_real['CapMrktCurUSD'],DCR_real['CapRealUSD'],DCR_sply['CapS2Fmodel_ideal'],
+            LTC_real['CapMrktCurUSD'],LTC_real['CapRealUSD'],LTC_sply['CapS2Fmodel_ideal'],
             BTC_half['y_arb']
             ]
         name_data = [
-            'Bitcoin Market Cap','Bitcoin Realised Cap',
-            'Litecoin Market Cap','Litecoin Realised Cap',
+            'Bitcoin Market Cap','Bitcoin Realised Cap','Bitcoin S2F Model',
+            'Decred Market Cap','Decred Realised Cap','Decred S2F Model',
+            'Litecoin Market Cap','Litecoin Realised Cap','Litecoin S2F Model',
             'BTC Halvings'
             ]
         color_data = [
-            'rgb(237, 109, 71)','rgb(237, 109, 71)',
-            'rgb(255, 192, 0)','rgb(255, 192, 0)',
+            'rgb(237, 109, 71)','rgb(237, 109, 71)','rgb(237, 109, 71)',
+            'rgb(46, 214, 161)','rgb(46, 214, 161)','rgb(46, 214, 161)',
+            'rgb(255, 192, 0)','rgb(255, 192, 0)','rgb(255, 192, 0)',
             'rgb(255, 255, 255)' 
             ]
         dash_data = [
-            'solid','dash',
-            'solid','dash',
+            'solid','dash','solid',
+            'solid','dash','solid',
+            'solid','dash','solid',
             'dot'
             ]
         width_data = [
-            2,2,2,2,0.5
+            2,2,1,
+            2,2,1,
+            2,2,1,
+            0.5
             ]
-
+        opacity_data = [
+            1,1,0.5,
+            1,1,0.5,
+            1,1,0.5,
+            1
+        ]
+        legend_data = [
+            True,True,True,
+            True,True,True,
+            True,True,True,
+            True
+        ]
 
         fig = make_subplots(specs=[[{"secondary_y": False}]])
-        for i in range(0,5):
+        for i in range(0,10):
             fig.add_trace(go.Scatter(
                 x=x_data[i], y=y_data[i],
                 name=name_data[i],
+                opacity=opacity_data[i],
+                showlegend=legend_data[i],
                 line=dict(width=width_data[i],color=color_data[i],dash=dash_data[i])),
                 secondary_y=False)
 
@@ -628,12 +654,13 @@ class ltcbtc_monetary_policy():
         fig.update_xaxes(
             title_text="<b>Coin Supply Issued</b>",
             type='linear',
-            range=[0,1]
+            range=[0,1],
+            dtick = 0.1
             )
         fig.update_yaxes(
             title_text="<b>Coin Market Cap</b>",
             type="log",
-            range=[4,12],
+            range=[4,15],
             secondary_y=False)
         fig.update_layout(template="plotly_dark")
         return fig
@@ -647,45 +674,55 @@ class ltcbtc_monetary_policy():
 
         x_data = [
             BTC_real['S2F'],
+            DCR_real['S2F'],
             LTC_real['S2F'],
             BTC_half['S2F'],BTC_real['S2F']
         ]
         y_data = [
             BTC_real['CapMrktCurUSD'],
+            DCR_real['CapMrktCurUSD'],
             LTC_real['CapMrktCurUSD'],
             BTC_half['y_arb'],BTC_real['CapS2Fmodel']
             ]
         name_data = [
             'Bitcoin Market Cap',
+            'Decred Market Cap',
             'Litecoin Market Cap',
             'Bitcoin Halvings','Plan B Model'
             ]
         color_data = [
             'rgb(237, 109, 71)',
+            'rgb(46, 214, 161)',
             'rgb(255, 192, 0)',
             'rgb(255,255,255)','rgb(255,255,255)'
             ]
         dash_data = [
             'solid',
             'solid',
+            'solid',
             'dash','solid'
             ]
         size_data = [
-            4,4,2,2
+            4,4,4,2,2
             ]
-
+        legend_data = [
+            True,True,True,
+            True,True
+        ]
         fig = make_subplots(specs=[[{"secondary_y": False}]])
-        for i in range(0,2):
+        for i in range(0,3):
             fig.add_trace(go.Scatter(
                 mode = 'markers',
                 x=x_data[i], y=y_data[i],
                 name=name_data[i],
+                showlegend=legend_data[i],
                 marker=dict(size=size_data[i],color=color_data[i])),
                 secondary_y=False)
-        for i in range(2,4):
+        for i in range(3,4):
             fig.add_trace(go.Scatter(
                 x=x_data[i], y=y_data[i],
                 name=name_data[i],
+                showlegend=legend_data[i],
                 line=dict(width=size_data[i],color=color_data[i],dash=dash_data[i])),
                 secondary_y=False)
 
@@ -706,10 +743,10 @@ class ltcbtc_monetary_policy():
         return fig
 
 
-ltcbtc_monetary_policy().chart_ltcbtc_sply_area().show()
-ltcbtc_monetary_policy().chart_ltcbtc_sply_s2f().show()
-ltcbtc_monetary_policy().chart_ltcbtc_sply_marketcap().show()
-ltcbtc_monetary_policy().chart_ltcbtc_s2f_model().show()
+#ltcbtc_monetary_policy().chart_ltcbtc_sply_area().show()
+#ltcbtc_monetary_policy().chart_ltcbtc_sply_s2f().show()
+#ltcbtc_monetary_policy().chart_ltcbtc_sply_marketcap().show()
+#ltcbtc_monetary_policy().chart_ltcbtc_s2f_model().show()
 
 """**************************************************************************
                             Part 2 - Proof of Work
@@ -794,24 +831,28 @@ class dcrbtc_pow_security():
                 secondary_y=True)
         """$$$$$$$$$$$$$$$ FORMATTING $$$$$$$$$$$$$$$$"""
         # Add figure title
-        fig.update_layout(title_text="How large was Bitcoin's Early Premine?")
+        fig.update_layout(
+            title_text="How large was Bitcoin's Early Premine?",
+            titlefont=dict(size=26)
+            )
         fig.update_xaxes(
             title_text="<b>Bitcoin Supply Mined</b>",
+            titlefont=dict(size=14),
             type='linear',
-            range=[0,2e6]
+            range=[0,2.5e6]
             )
         fig.update_yaxes(
             title_text="<b>Bitcoin Difficulty</b>",
             type="log",
-            titlefont=dict(color='rgb(237, 109, 71)'),
-            tickfont=dict(color='rgb(237, 109, 71)'),
+            titlefont=dict(color='rgb(237, 109, 71)',size=14),
+            tickfont=dict(color='rgb(237, 109, 71)',size=14),
             secondary_y=False)
         fig.update_yaxes(
             title_text="<b>Hashrate (H/s)</b>",
             type="log",
             range=[5,9],
-            titlefont=dict(color='rgb(20, 169, 233)'),
-            tickfont=dict(color='rgb(20, 169, 233)'),
+            titlefont=dict(color='rgb(20, 169, 233)',size=14),
+            tickfont=dict(color='rgb(20, 169, 233)',size=14),
             secondary_y=True)
         fig.update_layout(template="plotly_dark")
         return fig
@@ -1004,14 +1045,118 @@ class dcrbtc_pow_security():
         return fig
 
 
-dcrbtc_pow_security().chart_dcrbtc_btc_premine().show()
-dcrbtc_pow_security().chart_dcrbtc_powdiffhash_date().show()
-dcrbtc_pow_security().chart_dcrbtc_powdiffhash_sply().show()
+#dcrbtc_pow_security().chart_dcrbtc_btc_premine().show()
+#dcrbtc_pow_security().chart_dcrbtc_powdiffhash_date().show()
+#dcrbtc_pow_security().chart_dcrbtc_powdiffhash_sply().show()
 
 
+"""**************************************************************************
+                            Part 3 - User Adoption
+***************************************************************************"""
 
+class dcrbtc_userbase():
 
+    def __init__(self):
+        pass
 
+    def chart_dcrbtc_volactaddress_sply(self):
+        """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                        CREATE PLOT
+        ONCHAIN VOLUME AND ACTIVE ADDRESS VS COIN SUPPLY
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"""
+
+        # Plot against coin supply
+        # Yaxis 1 = Difficulty Adjustment Growth
+        # Yaxis 2 = Hashrate
+
+        x_data = [
+            BTC_real['SplyCur']/21e6, #BTC TxTfrValAdjNtv
+            DCR_real['SplyCur']/21e6, #DCR TxTfrValAdjNtv
+            BTC_real['SplyCur']/21e6, #AdrActCnt
+            DCR_real['SplyCur']/21e6, #AdrActCnt
+            BTC_real['SplyCur']/21e6, #AdrActCnt
+            DCR_real['SplyCur']/21e6  #AdrActCnt
+            ]
+        
+        y_data = [
+            BTC_real['TxTfrValAdjNtv'].rolling(28).mean(),
+            DCR_real['TxTfrValAdjNtv'].rolling(28).mean(),
+            BTC_real['AdrActCnt'].rolling(28).mean(),
+            DCR_real['AdrActCnt'].rolling(28).mean(),
+            BTC_real['TxTfrValAdjUSD'].rolling(28).mean(),
+            DCR_real['TxTfrValAdjUSD'].rolling(28).mean()
+            ]
+
+        name_data = [
+            'Bitcoin Transferred BTC (Adj)',
+            'Decred Transferred DCR (Adj)',
+            'Bitcoin Active Address',
+            'Decred Active Address',
+            'Bitcoin Transferred USD (Adj)',
+            'Decred Transferred USD (Adj)'
+            ]
+        color_data = [
+            'rgb(239, 125, 50)',
+            'rgb(112, 203, 255)',
+            'rgb(255, 204, 102)',
+            'rgb(41, 112, 255)',
+            'rgb(200, 92, 92)',
+            'rgb(46, 214, 161)'
+            ]
+
+        dash_data = [
+            'solid',
+            'solid',
+            'solid',
+            'solid',
+            'dot',
+            'dot'
+            ]
+        width_data = [
+            2,2,2,2,3,3
+            ]
+
+        fig = make_subplots(specs=[[{"secondary_y": True}]])
+        for i in [0,1,2,3]:
+            fig.add_trace(go.Scatter(
+                mode = 'lines',
+                x=x_data[i], y=y_data[i],
+                name=name_data[i],
+                line=dict(width=width_data[i],color=color_data[i],dash=dash_data[i])),
+                secondary_y=False)
+        for i in [4,5]:
+            fig.add_trace(go.Scatter(
+                mode = 'lines',
+                x=x_data[i], y=y_data[i],
+                name=name_data[i],
+                line=dict(width=width_data[i],color=color_data[i],dash=dash_data[i])),
+                secondary_y=True)
+        """$$$$$$$$$$$$$$$ FORMATTING $$$$$$$$$$$$$$$$"""
+        # Add figure title
+        fig.update_layout(title_text="Daily On-chain Activity")
+        fig.update_xaxes(
+            title_text="<b>Total Supply Minted</b>",
+            type='linear',
+            range=[0,1],
+            tickformat= ',.0%',
+            dtick=0.1
+            )
+        fig.update_yaxes(
+            title_text="<b>Active Address | Native Coins Transferred (Daily Adj)</b>",
+            type="log",
+            range=[2,7],
+            secondary_y=False)
+        fig.update_yaxes(
+            title_text="<b>USD Value Transferred (Adj)</b>",
+            type="log",
+            range=[3,10],
+            showgrid=False,
+            secondary_y=True)
+        fig.update_layout(template="plotly_dark")
+        
+        return fig
+
+dcrbtc_userbase().chart_dcrbtc_volactaddress_sply().show()
 
 
 

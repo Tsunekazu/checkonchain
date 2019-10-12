@@ -78,6 +78,7 @@ class Extract_dcrdata():
         response=response.join(tot_work[['pow_work']],how='outer')
         response['blk'] = response.index
         response = response[['blk','time','circulation','ticket_pool','ticket_count','pow_hashrate_THs','pow_work','pow_offset']]
+        response.columns = ['blk','time','circulation','ticket_pool_value','ticket_pool_size','pow_hashrate_THs','pow_work_total','pow_offset']
         return response
 
 #a = Extract_dcrdata().dcr_difficulty()

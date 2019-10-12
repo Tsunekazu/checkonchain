@@ -8,11 +8,14 @@
 | MINT GREEN   | 'rgb(113, 255, 177)'   |
 | BLUE         | 'rgb(0, 153, 255)'     |
 | YELLOW       | 'rgb(254, 215, 140)'   |
-| RED          | 'rgb(252, 132, 141)'   |
+| RED          | 'rgb(112, 203, 255)'   |
 | DEEP RED     | 'rgb(200, 92, 92)'     |
 | PURPLE       | 'rgb(102, 102, 153)'   |
 | PALE BLUE    | 'rgb(102, 153, 255)'   |
 | GREY         | 'rgb(216, 216, 216)'   |
+| CHART GREY   | 'rgb(39,40,34)'        |
+| GRID GREY    | 'rgb(127,127,127)'     |
+
 
 # Strong Colours
 |COLOUR   	   |RGB COLOUR   	        |

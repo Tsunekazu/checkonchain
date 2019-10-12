@@ -11,15 +11,15 @@ pio.renderers.default = "browser"
 
 from checkonchain.general.coinmetrics_api import *
 
-BTC = Coinmetrics_api('btc',"2009-01-03",today,35).convert_to_pd().set_index('date',drop=False)
-LTC = Coinmetrics_api('ltc',"2011-10-07",today,35).convert_to_pd().set_index('date',drop=False)
-BCH = Coinmetrics_api('bch',"2017-08-01",today,35).convert_to_pd().set_index('date',drop=False)
-DASH = Coinmetrics_api('dash',"2014-01-19",today,35).convert_to_pd().set_index('date',drop=False)
-DCR = Coinmetrics_api('dcr',"2016-02-08",today,35).convert_to_pd().set_index('date',drop=False)
-XMR = Coinmetrics_api('xmr',"2014-04-18",today,35).convert_to_pd().set_index('date',drop=False)
-ZEC = Coinmetrics_api('zec',"2016-10-28",today,35).convert_to_pd().set_index('date',drop=False)
-ETH = Coinmetrics_api('eth',"2015-07-30",today,35).convert_to_pd().set_index('date',drop=False)
-XRP = Coinmetrics_api('xrp',"2013-01-01",today,35).convert_to_pd().set_index('date',drop=False)
+BTC = Coinmetrics_api('btc',"2009-01-03",today).convert_to_pd().set_index('date',drop=False)
+LTC = Coinmetrics_api('ltc',"2011-10-07",today).convert_to_pd().set_index('date',drop=False)
+BCH = Coinmetrics_api('bch',"2017-08-01",today).convert_to_pd().set_index('date',drop=False)
+DASH = Coinmetrics_api('dash',"2014-01-19",today).convert_to_pd().set_index('date',drop=False)
+DCR = Coinmetrics_api('dcr',"2016-02-08",today).convert_to_pd().set_index('date',drop=False)
+XMR = Coinmetrics_api('xmr',"2014-04-18",today).convert_to_pd().set_index('date',drop=False)
+ZEC = Coinmetrics_api('zec',"2016-10-28",today).convert_to_pd().set_index('date',drop=False)
+ETH = Coinmetrics_api('eth',"2015-07-30",today).convert_to_pd().set_index('date',drop=False)
+XRP = Coinmetrics_api('xrp',"2013-01-01",today).convert_to_pd().set_index('date',drop=False)
 
 print('Coinmetrics')
 print(DCR.columns)

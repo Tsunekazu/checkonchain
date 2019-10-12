@@ -22,12 +22,12 @@ Coinmetrics API calls
 """
 class Coinmetrics_api:
        
-    def __init__(self,asset,begin_timestamp,end_timestamp,topcapconst):
+    def __init__(self,asset,begin_timestamp,end_timestamp):
         # List all available metrics for BTC.
         self.asset = asset
         self.begin_timestamp=begin_timestamp
         self.end_timestamp=end_timestamp
-        self.topcapconst = topcapconst
+        self.topcapconst = 35
 
     def collect_data(self):
         available_data_types = cm.get_available_data_types_for_asset(self.asset)
@@ -116,6 +116,9 @@ class Coinmetrics_api:
         df['FeesPct'] =  df['CapFee']/df['MinerIncome']
 
         return df
+
+BTC = Coinmetrics_api('btc',"2009-01-03","2019-10-07").convert_to_pd()
+BTC.columns
 
 
 
