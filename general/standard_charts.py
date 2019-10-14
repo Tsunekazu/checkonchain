@@ -39,7 +39,7 @@ class check_standard_charts():
         self.range_data = range_data # X-axis, Y-axis-1, Y-axis-2
         self.autorange_data = autorange_data
         self.type_data = type_data # X-axis, Y-axis-1, Y-axis-2
-        self._background = 'rgb(30,30,30)'
+        self._background = 'rgb(0,0,0)'
         self._font = 'Raleway'
         self._titlesize = 26
         self._legendsize = 14
@@ -67,8 +67,7 @@ class check_standard_charts():
         dash_data,
         width_data,
         opacity_data,
-        legend_data,
-        secondary_data        
+        legend_data        
         ):
         
         self._fig = make_subplots(specs=[[{"secondary_y": False}]])
@@ -86,7 +85,7 @@ class check_standard_charts():
                     color=color_data[i],
                     dash=dash_data[i]
                     )),
-                secondary_y=secondary_data)        
+                secondary_y=False)        
         
                 
         """#######  Title Block   #######"""

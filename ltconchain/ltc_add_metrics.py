@@ -1,6 +1,14 @@
 # Calculate a Suite of Bitcoin Specific Metrics
-from checkonchain.ltconchain.__init__ import *
+#Data Science
+import pandas as pd
+import numpy as np
+import math
+import datetime as date
+today = date.datetime.now().strftime('%Y-%m-%d')
+
+from checkonchain.general.coinmetrics_api import * #Coinmetrics.io
 from checkonchain.general.regression_analysis import *
+from checkonchain.ltconchain.ltc_schedule import *
 
 class ltc_add_metrics():
 

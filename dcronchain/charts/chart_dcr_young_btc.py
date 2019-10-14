@@ -20,7 +20,8 @@ from checkonchain.ltconchain.ltc_add_metrics import *
 """############## PULL DATSETS ##############"""
 
 """##### Bitcoin #####"""
-BTC_sply = btc_add_metrics().btc_sply(1200000) #Theoretical Supply curve
+print('CALCULATING BITCOIN DATAFRAMES')
+BTC_sply = btc_add_metrics().btc_sply(2400000) #Theoretical Supply curve
 BTC_real = btc_add_metrics().btc_pricing_models() #Actual Performance
 BTC_half = btc_supply_schedule(0).btc_halvings_stepped() # Calculate Max-Min step to plot up Bitcoin halvings
 # Blockchain.com hashrate w/ coinmetrics block (UPDATE 5 Oct 2019)
@@ -33,7 +34,8 @@ BTC_hash.reset_index(drop=True)
 
 
 """##### Decred #####"""
-DCR_sply = dcr_add_metrics().dcr_sply(1200000*2-33600*2) #Theoretical Supply curve
+print('CALCULATING DECRED DATAFRAMES')
+DCR_sply = dcr_add_metrics().dcr_sply(2400000*2-33600*2) #Theoretical Supply curve
 DCR_real = dcr_add_metrics().dcr_pricing_models() #Actual Market Performance
 DCR_natv = dcr_add_metrics().dcr_natv() #Actual On-chain Performance
 # Calculate the btc_block where supply = 1.68million BTC
@@ -44,6 +46,7 @@ DCR_real['btc_blk'] = dcr_btc_blk_start + 0.5*DCR_real['blk']
 
 
 """##### Litecoin #####"""
+print('CALCULATING LITECOIN DATAFRAMES')
 LTC_sply = ltc_add_metrics().ltc_sply(1200000*2) #Theoretical Supply curve
 LTC_real = ltc_add_metrics().ltc_real() #Actual Performance
 #Calculate BTC block height assuming LTC launched on same date (0.25x)
@@ -204,7 +207,7 @@ class dcrbtc_monetary_policy():
             '<b>Stock-to-Flow Ratio</b>'
             ]
         loop_data = [[0,3,6],[1,2,4,5,7,8,9]]
-        range_data = [[0,1200000],[0,21000000],[-1,5]]
+        range_data = [[0,2400000],[0,21000000],[-1,5]]
         type_data = ['linear','linear','log']
         autorange_data = [False,False,False]
 
@@ -224,7 +227,7 @@ class dcrbtc_monetary_policy():
                 opacity_data,
                 legend_data
                 )
-
+    
         return fig
 
 
@@ -234,7 +237,6 @@ class dcrbtc_monetary_policy():
             SUPPLY AND DEMAND - % of Supply Mined VS Market Cap
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"""
 
-        LTC_sply['CapS2FPlanbIdeal'] = np.exp(3.31954*np.log(LTC_sply['S2F_ideal'])+14.6227)
         x_data = [
             BTC_real['SplyCur']/21e6,BTC_real['SplyCur']/21e6,BTC_sply['Sply_ideal']/21e6,
             DCR_real['SplyCur']/21e6,DCR_real['SplyCur']/21e6,DCR_sply['Sply_ideal']/21e6,
@@ -242,9 +244,9 @@ class dcrbtc_monetary_policy():
             BTC_half['end_pct_totsply']
             ]
         y_data = [
-            BTC_real['CapMrktCurUSD'],BTC_real['CapRealUSD'],BTC_sply['CapS2FRegrIdeal'],
-            DCR_real['CapMrktCurUSD'],DCR_real['CapRealUSD'],DCR_sply['CapS2FRegrIdeal'],
-            LTC_real['CapMrktCurUSD'],LTC_real['CapRealUSD'],LTC_sply['CapS2FRegrIdeal'],
+            BTC_real['CapMrktCurUSD'],BTC_real['CapRealUSD'],BTC_sply['CapS2Fmodel'],
+            DCR_real['CapMrktCurUSD'],DCR_real['CapRealUSD'],DCR_sply['CapS2Fmodel'],
+            LTC_real['CapMrktCurUSD'],LTC_real['CapRealUSD'],LTC_sply['CapS2Fmodel'],
             BTC_half['y_arb']
             ]
         name_data = [
@@ -272,15 +274,15 @@ class dcrbtc_monetary_policy():
             1
             ]
         opacity_data = [
-            1,1,0.5,
-            1,1,0.5,
-            1,1,0.5,
+            1,1,0.75,
+            1,1,0.75,
+            1,1,0.75,
             1
             ]
         legend_data = [
             True,True,True,
             True,True,True,
-            False,False,False,
+            True,True,True,
             True
             ]
 
@@ -312,7 +314,9 @@ class dcrbtc_monetary_policy():
                 )
         fig.update_xaxes(dtick=0.1)
         fig.update_layout(title_text=title_data[0])
-
+        fig.update_layout(
+            paper_bgcolor='rgb(0,0,0)',
+            plot_bgcolor='rgb(0,0,0)')
         return fig
 
     def chart_dcrbtc_s2f_model(self):
@@ -331,7 +335,7 @@ class dcrbtc_monetary_policy():
             BTC_real['CapMrktCurUSD'],
             DCR_real['CapMrktCurUSD'],
             LTC_real['CapMrktCurUSD'],
-            BTC_half['y_arb'],BTC_real['CapS2Fmodel']
+            BTC_half['y_arb'],BTC_real['CapPlanBmodel']
             ]
         name_data = [
             'Bitcoin Market Cap',
@@ -391,11 +395,11 @@ class dcrbtc_monetary_policy():
         fig.update_layout(template="plotly_dark")
         return fig
 
-
-dcrbtc_monetary_policy().chart_dcrbtc_sply_area().show()
-dcrbtc_monetary_policy().chart_dcrbtc_sply_s2f().show()
+    
+#dcrbtc_monetary_policy().chart_dcrbtc_sply_area().show()
+#dcrbtc_monetary_policy().chart_dcrbtc_sply_s2f().show()
 dcrbtc_monetary_policy().chart_dcrbtc_sply_marketcap().show()
-dcrbtc_monetary_policy().chart_dcrbtc_s2f_model().show()
+#dcrbtc_monetary_policy().chart_dcrbtc_s2f_model().show()
 
 
 class ltcbtc_monetary_policy():

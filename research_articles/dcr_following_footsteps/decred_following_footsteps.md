@@ -42,6 +42,7 @@ In this light, **Decred** has a uniquely differentiated value proposition amongs
 
 # Part 1 - Monetary Policy
 
+## Commonalities 
 The core value proposition of **Decred** is near identical to **Bitcoin** in that it presents an opt-in, self-sovereign and immutable digital store of value.
 
 **Decred** has thus retained the core sound money principles of **Bitcoin** including:
@@ -49,35 +50,106 @@ The core value proposition of **Decred** is near identical to **Bitcoin** in tha
 - 100,000,000 divisible units (atoms) per DCR, equivalent to satoshis of Bitcoin
 - Deterministic supply schedule by block height
 
-Decred's overall supply curve actually approaches that of **Bitcoin** with near identical circulating supply estimated around Mar 2038 (Bitcoin Block 1,534,712 ~ Decred Block 2,272,240).
+Decred's overall supply curve actually approaches that of **Bitcoin** with comparable circulating supplies estimated around Mar 2038.
 
 ![DCR Supply Chart](images/01_dcr_supplycurves.png)
 
-Material differences between **Decred** and **Bitcoin** monetary policies can be summarised as:
-- Decred launched with an 8% premine (1.68 million DCR) with half (864k DCR) airdropped free to early community members and the other half purchased by the team at a rate of $0.49/DCR. Bitcoin launched without a pre-mine and instead had the benefit only a small collective of cypherpunks being aware if it's existence to support the network in this nascent stage. Within the first year it is estimated that Satoshi Nakamoto was the dominant miner who still owns an estimated lower bound of 700k to 800k BTC ([BitMex, 2018](https://blog.bitmex.com/satoshis-1-million-bitcoin/); [Held, 2018](https://blog.picks.co/bitcoins-distribution-was-fair-e2ef7bbbc892)).
+## Differences
+
+Material differences between **Decreds** and **Bitcoins** monetary policies can be summarised as:
+- Decred launched with an 8% premine (1.68 million DCR) with half (864k DCR) airdropped free to community members to bootstrap Proof-of-Stake security and the other half purchased by the team at a rate of $0.49/DCR. Bitcoin launched without a pre-mine and instead launched with only a small collective of cypherpunks aware if it's existence. Both systems acted as a reward structure for those who nurtured the network through early life. Within the first year it is estimated that Satoshi Nakamoto was the dominant Bitcoin miner who owns an estimated 700k to 800k BTC ([BitMex, 2018](https://blog.bitmex.com/satoshis-1-million-bitcoin/); [Held, 2018](https://blog.picks.co/bitcoins-distribution-was-fair-e2ef7bbbc892)).
 
 - The **Decred** block reward starts at 31.19582664 DCR per ~5min block time and the reward is distributed at a rate of 60% / 30% / 10% to Proof-of-Work miners, Proof-of-Stake Stakeholders and the **Decred** Treasury Fund, respectively. This compares to **Bitcoin** that starts at 50 BTC per block issued every ~10mins allocated in full to Proof-of-Work miners.
 
-- **Decred's** monetary policy does not include a significant supply shock 'halving' event as **Bitcoin** does every 210,000 blocks (~4 years). Instead, its block reward follows a smooth reduction by [100/101 every 6,144 blocks](https://docs.decred.org/advanced/inflation/), equating to a reduction of approximately 0.99% to the total block reward every 21.33days.
+- **Decred's** monetary policy does not include a significant supply shock 'halving' event as **Bitcoin** does every 210,000 blocks (~4 years). Instead, its block reward follows a smooth reduction by [100/101 every 6,144 blocks](https://docs.decred.org/advanced/inflation/), equating to a reduction of approximately 0.99% to the total block reward every 21.33days. The effective inflation half-life is approximately equal at around 4years.
+
+Key monetary policy characteristics of Bitcoin and Decred are summarised in the table below.
 
 ![Monetary Policy Comparison](images/02_monetary_policy.png)
 
-To illustrate the similarity between monetary policies, we can superimpose **Decred** launching at the block-height when **Bitcoins** circulating supply reached 1.68million BTC (equivalent to **Decreds** initial pre-mine) to compare progression of the stock-to-flow ratios and supply curves.
+To illustrate the similarity between monetary policies, we can superimpose **Decred** launching at the block-height when **Bitcoins** circulating supply reached 1.68million BTC (equivalent to **Decreds** initial pre-mine = BTC block 33,600) to compare progression of the stock-to-flow ratios and supply curves.
 
-What is immediately observable is that **Decreds** stock-to-flow development approximates the mean trajectory of **Bitcoin** and traverse the same set of stock-to-flow values.
-
-As such, if the fundamental relationship between stock-to-flow and value developed by Plan B is proven valid only for Bitcoin, it must be reasonably attributed to the combined influence of Satoshi's immaculate conception, first mover advantage and halving events.
+What is immediately clear is that **Decreds** stock-to-flow development approximates the mean trajectory of **Bitcoin** and traverses the same set of stock-to-flow values with exception of halving events. 
 
 ![BTC and DCR Supply Chart](images/03_btcdcr_supplycurves.png)
 
-## Differences in Market Landscape
 
-The **Decred** protocol does not benefit from discrete viral hype cycles observed throughout **Bitcoin's** history following halving supply shocks. Similarly, **Decred** competes amongst a growing pool of alt-coins for capital and market mind-share making for a more competitive landscape than Bitcoin faced in the early days.
+Plan B has shown that a fundamental power-law relationship between stock-to-flow is valid for **Bitcoin**. It reasonably follows that a similar linear regression calculation may be undertaken for **Decred** as a gauge for the monetary premium it has developed. The regression fit and constants may be compared with respect to the age of the coin and state of progress through its issuance schedule. 
 
-On the other hand, **Decred** (and other alt-coins) benefit from the prior knowledge and a larger pool of participants in the cryptocurrency market than **Bitcoin** with roots nurtured by a small collective of cyperpunks into maturity. 
+In the instance **Bitcoin** continues to outperform in this relationship it may be reasonably attributed to the combined influence of Satoshi's immaculate conception, first mover advantage, network effects and the halving supply shock events. If on the other hand a comparable monetary premium and model confidence is observed for **Decred**, it supports further consideration of **Decred** as a viable digital store of value candidate.
 
-Given extensive market competition, a lack of viral supply shocks and famously minimal social media presence of the founding **Decred** team, any observable growth of **Decred** in it's formative years can most likely be attribted to the communities belief in the fundamental value proposition.
+For comparison, the same calculation will be undertaken for **Litecoin** which launched in 2011 and for all intents an purposes represents a direct fork of **Bitcoin** with minimal alteration to the protocol or monetary policy.
 
-As was observed [in this study](https://medium.com/@_Checkmatey_/monetary-premiums-can-altcoins-compete-with-bitcoin-54c97a92c6d4), 
+# Methodology
 
-![BTC and DCR S2F Estimate Chart](images/04_btcdcr_s2chart.png)
+The regression analysis has been undertaken as follows:
+
+1) Data is aquired for BTC, DCR and LTC from the coinmetrics.io community dataset. Early price data for Bitcoin is supplemented with data originally used in Plan B's model. Similarly, DCR data is supplemented with the genesis pricing of $0.49/DCR and early data from Bittrex not included in the coinmetrics dataset. Data is considered on a daily basis.
+
+2) Calculate the daily annual inflation rate of native coins (assuming 365.25 days/yr) and the corresponding Stock-to-Flow ratio. Assuming a power-law relationship exists, the natural logarithm of both S2F and Market Cap are taken and used in linear regression models.
+
+3) Considering the quality of a regression analysis is dependant on the size of the dataset, an additional set of calculations are undertaken looking at the R-Squared coefficient. This aims to observe the quality of the Bitcoin model fit over time for due consideration of the age difference between **Bitcoin**, **Decred** and **Litecoin**. It is expected that if a sound monetary premium is developing for an asset, the model fit will improve over time leading to an increasing R-square as more market data comes to light.
+
+4) Results are presented normalised against Stock-to-Flow Ratio and the Proportion of total supply issued to normalise for the age of each protocol.
+
+The model spreadsheet is available here for inspection and verification.
+
+# Analysis Result
+## Stock-to-Flow Relationships
+
+The results of the linear regression analysis including model parameters and R-square fit coefficients are presented in the table and figure below. For Bitcoin and Litecoin, a second regression analysis considering only the first four years of data (pre-halving 1) to align with Plan B's original analysis which showed four years of data provided a very strong model fit.
+
+By plotting the market valuation against stock-to-flow ratio in log-log space, we can verify visually that the linear regression calculation indeed matches the available market data for each protocol.
+
+There are a number of observations and considerations which must be taken into account when interpreting these results.
+
+![Regression Analysis Results](images/05_regression_results.png)
+![Regression Formula](images/05_regression_formula.png)
+![Regression Analysis Plot](images/06_regression_plot.png)
+
+## Bitcoin
+All three **Bitcoin** regression models are reasonably consistent in fit and show an improved R-square coefficient as larger data-sets and more history is considered. Indeed the full history of Bitcoin very closely matches the model developed by Plan B.
+
+Plan Bs original model utilised monthly price data (first of each month) whereas this study considers the average daily close price data. Whilst the overall outcome is similar, the pre-halving model fit using the set of daily **Bitcoin** daily data provides an R-square value of only 0.6624, a marked reduction from ~0.90 when considering a monthly distribution of data for the full history.
+
+This highlights the importance of temporal distribution of the data which has shown to make statistically significant differences to the model fit. At halving events for example, there is a significant change to Bitcoin's Stock-to-flow ratio which is not immediately followed by an equivalent shift in network valuation. Therefore one must be cautious to select data that is not heavily weighted of skewed by data immediately after a halving event.
+
+Nevertheless, given the full suite of price data for **Bitcoin** it is the authors opinion that Bitcoin has an undeniable monetary premium and indeed is an appropriate baseline to which other models should be compared. This analysis provides yet another independant verification that a strong relationship exists between stock-to-flow and network valuation for **Bitcoin**.
+
+## Decred
+**Decred** has shown a statistically significant relationship between Stock-to-Flow and market valuation with an R-square value of 0.70 considering only the first three years of price data. It may be seen that this relationship is comparable to **Bitcoins** at the time of the first halving with an R-square of 0.66.
+
+The early tail of the data plotted above speaks to the difference in market dynamics at the time when first price data first became available for each protocol. Despite high early inflation, **Decreds** tail is consistent around a market value of $5Million until the S2F ratio approaches 2.0 at which point price accelerates during the 2016-17 bull run. **Bitcoin** on the other hand experienced a far slower growth during the 2011-12 bull market with a smaller pool of participants. Early **Bitcoin** price data sources range from Laszlo's 10,000 BTC pizza to early Mt Gox pricing. 
+
+It must therefore be noted that the gradient of these relationship is heavily weighted by this tail end especially during the first 3-4 years of life, an effect **Bitcoin** has overcome with its not 10+ years of price data. It remains to be seen whether **Decred** posts strong performance into the future which will refine whether the model remains statistically valid.
+
+The overall shape of **Decred**s relationship with S2F appears to be oscillating around the mean regression line. **Decreds** relationship over time appears smoother than **Bitcoin** or **Litecoin**, potentially a result of the smooth issuance curve and lack of severe halving event supply shocks. 
+
+This model must be revised in the next 12-24 months as it is likely the regression fit will be improved if **Decred** experiences strong market performance over this time. Similarly, poor future performance would negatively influence the regression fit.
+
+In summary, **Decred** is showing early signs of developing a strong moentary premium based on it's scarcity as measured by stock-to-flow ratio. The coming years will be critical in validating this model, particularly over the next 12-24 months.
+
+## Litecoin
+**Litecoin**
+Based on the results and sensitivity studies presented it is concluded that Litecoin has not developed what the author considers a convincing monetary premium. This is consistent with the [original screening analysis](https://medium.com/@_Checkmatey_/monetary-premiums-can-altcoins-compete-with-bitcoin-54c97a92c6d4) which is now statistically validated by the low R-square which is not imporved by any significant magnitide by adjusting the resolution of data inputs. 
+
+It is the authors opinion that Litecoin does not display a convincing relationship between stock-to-flow scarcity and market valuation.
+
+## R-Square Development over time
+
+To quantify the relative model fits and account for different timescales of data considered in the analysis, the development of the R-square coefficient has been plotted against Stock-to-Flow. This shows the confidence in a S2F-Value relationship for **Bitcoin**, **Decred** has increased over time with a depression in the lead up to the point of 50% of supply mined. 
+
+For **Bitcoin** this is explained by the first halving event which increases S2F with no direct impact on value leading to an immediate undervaluation. For **Decred** this may reasonably be attributed to the generally low market engagement towards alt-coins during the pre-2020 halving **Bitcoin** bull market. Again, **Litecoin** can be seen to perform poorly over it's entire trading history with a peak R-square value of around 0.46.
+
+![R-Square Development](images/07_rsq_plot.png)
+
+By comparing the deviation of each protocols valuation from the model (full history) as a ratio to the standard model error, we can observe repeated fractals indicating undervaluation and overvaluation.
+
+![Standard Deviations](images/09_standard_deviations.png)
+
+
+## Projections
+
+
+![Market Cap vs Supply Issued](images/08_sply_mcap.png)
+

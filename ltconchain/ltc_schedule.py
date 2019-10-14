@@ -1,5 +1,9 @@
 #Produce Litecoin Supply Schedule
-from checkonchain.ltconchain.__init__ import *
+#Data Science
+import pandas as pd
+import numpy as np
+import math
+
 """
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 BITCOIN SUPPLY FUNCTION
