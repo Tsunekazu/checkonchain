@@ -52,7 +52,7 @@ The core value proposition of **Decred** is near identical to **Bitcoin** in tha
 
 Decred's overall supply curve actually approaches that of **Bitcoin** with comparable circulating supplies estimated around Mar 2038.
 
-![DCR Supply Chart](images/01_dcr_supplycurves.png)
+![DCR Supply Chart](images/01_dcr_supplycurves.PNG)
 
 ## Differences
 
@@ -65,13 +65,13 @@ Material differences between **Decreds** and **Bitcoins** monetary policies can 
 
 Key monetary policy characteristics of Bitcoin and Decred are summarised in the table below.
 
-![Monetary Policy Comparison](images/02_monetary_policy.png)
+![Monetary Policy Comparison](images/02_monetary_policy.PNG)
 
 To illustrate the similarity between monetary policies, we can superimpose **Decred** launching at the block-height when **Bitcoins** circulating supply reached 1.68million BTC (equivalent to **Decreds** initial pre-mine = BTC block 33,600) to compare progression of the stock-to-flow ratios and supply curves.
 
 What is immediately clear is that **Decreds** stock-to-flow development approximates the mean trajectory of **Bitcoin** and traverses the same set of stock-to-flow values with exception of halving events. 
 
-![BTC and DCR Supply Chart](images/03_btcdcr_supplycurves.png)
+![BTC and DCR Supply Chart](images/03_btcdcr_supplycurves.PNG)
 
 
 Plan B has shown that a fundamental power-law relationship between stock-to-flow is valid for **Bitcoin**. It reasonably follows that a similar linear regression calculation may be undertaken for **Decred** as a gauge for the monetary premium it has developed. The regression fit and constants may be compared with respect to the age of the coin and state of progress through its issuance schedule. 
@@ -105,7 +105,7 @@ There are a number of observations and considerations which must be taken into a
 
 ![Regression Analysis Results](images/05_regression_results.png)
 ![Regression Formula](images/05_regression_formula.png)
-![Regression Analysis Plot](images/06_regression_plot.png)
+![Regression Analysis Plot](images/06_regression_plot.PNG)
 
 ## Bitcoin
 All three **Bitcoin** regression models are reasonably consistent in fit and show an improved R-square coefficient as larger data-sets and more history is considered. Indeed the full history of Bitcoin very closely matches the model developed by Plan B.
