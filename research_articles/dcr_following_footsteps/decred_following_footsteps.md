@@ -3,7 +3,7 @@
 
 *14-Oct-2019*
 
-In my opinion, **Decred** is the most promising cryptocurrency project and a sound competitor next to **Bitcoin** in the free market for digital and scarce monetary assets. At an absolute mininimum, strong market competition market forces innovation and hardening of the strongest protocols whilst also providing a rational risk hedge during the nascent development of digital mony.
+In my opinion, **Decred** is the most promising cryptocurrency project and a sound competitor next to **Bitcoin** in the free market for digital and scarce monetary assets. At an absolute mininimum, strong market competition market forces innovation and hardening of the strongest protocols whilst also providing a rational risk hedge during the nascent development of digital money.
 
 As **Bitcoin**  continues to assert it's market dominance, it is the correct benchmark against which competitors must be compared. The following article is the first of three parts and the culmination of a number of months study into **Decred** from a data driven, first principles perspective.
 
