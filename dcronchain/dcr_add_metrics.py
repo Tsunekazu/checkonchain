@@ -1,5 +1,19 @@
 # Calculate a Suite of Decred Specific Metrics
-from checkonchain.dcronchain.__init__ import *
+#Data Science
+import pandas as pd
+import numpy as np
+import math
+import datetime as date
+today = date.datetime.now().strftime('%Y-%m-%d')
+
+from checkonchain.general.coinmetrics_api import * #Coinmetrics.io
+from checkonchain.general.regression_analysis import *
+from checkonchain.dcronchain.dcr_schedule import * #DCR Schedule
+from checkonchain.dcronchain.dcr_dcrdata_api import * #DCRdata.org
+
+import os
+os.getcwd()
+os.chdir('D:\code_development\checkonchain\checkonchain')
 
 """ROADMAP
 Goal:   Distil datasets down into core datasets for development of useful metrics
@@ -31,10 +45,31 @@ class dcr_add_metrics():
 
     def dcr_coin(self):
         df = Coinmetrics_api('dcr',"2016-02-08",today).convert_to_pd()
+        df['age'] = (df[['date']] - df.loc[0,['date']])/np.timedelta64(1,'D')
+        
+        print('...adding PriceUSD and CapMrktCurUSD for $0.49 (founders, 8/9-Feb-2016) and Bittrex (10-02-2016 to 16-05-2016)...')
+        #Import Early price data --> founders $0.49 for 8/9 Feb 2016 and Bitrex up to 16-May-2016
+        df_dcr_earlyprice = pd.read_csv(r"dcronchain\resources\data\dcr_pricedata_2016-02-08_2016-05-16.csv")
+        df_dcr_earlyprice['date'] = pd.to_datetime(df_dcr_earlyprice['date'],utc=True)
+        df['notes'] = str('')
+        for i in df_dcr_earlyprice['date']:
+            df.loc[df.date==i,'PriceUSD'] = float(df_dcr_earlyprice.loc[df_dcr_earlyprice.date==i,'PriceUSD'])
+            df.loc[df.date==i,'PriceBTC'] = float(df_dcr_earlyprice.loc[df_dcr_earlyprice.date==i,'PriceBTC'])
+            df.loc[df.date==i,'CapMrktCurUSD'] = df.loc[df.date==i,'PriceUSD'] * df.loc[df.date==i,'SplyCur']
+            df.loc[df.date==i,'notes'] = df_dcr_earlyprice.loc[df_dcr_earlyprice.date==i,'notes']
         return df
 
     def dcr_sply(self,to_blk):
         df = dcr_supply_schedule(to_blk).dcr_supply_function()
+
+        #Calculate projected S2F Models Valuations
+        dcr_s2f_model = regression_analysis().regression_constants()['dcr_s2f']
+        df['CapS2Fmodel'] = np.exp(float(dcr_s2f_model['coefficient'])*np.log(df['S2F_ideal'])+float(dcr_s2f_model['intercept']))
+        df['PriceS2Fmodel'] = df['CapS2Fmodel']/df['Sply_ideal']
+        #Calc S2F Model - Bitcoins Plan B Model
+        planb_s2f_model = regression_analysis().regression_constants()['planb']
+        df['CapPlanBmodel'] = np.exp(float(planb_s2f_model['coefficient'])*np.log(df['S2F_ideal'])+float(planb_s2f_model['intercept']))
+        df['PricePlanBmodel'] = df['CapPlanBmodel']/df['Sply_ideal']        
         return df
 
     def dcr_diff(self):
@@ -44,11 +79,13 @@ class dcr_add_metrics():
     def dcr_perf(self):
         df = Extract_dcrdata().dcr_performance()
         return df
-    
+
     def dcr_natv(self):
         #Step 1 - smear tickets bought in window for economic calculations
         _diff = self.dcr_diff()
         _perf = self.dcr_perf()
+        # Clean DCR hashrate data
+        _perf = _perf[_perf['pow_hashrate_THs']>1]
         _diff['ticket_count_smeared'] = _diff['ticket_count']/144
         # DCR_natv concat diff and perf on blk, dropping useless cols
         df = pd.concat([
@@ -60,6 +97,7 @@ class dcr_add_metrics():
         return df
 
     def dcr_real(self):
+        print('...Calculating Decred specific metrics - (coinmetrics + supply curve + dcrdata)...')
         _coin = self.dcr_coin()
         _diff = self.dcr_diff()
         _perf = self.dcr_perf()
@@ -72,7 +110,7 @@ class dcr_add_metrics():
         # Drop uncessecary columns, perf = exact match, Vlookup nearest lower on blk for coin
         df = pd.merge_asof(_diff.drop(['time','missed'],axis=1),_perf.drop(['time','pow_offset'],axis=1),on='blk')
         df = pd.merge_asof(df,_coin,on='blk',direction='backward')
-        df = pd.merge_asof(df,_sply[['blk','blk_reward','Sply_ideal', 'PoWSply_ideal', 'PoSSply_ideal','FundSply_ideal']],on='blk')
+        df = pd.merge_asof(df,_sply[['blk','blk_reward','Sply_ideal', 'PoWSply_ideal', 'PoSSply_ideal','FundSply_ideal','inflation_ideal','S2F_ideal']],on='blk')
         #Calculate PoS Return on Investment
         df['PoW_Income'] = df['blk_reward']*self.blkrew_ratio[0]*df['window']
         df['PoS_Income'] = df['blk_reward']*self.blkrew_ratio[1]*df['window']
@@ -81,6 +119,7 @@ class dcr_add_metrics():
 
 
     def dcr_pricing_models(self):
+        print('...Calculating Decred pricing models...')
         _real = self.dcr_real()
         df = _real
         #Calculate Ticket Based Valuation Metrics
@@ -110,10 +149,14 @@ class dcr_add_metrics():
         df['CapTop'] = df['CapAvg']*self.topcapconst
         df['PriceTop'] =df['CapTop']/df['SplyCur']
 
-        #Calc S2F Model
-        s2f_model = self.dcr_regression('S2F','CapMrktCurUSD')['model_params']
-        df['CapS2Fmodel'] = np.exp(s2f_model['coefficient']*np.log(df['S2F'])+s2f_model['intercept'])
+        #Calc S2F Model - Specific to Decred
+        dcr_s2f_model = regression_analysis().ln_regression(df,'S2F','CapMrktCurUSD','date')['model_params']
+        df['CapS2Fmodel'] = np.exp(float(dcr_s2f_model['coefficient'])*np.log(df['S2F'])+float(dcr_s2f_model['intercept']))
         df['PriceS2Fmodel'] = df['CapS2Fmodel']/df['SplyCur']
+        #Calc S2F Model - Bitcoins Plan B Model
+        planb_s2f_model = regression_analysis().regression_constants()['planb']
+        df['CapPlanBmodel'] = np.exp(float(planb_s2f_model['coefficient'])*np.log(df['S2F'])+float(planb_s2f_model['intercept']))
+        df['PricePlanBmodel'] = df['CapPlanBmodel']/df['SplyCur']
 
         # Inflow Cap and Inflow Price
         df['CapInflow'] = df['DailyIssuedUSD'].expanding().sum()
@@ -126,10 +169,12 @@ class dcr_add_metrics():
         #Calculate Miner Income
         df['MinerIncome'] = df['CapInflow'] + df['CapFee']
         df['FeesPct'] =  df['CapFee']/df['MinerIncome']
+        df['MinerCap'] = df['MinerIncome'].expanding().sum()
 
         return df
 
     def dcr_oscillators(self):
+        print('...Calculating Decred Oscillators...')
         _real = self.dcr_real()
         df = _real        
         #Calc - NVT_28, NVT_90, NVTS, RVT_28, RVT_90, RVTS
@@ -139,130 +184,5 @@ class dcr_add_metrics():
         df['RVT_28'] = df['CapRealUSD'].rolling(28).mean()/ df['TxTfrValUSD'].rolling(28).mean()
         df['RVT_90'] = df['CapRealUSD'].rolling(90).mean()/df['TxTfrValUSD'].rolling(90).mean()
         df['RVTS']   = df['CapRealUSD']/ df['TxTfrValUSD'].rolling(28).mean()
-
-        return df
-
-
-    def dcr_regression(self,x_metric,y_metric):
-        from sklearn.linear_model import LinearRegression
-        _coin = self.dcr_coin()
-
-        #Subset of coin, drop na values
-        df = _coin[['blk','date',x_metric,y_metric]].dropna(axis=0)
-        df = df.reset_index(drop=True)
-
-        x=np.array(np.log(df[x_metric])).reshape((-1,1))
-        y=np.array(np.log(df[y_metric]))
-        regression_model = LinearRegression().fit(x, y)
         
-        #Calculate progression of rsq over time 
-        df['rsq']=0
-        for i in range(0,len(df.index)):
-            #Calculate S2F RSQ development
-            df.loc[i,['rsq']]=LinearRegression().fit(
-                np.log(df.loc[:i,[x_metric]]),
-                np.log(df.loc[:i,[y_metric]])
-                ).score(
-                    np.log(df.loc[:i,[x_metric]]),
-                    np.log(df.loc[:i,[y_metric]])
-                    )
-
-        #Calculate r_sq, intercept and coefficient of models
-        model_params = pd.DataFrame(
-            index=['regression_model'],
-            data={
-                'rsq':[regression_model.score(x,y)], 
-                'intercept': [regression_model.intercept_],
-                'coefficient':[float(regression_model.coef_)]
-                })
-        return {
-            'regression_model': regression_model, 
-            'model_params':model_params, 
-            'rsq_develop':df
-            }
-
-
-
-
-"""##### CALCULATE DCR DATAFRAMES #####"""
-
-#DCR_coin = dcr_add_metrics().dcr_coin()
-#DCR_sply = dcr_add_metrics().dcr_sply(387187)
-#DCR_perf = dcr_add_metrics().dcr_perf()
-#DCR_diff = dcr_add_metrics().dcr_diff()
-#DCR_natv = dcr_add_metrics().dcr_natv()
-#DCR_real = dcr_add_metrics().dcr_real()
-DCR_pricing = dcr_add_metrics().dcr_pricing_models()
-#print('DCR_coin - by date')
-#print(DCR_coin.columns)
-#print('DCR_sply - by blk')
-#print(DCR_sply.columns)
-#print('DCR_perf - by blk')
-#print(DCR_perf.columns)
-#print('DCR_diff - by ticket window')
-#print(DCR_diff.columns)
-#print('DCR_natv - by blk')
-#print(DCR_natv.columns)
-#print('DCR_real - by ticket window')
-#print(DCR_real.columns)
-
-
-
-
-from checkonchain.dcronchain.charts import *
-x_data = [
-    DCR_pricing['blk'],DCR_pricing['blk'],
-    DCR_pricing['blk'],DCR_pricing['blk'],DCR_pricing['blk']
-        ]
-y_data = [
-    DCR_pricing['CapTicket'],DCR_pricing['CapMrktCurUSD'],
-    DCR_pricing['dcr_hodl_rating_tot'],
-    DCR_pricing['dcr_hodl_rating_pool'],
-    DCR_pricing['dcr_hodl_rating_posideal']
-    ]
-name_data = [
-    'ticket_cap','market_cap',
-    'dcr_hodl_rating_tot','dcr_hodl_rating_pool','dcr_hodl_rating_posideal'
-    ]
-color_data = [
-    'rgb(237, 109, 71)','rgb(46, 214, 161)',
-    'rgb(41, 112, 255)','rgb(65, 191, 83)','rgb(112, 203, 255)'
-    ]
-dash_data = [
-    'solid','solid','solid','solid','solid'
-    ]
-width_data = [
-    2,2,2,2,2
-    ]
-opacity_data = [
-    1,1,1,1,1
-    ]
-legend_data = [
-    True,True,True,True,True
-    ]
-
-fig = make_subplots(specs=[[{"secondary_y": False}]])
-for i in range(0,5):
-    fig.add_trace(go.Scatter(
-        x=x_data[i], y=y_data[i],
-        name=name_data[i],
-        opacity=opacity_data[i],
-        showlegend=legend_data[i],
-        line=dict(width=width_data[i],color=color_data[i],dash=dash_data[i])),
-        secondary_y=False)
-
-"""$$$$$$$$$$$$$$$ FORMATTING $$$$$$$$$$$$$$$$"""
-# Add figure title
-fig.update_layout(title_text="Decred Total Ticket Investment")
-fig.update_xaxes(
-    title_text="<b>Decred Block Height</b>",
-    type='linear'
-    #range=[0,1]
-    )
-fig.update_yaxes(
-    title_text="<b>Valuation Metric</b>",
-    type="log",
-    #range=[4,15],
-    secondary_y=False)
-fig.update_layout(template="plotly_dark")
-fig.show()
+        return df

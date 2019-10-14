@@ -7,7 +7,6 @@ blk, window, time, ticket_count, ticket_price, missed, pow_diff
 2) dcr_performance() ---> data by block height on actual blockchain performance 
   blk, time, circulation, ticket_pool, ticket_count, pow_hashrate, pow_work, pow_offset
 """
-
 #Data Science
 import pandas as pd
 import numpy as np

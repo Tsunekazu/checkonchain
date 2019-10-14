@@ -49,6 +49,13 @@ class check_standard_charts():
         self._gridwidth = 0.1
         self._zerolinecolor = 'rgb(127,127,127)'
 
+    def add_traces_lines(
+):
+
+        return self._fig
+
+
+
 
     def subplot_lines_singleaxis(
         self,
@@ -60,14 +67,15 @@ class check_standard_charts():
         dash_data,
         width_data,
         opacity_data,
-        legend_data
+        legend_data,
+        secondary_data        
         ):
         
         self._fig = make_subplots(specs=[[{"secondary_y": False}]])
-        
         """#######  Add Traces   #######"""
         for i in loop_data[0]:
             self._fig.add_trace(go.Scatter(
+                mode='lines',
                 x=x_data[i], 
                 y=y_data[i],
                 name=name_data[i],
@@ -78,7 +86,8 @@ class check_standard_charts():
                     color=color_data[i],
                     dash=dash_data[i]
                     )),
-                secondary_y=False)
+                secondary_y=secondary_data)        
+        
                 
         """#######  Title Block   #######"""
         self._fig.update_layout(

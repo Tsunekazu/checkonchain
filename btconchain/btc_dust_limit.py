@@ -1,9 +1,4 @@
 #Calculate the dust limit and estimate future value
-import pandas as pd
-import numpy as np
-import datetime as date
-today = date.datetime.now().strftime('%Y-%m-%d')
-
 
 # Plotly Libraries (+ force browser charts)
 import plotly.graph_objects as go
@@ -11,8 +6,7 @@ from plotly.subplots import make_subplots
 import plotly.io as pio
 pio.renderers.default = "browser"
 
-from checkonchain.general.coinmetrics_api import *
-from checkonchain.btconchain.btc_schedule import *
+from checkonchain.btconchain.btc_add_metrics import *
 
 #Set Constants
 blk_max = 210000*6 #max block height to calculate up to
@@ -20,7 +14,7 @@ dustlim = 172 #sats
 sats = 1e8 #sats per BTC
 
 #Pull Coinmetrics data
-BTC_coin = Coinmetrics_api('btc',"2009-01-03",today,35).convert_to_pd()
+BTC_coin = btc_add_metrics().btc_coin()
 BTC_coin = BTC_coin.loc[:,[
     'date','blk',
     'PriceUSD','PriceRealised','SplyCur',
@@ -47,9 +41,8 @@ BTC_coin['FeeSatsMean']
 BTC_coin['FeeMeanNtv']
 
 #Calculate supply function
-BTC_sply = btc_supply_schedule(blk_max).btc_supply_function()
-BTC_sply['S2F_Price']=np.exp(-1.84)*BTC_sply['S2F']**3.36
-BTC_sply['S2F_1sats_byte'] = BTC_sply['S2F_Price'] * dustlim/sats
+BTC_sply = btc_add_metrics().btc_sply(blk_max)
+BTC_sply['S2F_1sats_byte'] = BTC_sply['PricePlanBmodel'] * dustlim/sats
 BTC_sply['S2F_2sats_byte'] = BTC_sply['S2F_1sats_byte'] * 2
 BTC_sply['S2F_10sats_byte'] = BTC_sply['S2F_1sats_byte'] * 10
 BTC_sply['S2F_30sats_byte'] = BTC_sply['S2F_1sats_byte'] * 30
@@ -114,7 +107,7 @@ fig_01.add_trace(go.Scatter(
     name="BTCUSD Price",line=dict(width=2,color='rgb(102, 102, 153)')),
     secondary_y=True)
 fig_01.add_trace(go.Scatter(
-    x=BTC_sply['blk'], y=BTC_sply['S2F_Price'],
+    x=BTC_sply['blk'], y=BTC_sply['PricePlanBmodel'],
     name="S2F Model Price",line=dict(width=1,color='rgb(102, 153, 255)')),
     secondary_y=True)
 
@@ -162,7 +155,7 @@ fig_02.add_trace(go.Scatter(
     name="BTCUSD Price",line=dict(width=2,color='rgb(255, 255, 255)')),
     secondary_y=True)
 fig_02.add_trace(go.Scatter(
-    x=BTC_sply['blk'], y=BTC_sply['S2F_Price'],
+    x=BTC_sply['blk'], y=BTC_sply['PricePlanBmodel'],
     name="S2F Model Price",line=dict(width=2,dash='dash',color='rgb(102, 153, 255)')),
     secondary_y=True)
 

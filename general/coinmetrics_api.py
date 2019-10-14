@@ -1,9 +1,8 @@
 # Import Coinmetrics API
 
 #Project specific Modules
+from checkonchain.general.__init__ import *
 import coinmetrics
-import pandas as pd
-import numpy as np
 
 # Initialize a reference object, in this case `cm` for the Community API
 cm = coinmetrics.Community()
@@ -23,6 +22,7 @@ Coinmetrics API calls
 class Coinmetrics_api:
        
     def __init__(self,asset,begin_timestamp,end_timestamp):
+        print('...Fetching Coinmetrics API for '+asset+'...')
         # List all available metrics for BTC.
         self.asset = asset
         self.begin_timestamp=begin_timestamp
@@ -117,57 +117,59 @@ class Coinmetrics_api:
 
         return df
 
-BTC = Coinmetrics_api('btc',"2009-01-03","2019-10-07").convert_to_pd()
-BTC.columns
+"""#############################  
+    Coinmetrics Community API
+BTC = Coinmetrics_api('btc',"2009-01-03","2019-10-07").convert_to_pd()  
+################################"""
 
+"""Example Calculations"""
+#BTC = Coinmetrics_api('btc',"2009-01-03","2019-10-07").convert_to_pd()
+#LTC = Coinmetrics_api('ltc',"2011-10-07",today).convert_to_pd()
+#BCH = Coinmetrics_api('bch',"2017-08-01",today).convert_to_pd()
+#DASH = Coinmetrics_api('dash',"2014-01-19",today).convert_to_pd()
+#DCR = Coinmetrics_api('dcr',"2016-02-08",today).convert_to_pd()
+#XMR = Coinmetrics_api('xmr',"2014-04-18",today).convert_to_pd()
+#ZEC = Coinmetrics_api('zec',"2016-10-28",today).convert_to_pd()
+#ETH = Coinmetrics_api('eth',"2015-07-30",today).convert_to_pd()
 
-
-"""Coinmetrics Community API"""
-
-# NVTAdj
-# NVTAdj90
-# PriceBTC
-# PriceUSD
-# ROI1yr
-# ROI30d
-# SplyCur
-# TxCnt
-# TxTfr
-# TxTfrValAdjNtv
-# TxTfrValAdjUSD
-# TxTfrValMeanNtv
-# TxTfrValMeanUSD
-# TxTfrValMedNtv
-# TxTfrValMedUSD
-# TxTfrValNtv
-# TxTfrValUSD
-# VtyDayRet180d
-# VtyDayRet30d
-# VtyDayRet60d
+"""Time Metrics"""
+# date               -datetime64[ns, UTC]
+# blk                -ADDED METRIC - block height (Sum of BlkCnt)
+# btc_blk_est        -ADDED METRIC - Estimated Bitcoin block-height (Assumes 10min block-times)
 
 """Blockchain Metrics"""
-# date
-# AdrActCnt
-# BlkCnt
-# BlkSizeByte
-# BlkSizeMeanByte
-# blk
-# btc_blk_est
+# AdrActCnt          -Active Addresses
+# BlkCnt             -Block Count (Daily)
+# BlkSizeByte        -Block Size (Bytes)
+# BlkSizeMeanByte    -Block Size Average (Bytes)
+# SplyCur            -Current Coin Supply
+# inf_pct_ann        -ADDED METRIC - Inflation % annual
+# S2F                -ADDED METRIC - Stock-to-Flow Ratio
 
 """Network Valuation Models"""
-#CapMrktCurUSD      - Market Cap
-#CapRealUSD         - Realised Cap
-#CapAvg             - Average Cap (All Time Average of Market Cap)
-
+# CapMrktCurUSD      - Market Cap
+# CapRealUSD         - Realised Cap
 
 """Network Pricing Models"""
-#PriceUSD           - Coin Price USD
-#PriceRealised      - Realised Price USD
-#PriceAvg           - All time Average Price USD 
+# PriceUSD           - Coin Price USD
+# PriceRealised      - Realised Price USD
 
-"""Network Value Metrics"""
-# CapMVRVCur        - Ratio of Market Cap to Realised Cap
+"""Network Valuation Oscillators"""
+# CapMVRVCur         - MVRV Ratio - Market Cap / Realised Cap
+# NVTAdj             - NVT Ratio (Adjusted Volume)
+# NVTAdj90           - NVT Ratio 90D MA (Adjusted Volume)
 
+"""Transaction Flow Metrics"""
+# TxCnt              -Count of Transactions
+# TxTfrCnt           -Count of Transaction Transfers (Cleaned Data)
+# TxTfrValAdjNtv     -Native Units Transferred (Adjusted Data)
+# TxTfrValAdjUSD     -USD Value Transferred (Adjusted Data)
+# TxTfrValNtv        -Total Native Units Value Transferred
+# TxTfrValUSD        -Total USD Value Transferred
+# TxTfrValMeanNtv    -Mean Native Units Transferred
+# TxTfrValMeanUSD    -Mean USD Value Transferred
+# TxTfrValMedNtv     -Median Native Units Transferred
+# TxTfrValMedUSD     -Median USD Value Transferred
 
 """Miner Metrics"""
 # DiffMean          - Average Difficulty
@@ -182,3 +184,12 @@ BTC.columns
 # IssContUSD        - Daily Issued USD to Miners/Validators
 # IssTotNtvDaily    - Issued Native Coins to Miners/Validators (Daily)
 # IssTotUSD         - Daily Issued USD Value to Miners/Validators (Daily)
+# DailyIssuedNtv    - ADDED METRIC - Daily Issued Native Units (Sply_n - Sply_n-1)
+# DailyIssuedUSD    - ADDED METRIC - Daily Issued USD Value (Sply_n - Sply_n-1)
+
+"""Market Specific Metrics"""
+# ROI1yr
+# ROI30d
+# VtyDayRet180d
+# VtyDayRet30d
+# VtyDayRet60d

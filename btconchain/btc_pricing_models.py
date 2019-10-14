@@ -6,18 +6,16 @@ import datetime as date
 today = date.datetime.now().strftime('%Y-%m-%d')
 
 #Internal Modules
-from checkonchain.general.coinmetrics_api import *
-from checkonchain.dcronchain.dcr_dcrdata_api import *
-from checkonchain.dcronchain.dcr_schedule import *
+from checkonchain.btconchain.btc_add_metrics import *
 
-#Plotly libraries
+# Plotly Libraries (+ force browser charts)
 import plotly.graph_objects as go
-import plotly.express as px
 from plotly.subplots import make_subplots
+import plotly.io as pio
+pio.renderers.default = "browser"
 
 
-BTC = Coinmetrics_api('btc',"2009-01-03",today,35).add_metrics()
-DCR = Coinmetrics_api('dcr',"2016-02-08",today,12).add_metrics()
+BTC = btc_add_metrics().btc_oscillators()
 
 asset = BTC
 blk_max = int(asset['blk'][asset.index[-1]])

@@ -1,76 +1,55 @@
 #Compare the behaviour of Decred and Bitcoin
 import pandas as pd
 import numpy as np
-import datetime as date
-today = date.datetime.now().strftime('%Y-%m-%d')
+import os
+os.getcwd()
+os.chdir('D:\code_development\checkonchain\checkonchain')
 
-from plotly.subplots import make_subplots
-import plotly.graph_objects as go
-import plotly.io as pio
-pio.renderers.default = "browser"
 
-from checkonchain.general.coinmetrics_api import *
-from checkonchain.general.standard_charts import *
-from checkonchain.btconchain.btc_schedule import *
-from checkonchain.dcronchain.dcr_schedule import *
-from checkonchain.btconchain.ltc_schedule import *
-from checkonchain.dcronchain.dcr_dcrdata_api import *
+from checkonchain.dcronchain.charts.__init__ import *
+
+from checkonchain.btconchain.btc_add_metrics import *
+
+from checkonchain.dcronchain.dcr_add_metrics import *
+
+from checkonchain.ltconchain.ltc_add_metrics import *
 """**************************************************************************
                             Part 0 - Code Setup
 ***************************************************************************"""
 
-"""##### PULL INITIAL DATSETS #####"""
-#Pull BTC and DCR data from Coinmetrics
-BTC_coin = Coinmetrics_api('btc',"2009-01-03",today).add_metrics()
-DCR_coin = Coinmetrics_api('dcr',"2016-02-08",today).add_metrics()
-LTC_coin = Coinmetrics_api('ltc',"2011-10-07",today).add_metrics()
-print('Coinmetrics')
-print(BTC_coin.columns)
+"""############## PULL DATSETS ##############"""
 
-#Pull BTC and DCR data from Theoretical SUpply Curves
-BTC_sply = btc_supply_schedule(1200000).btc_supply_function()
-DCR_sply = dcr_supply_schedule(1200000*2-33600*2).dcr_supply_function()
-LTC_sply = ltc_supply_schedule(1200000*4).ltc_supply_function()
-print('Supply')
-print(BTC_sply.columns)
-
-"""##### CALCULATE DCR EQUIVALENT BTC BLOCK HEIGHT @ 1.68M BTC #####"""
-#Calculate the btc_block where supply = 1.68million BTC
-dcr_btc_blk_start = int(BTC_sply[BTC_sply['Sply_ideal']==1680000]['blk'])
-#Create DCR_Sply column of equivalent btc_blk
-#ASSUMES 1BTC block == 2 DCR blocks
-DCR_sply['btc_blk'] = dcr_btc_blk_start + 0.5*DCR_sply['blk']
-LTC_sply['btc_blk'] = 0.25*LTC_sply['blk']
-#Create XXX_data column absorbing XXX_Sply columns
-"""##### COMPILE INTO FINAL DATASETS #####"""
-#XXX_real --> COINMETRICS = PARENT
-BTC_real = pd.concat([BTC_coin.set_index('blk',drop=False),BTC_sply.set_index('blk')],axis=1,join='inner')
-BTC_real = BTC_real.reset_index(drop=True)
-DCR_real = pd.concat([DCR_coin.set_index('blk',drop=False),DCR_sply.set_index('blk')],axis=1,join='inner')
-DCR_real = DCR_real.reset_index(drop=True)
-LTC_real = pd.concat([LTC_coin.set_index('blk',drop=False),LTC_sply.set_index('blk')],axis=1,join='inner')
-LTC_real = LTC_real.reset_index(drop=True)
-# Calculate Max-Min step to plot up Bitcoin halvings
-BTC_half = btc_supply_schedule(0).btc_halvings_stepped()
-
-"""##### DECRED SPECIFIC MODULES #####"""
-DCR_perf = Extract_dcrdata().dcr_performance()
-DCR_diff = Extract_dcrdata().dcr_difficulty()
-#Update DCR_performance with date and btc_blk
-DCR_perf = pd.concat([DCR_perf.set_index('blk',drop=False),DCR_real[['blk','date','btc_blk']].set_index('blk',drop=True)],axis=1,join='inner')
-# Clean DCR hashrate data
-DCR_perf = DCR_perf[DCR_perf['pow_hashrate_THs']>1]
-
-"""##### BITCOIN HASHRATE CSV FROM BLOCKCHAIN.COM #####"""
+"""##### Bitcoin #####"""
+BTC_sply = btc_add_metrics().btc_sply(1200000) #Theoretical Supply curve
+BTC_real = btc_add_metrics().btc_pricing_models() #Actual Performance
+BTC_half = btc_supply_schedule(0).btc_halvings_stepped() # Calculate Max-Min step to plot up Bitcoin halvings
 # Blockchain.com hashrate w/ coinmetrics block (UPDATE 5 Oct 2019)
-#Note need to add coinmetrics block manually
-BTC_hash = pd.read_csv(r"D:\code_development\checkonchain\checkonchain\btconchain\data\btc_blockchaincom_hashrate.csv")
-#Drop date and apply
-BTC_hash = BTC_hash.drop(BTC_hash.index[1])
-BTC_hash = BTC_hash.drop(['date'],axis=1)
+# Note need to add coinmetrics block manually
+BTC_hash = pd.read_csv(r"btconchain\data\btc_blockchaincom_hashrate.csv")
+BTC_hash
 BTC_hash = pd.concat([BTC_hash.set_index('blk',drop=False),BTC_real[['blk','date']].set_index('blk',drop=True)],axis=1,join='inner')
 BTC_hash = BTC_hash.drop(BTC_hash.index[0])
 BTC_hash.reset_index(drop=True)
+
+
+"""##### Decred #####"""
+DCR_sply = dcr_add_metrics().dcr_sply(1200000*2-33600*2) #Theoretical Supply curve
+DCR_real = dcr_add_metrics().dcr_pricing_models() #Actual Market Performance
+DCR_natv = dcr_add_metrics().dcr_natv() #Actual On-chain Performance
+# Calculate the btc_block where supply = 1.68million BTC
+dcr_btc_blk_start = int(BTC_sply[BTC_sply['Sply_ideal']==1680000]['blk'])
+# Create btc_blk height  (1BTC block == 2 DCR blocks)
+DCR_sply['btc_blk'] = dcr_btc_blk_start + 0.5*DCR_sply['blk']
+DCR_real['btc_blk'] = dcr_btc_blk_start + 0.5*DCR_real['blk']
+
+
+"""##### Litecoin #####"""
+LTC_sply = ltc_add_metrics().ltc_sply(1200000*2) #Theoretical Supply curve
+LTC_real = ltc_add_metrics().ltc_real() #Actual Performance
+#Calculate BTC block height assuming LTC launched on same date (0.25x)
+LTC_sply['btc_blk'] = 0.25*LTC_sply['blk']
+LTC_real['btc_blk'] = 0.25*LTC_real['blk']
+
 
 """**************************************************************************
                             Part 1 - Monetary Policy
@@ -88,7 +67,7 @@ class dcrbtc_monetary_policy():
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"""
         x_data = [
             BTC_sply['blk'],
-            DCR_sply['btc_blk_est'],
+            DCR_sply['btc_blk'],
             DCR_sply['btc_blk'],
             DCR_sply['btc_blk'],
             DCR_sply['btc_blk']
@@ -255,19 +234,17 @@ class dcrbtc_monetary_policy():
             SUPPLY AND DEMAND - % of Supply Mined VS Market Cap
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"""
 
-        BTC_sply['CapS2Fmodel_ideal'] = np.exp(3.31954*np.log(BTC_sply['S2F_ideal'])+14.6227)
-        DCR_sply['CapS2Fmodel_ideal'] = np.exp(3.31954*np.log(DCR_sply['S2F_ideal'])+14.6227)
-        LTC_sply['CapS2Fmodel_ideal'] = np.exp(3.31954*np.log(LTC_sply['S2F_ideal'])+14.6227)
+        LTC_sply['CapS2FPlanbIdeal'] = np.exp(3.31954*np.log(LTC_sply['S2F_ideal'])+14.6227)
         x_data = [
             BTC_real['SplyCur']/21e6,BTC_real['SplyCur']/21e6,BTC_sply['Sply_ideal']/21e6,
             DCR_real['SplyCur']/21e6,DCR_real['SplyCur']/21e6,DCR_sply['Sply_ideal']/21e6,
             LTC_real['SplyCur']/84e6,LTC_real['SplyCur']/84e6,LTC_sply['Sply_ideal']/84e6,
             BTC_half['end_pct_totsply']
-        ]
+            ]
         y_data = [
-            BTC_real['CapMrktCurUSD'],BTC_real['CapRealUSD'],BTC_sply['CapS2Fmodel_ideal'],
-            DCR_real['CapMrktCurUSD'],DCR_real['CapRealUSD'],DCR_sply['CapS2Fmodel_ideal'],
-            LTC_real['CapMrktCurUSD'],LTC_real['CapRealUSD'],LTC_sply['CapS2Fmodel_ideal'],
+            BTC_real['CapMrktCurUSD'],BTC_real['CapRealUSD'],BTC_sply['CapS2FRegrIdeal'],
+            DCR_real['CapMrktCurUSD'],DCR_real['CapRealUSD'],DCR_sply['CapS2FRegrIdeal'],
+            LTC_real['CapMrktCurUSD'],LTC_real['CapRealUSD'],LTC_sply['CapS2FRegrIdeal'],
             BTC_half['y_arb']
             ]
         name_data = [
@@ -299,24 +276,24 @@ class dcrbtc_monetary_policy():
             1,1,0.5,
             1,1,0.5,
             1
-        ]
+            ]
         legend_data = [
             True,True,True,
             True,True,True,
             False,False,False,
             True
-        ]
+            ]
 
         title_data = [
             '<b>Market Capitalisation vs Supply Mined</b>',
             '<b>Coin Supply Issued</b>',
             '<b>Coin Market Cap</b>'
-        ]
+            ]
         range_data = [[0,1],[4,15]]
         type_data = ['linear','log']
         autorange_data = [False,False]
         loop_data = [range(0,10)]
-
+        
         fig=check_standard_charts(
             title_data,
             range_data,
@@ -415,10 +392,10 @@ class dcrbtc_monetary_policy():
         return fig
 
 
-#dcrbtc_monetary_policy().chart_dcrbtc_sply_area().show()
+dcrbtc_monetary_policy().chart_dcrbtc_sply_area().show()
 dcrbtc_monetary_policy().chart_dcrbtc_sply_s2f().show()
 dcrbtc_monetary_policy().chart_dcrbtc_sply_marketcap().show()
-#dcrbtc_monetary_policy().chart_dcrbtc_s2f_model().show()
+dcrbtc_monetary_policy().chart_dcrbtc_s2f_model().show()
 
 
 class ltcbtc_monetary_policy():

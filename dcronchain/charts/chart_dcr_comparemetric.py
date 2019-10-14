@@ -24,7 +24,7 @@ XRP = Coinmetrics_api('xrp',"2013-01-01",today).convert_to_pd().set_index('date'
 print('Coinmetrics')
 print(DCR.columns)
 
-metric="PriceUSD"
+metric="CapMrktCurUSD"
 
 DCR['dcr_btc']  = DCR[metric]/ BTC[metric]
 DCR['dcr_ltc']  = DCR[metric]/ LTC[metric]

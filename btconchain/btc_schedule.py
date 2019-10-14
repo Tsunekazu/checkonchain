@@ -1,9 +1,10 @@
 #Produce Bitcoin Supply Schedule
-from checkonchain.dcronchain import *
+#Data Science
 import pandas as pd
 import numpy as np
 import math
-
+import datetime as date
+today = date.datetime.now().strftime('%Y-%m-%d')
 """
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 BITCOIN SUPPLY FUNCTION
@@ -14,7 +15,7 @@ Returns blk, TotSply, PoWSply, PoSSply, FundSply, Inflation, S2F
 
 class btc_supply_schedule:
 
-    #Set constants for DECRED
+    #Set constants for Bitcoin
     def __init__(self,blk_max):
         self.initial_sply = 0
         self.initial_W = 0
@@ -41,6 +42,7 @@ class btc_supply_schedule:
         return response
 
     def btc_supply_function(self):
+        print('...Calculating Bitcoin Supply Curve up to block height ',self.blk_max,'...')
         response=np.zeros((self.blk_max,8))
         response[0,0]=int(0) #block height
         response[0,1]=self.btc_blk_rew(0) #Current Block Reward
@@ -49,7 +51,7 @@ class btc_supply_schedule:
         response[0,4]=self.initial_S #Total PoS Supply
         response[0,5]=self.initial_F #Total Treasury Supply
         response[0,6]=float('inf') #Inflation Rate = Infinity
-        response[0,7]=1/response[0,6] #Stock-to-Flow Ratio 
+        response[0,7]=1/1e8#response[0,6] #Stock-to-Flow Ratio - set near zero
         for i in range (1, self.blk_max):
             response[i,0] = int(i)
             response[i,1] = self.btc_blk_rew(i)
@@ -65,6 +67,7 @@ class btc_supply_schedule:
         return df
     
     def btc_halvings(self):
+        print('...Calculating Bitcoin halvings...')
         data = np.zeros((34,8))
         for i in range(0,34):
             data[i,0] = int(self.halving*(i)) # start blk
@@ -106,8 +109,5 @@ class btc_supply_schedule:
         return pd.DataFrame(data=data,columns=cols)
 
 #BTC = btc_supply_schedule(1200000).btc_supply_function()
-
-BTC_half = btc_supply_schedule(0).btc_halvings()
-BTC_half.head(10)
-BTC_step = btc_supply_schedule(0).btc_halvings_stepped()
-BTC_step.head(10)
+#BTC_half = btc_supply_schedule(0).btc_halvings()
+#BTC_step = btc_supply_schedule(0).btc_halvings_stepped()

@@ -1,8 +1,10 @@
 #Produce Decred Supply Schedule
-from checkonchain.dcronchain import *
+#Data Science
 import pandas as pd
 import numpy as np
 import math
+import datetime as date
+today = date.datetime.now().strftime('%Y-%m-%d')
 
 """
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -42,6 +44,7 @@ class dcr_supply_schedule:
         return response
 
     def dcr_supply_function(self):
+        print('...Calculating Decred Supply Curve up to block height ',self.blk_max,'...')
         response=np.zeros((self.blk_max,8))
         response[0,0]=int(0) #block height
         response[0,1]=self.dcr_blk_rew(0) #Current Block Reward
