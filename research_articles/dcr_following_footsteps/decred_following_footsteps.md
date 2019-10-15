@@ -111,7 +111,7 @@ By plotting the market valuation against stock-to-flow ratio in log-log space, w
 ## Bitcoin
 All three **Bitcoin** regression models show a consistent fit and generally agree with Plan B's model. A positive correlation exists between the R-squared coefficient and larger input data-sets with more price history. Indeed the full history of Bitcoin very closely matches the model developed by Plan B with an R-squared of 0.899.
 
-Plan Bs original model utilised monthly price data (first of each month) whereas this study considers the average daily close price data. Whilst the outcome is consistent, the pre-halving model using the set of daily **Bitcoin** data provides an R-squared value of only 0.6624, whilst the fit using monthly price data is 0.894. This highlights the importance of temporal distribution of input data which has shown to make statistically significant differences to the model fit.
+[Plan Bs original model](https://github.com/100trillionUSD/bitcoin) utilised monthly price data (first of each month) whereas this study considers the average daily close price data. Whilst the outcome is consistent, the pre-halving model using the set of daily **Bitcoin** data provides an R-squared value of only 0.6624, whilst the fit using monthly price data is 0.894. This highlights the importance of temporal distribution of input data which has shown to make statistically significant differences to the model fit.
 
 At halving events there is a significant change to Bitcoin's Stock-to-flow ratio which is not immediately followed by an equivalent shift in network valuation. Therefore one must be cautious when selecting data to avoid heavily weighting the analysis by data immediately after a halving event.
 
