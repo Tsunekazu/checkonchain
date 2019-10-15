@@ -23,7 +23,7 @@ What I explore further in this article, is the depth to which **Decred's** marke
 
 ## Disclosure
 
-*This paper was written and researched as part of the authors [research proposal](https://proposals.decred.org/proposals/78b50f218106f5de40f9bd7f604b048da168f2afbec32c8662722b70d62e4d36) accepted by the Decred DAO. Thus, the writer was paid in DCR for their billed time undertaking the research. Nevertheless, the study aims to be objective and mathematically rigorous based on publicly available market and blockchain data. All findings can be readily verified by readers in the attached [spreadsheet](https://github.com/checkmatey/checkonchain/tree/master/research_articles/dcr_following_footsteps) and all assumptions shall be clearly stated.*
+*This paper was written and researched as part of the author's [research proposal](https://proposals.decred.org/proposals/78b50f218106f5de40f9bd7f604b048da168f2afbec32c8662722b70d62e4d36) accepted by the Decred DAO. Thus, the writer was paid in DCR for their billed time undertaking the research. Nevertheless, the study aims to be objective and mathematically rigorous based on publicly available market and blockchain data. All findings can be readily verified by readers in the attached [spreadsheet](https://github.com/checkmatey/checkonchain/tree/master/research_articles/dcr_following_footsteps) and all assumptions shall be clearly stated.*
 
 # Why Decred?
 **Decred** is founded on the same core sound money principles as **Bitcoin** yet differentiates significantly in three areas:
@@ -75,7 +75,7 @@ What is immediately clear is that **Decreds** stock-to-flow development approxim
 
 Stock-to-flow (S2F) ratio is the ratio between the 'above ground'/circulating supply of an asset and the annual inflation rate, thus representing the number of years of production required to double the current supply. It is a concept generally suited to commodities and fixed supply crypto-assets and may be throught of as a measure of Scarcity. A higher the S2F ratio suggests a scarcer asset and a consistent S2F ratio is over time indicates a resistance to inflation (hardness).
 
-[Plan B has shown](https://medium.com/@100trillionUSD/modeling-bitcoins-value-with-scarcity-91fa0fc03e25) that a fundamental power-law relationship between stock-to-flow is observable for **Bitcoin**. Subsequent statistical checks have further validated this model by confirming S2F and Value for **Bitcoin** are co-integrated ([Nick,2019](https://medium.com/@phraudsta/falsifying-stock-to-flow-as-a-model-of-bitcoin-value-b2d9e61f68af); [BurgerCrypto, 2019](https://medium.com/burgercrypto-com/reviewing-modelling-bitcoins-value-with-scarcity-part-ii-the-hunt-for-cointegration-66a8dcedd7ef)). 
+[Plan B has shown](https://medium.com/@100trillionUSD/modeling-bitcoins-value-with-scarcity-91fa0fc03e25) that a fundamental power-law relationship between stock-to-flow is observable for **Bitcoin**. Subsequent statistical checks have further validated this model by confirming S2F and Value for **Bitcoin** are co-integrated ([Nick, 2019](https://medium.com/@phraudsta/falsifying-stock-to-flow-as-a-model-of-bitcoin-value-b2d9e61f68af); [BurgerCrypto, 2019](https://medium.com/burgercrypto-com/reviewing-modelling-bitcoins-value-with-scarcity-part-ii-the-hunt-for-cointegration-66a8dcedd7ef)). 
 
 Given similarities in monetary policy and stock-to-flow ratio, it reasonably follows that a similar linear regression calculation may be undertaken for **Decred**. This provides a gauge for the monetary premium developed especially if equivalent statistical rigor is established. The regression fit and constants should be compared with respect to the age of the coin and state of progress through its issuance schedule. 
 
@@ -115,7 +115,7 @@ All three **Bitcoin** regression models show a consistent fit and generally agre
 
 At halving events there is a significant change to Bitcoin's Stock-to-flow ratio which is not immediately followed by an equivalent shift in network valuation. Therefore one must be cautious when selecting data to avoid heavily weighting the analysis by data immediately after a halving event.
 
-Nevertheless, given the full suite of price data for **Bitcoin** it is the authors opinion that Bitcoin has an undeniable and quantifiable monetary premium and is indeed an appropriate baseline against which other models should be compared. This analysis provides yet another independent verification that a strong relationship exists between stock-to-flow and network valuation for **Bitcoin**.
+Nevertheless, given the full suite of price data for **Bitcoin** it is the author's opinion that Bitcoin has an undeniable and quantifiable monetary premium and is indeed an appropriate baseline against which other models should be compared. This analysis provides yet another independent verification that a strong relationship exists between stock-to-flow and network valuation for **Bitcoin**.
 
 ## Decred
 
@@ -135,7 +135,7 @@ This model must be revised in the next 12-24 months as it is likely the regressi
 **Litecoin**
 Based on the results and sensitivity studies presented, Litecoin does not seem to be developing what the author considers a convincing or competitive monetary premium. This is consistent with the [original screening analysis](https://medium.com/@_Checkmatey_/monetary-premiums-can-altcoins-compete-with-bitcoin-54c97a92c6d4) that this study provides additional rigor behind the low R-squared value. It is noted that the model fit is not improved by any significant magnitude through adjusting the resolution of data inputs.
 
-It is the authors opinion that **Litecoin** does not display a convincing relationship between stock-to-flow scarcity and market valuation.
+It is the author's opinion that **Litecoin** does not display a convincing relationship between stock-to-flow scarcity and market valuation.
 
 ## R-Squared Development over time
 
@@ -171,11 +171,11 @@ Given the importance of the timescale of data considered for these models, this 
 
 As a final projection of the path a head, all three protocols at the point of 50% issuance have interestingly attained a similar market value between $130M and $180M. From this time, **Bitcoin** has continued to perform strongly whilst **Litecoin** has shown progressively weaker performance over time.
 
-**Decreds** is only just getting started on its journey having just crossed the point of 50% DCR issued.
+**Decred** is only just getting started on its journey having just crossed the point of 50% DCR issued.
 
 ![Market Cap vs Supply Issued](images/08_sply_mcap.png)
 
-The test for **Decred** is now which of these two paths it follows. Based on this analysis, it is the authors opinion that probabilities favor **Decred** following in **Bitcoins** footsteps on the path to becoming a global, immutable, digital, and secure sound money store of value protocol. 
+The test for **Decred** is now which of these two paths it follows. Based on this analysis, it is the author's opinion that probabilities favor **Decred** following in **Bitcoins** footsteps on the path to becoming a global, immutable, digital, and secure sound money store of value protocol. 
 
 
 ## Signature
@@ -192,7 +192,7 @@ The test for **Decred** is now which of these two paths it follows. Based on thi
 >[3FJaqvbMUTPZ6f7rdca8tifS5PnVDFtN6P](https://blockstream.info/address/3FJaqvbMUTPZ6f7rdca8tifS5PnVDFtN6P)
 
 ## References
-[1]  Modelling Bitcoin’s Value with Scarcity, https://medium.com/@100trillionUSD/modeling-bitcoins-value-with-scarcity-91fa0fc03e25 – Plan B, 2009
+[1]  Modelling Bitcoin’s Value with Scarcity, https://medium.com/@100trillionUSD/modeling-bitcoins-value-with-scarcity-91fa0fc03e25 – Plan B, 2019
 
 [2] Modelling Bitcoins stock-to-flow and other metrics – various charts and analysis, https://twitter.com/100trillionUSD, Plan B, 2019 onwards.
 
