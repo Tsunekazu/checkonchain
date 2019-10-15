@@ -110,3 +110,4 @@ class btc_supply_schedule:
 #BTC = btc_supply_schedule(1200000).btc_supply_function()
 #BTC_half = btc_supply_schedule(0).btc_halvings()
 #BTC_step = btc_supply_schedule(0).btc_halvings_stepped()
+#BTC_half

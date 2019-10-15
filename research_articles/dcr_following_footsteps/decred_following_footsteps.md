@@ -108,7 +108,7 @@ By plotting the market valuation against stock-to-flow ratio in log-log space, w
 ![Regression Formula](images/05_regression_formula.png)
 ![Regression Analysis Plot](images/06_regression_plot.png)
 
-## ₿itcoin
+## Bitcoin
 All three **Bitcoin** regression models show a consistent fit and generally agree with Plan B's model. A positive correlation exists between the R-squared coefficient and larger input data-sets with more price history. Indeed the full history of Bitcoin very closely matches the model developed by Plan B with an R-squared of 0.899.
 
 Plan Bs original model utilised monthly price data (first of each month) whereas this study considers the average daily close price data. Whilst the outcome is consistent, the pre-halving model using the set of daily **Bitcoin** data provides an R-squared value of only 0.6624, whilst the fit using monthly price data is 0.894. This highlights the importance of temporal distribution of input data which has shown to make statistically significant differences to the model fit.
@@ -121,37 +121,100 @@ Nevertheless, given the full suite of price data for **Bitcoin** it is the autho
 
 **Decred** has shown a statistically significant relationship between Stock-to-Flow and market valuation with an R-squared value of 0.70 considering only the first 3.67 years of price data. It can be seen that this relationship is a comparable fit to **Bitcoins** using data up to the time of the first halving with an R-squared of 0.66.
 
+The overall fractal for **Decreds** S2F relationship appears to oscillate around the mean regression line which appears smoother over time than **Bitcoin** or **Litecoin** likely a result of the smooth issuance curve and lack of severe halving event supply shocks.
+
 The early tail (low S2F value) of the data plotted above speaks to the difference in market dynamics at the time when first price data first became available for each protocol. Despite high early inflation, **Decreds** tail is consistent around a market value of $5Million until the S2F ratio approaches ~2.0 at which point valuation accelerates during the 2016-17 bull run. **Bitcoin** on the other hand experienced a far slower growth during the 2011-12 bull market with a smaller pool of participants. Early **Bitcoin** price data sources range from Laszlo's 10,000 BTC pizza to early Mt Gox pricing leading to a lower relative value at similar S2F values.
 
-It must therefore be noted that the gradient of the **Decred** relationship is heavily weighted by this tail end especially during the first 3-4 years of life. **Decred** has only existed through a single **Bitcoin** bull-bear cycle and thus has a limited dataset whilst **Bitcoin** has largely overcome this effect with its now 10+ years of price data and multiple market cycles.
+It must therefore be noted that the gradient of the **Decred** relationship is heavily weighted by this tail end especially during the first 3-4 years of life. **Decred** has only existed through a single **Bitcoin** bull-bear cycle and thus has a comparatively limited dataset whilst **Bitcoin** has largely overcome this effect with its now 10+ years of price data and multiple market cycles.
 
-The overall fractal of **Decreds** S2F relationship appears to oscillate around the mean regression line. **Decreds** relationship over time appears smoother than **Bitcoin** or **Litecoin**, likely a result of the smooth issuance curve and lack of severe halving event supply shocks. 
+In summary, **Decred** is showing signs of developing a strong monetary premium with respect to it's scarcity measured by stock-to-flow ratio. 
 
-This model must be revised in the next 12-24 months as it is likely the regression fit will be improved if **Decred** experiences strong market performance over this time. Similarly, poor future performance would negatively influence the regression fit.
-
-In summary, **Decred** is showing early signs of developing a strong moentary premium based on it's scarcity as measured by stock-to-flow ratio. The coming years will be critical in validating this model, particularly over the next 12-24 months.
+This model must be revised in the next 12-24 months as it is likely the regression fit will be improved if **Decred** experiences strong market performance over this time. Similarly, poor future performance will negatively influence the regression fit.
 
 ## Litecoin
 **Litecoin**
-Based on the results and sensitivity studies presented it is concluded that Litecoin has not developed what the author considers a convincing monetary premium. This is consistent with the [original screening analysis](https://medium.com/@_Checkmatey_/monetary-premiums-can-altcoins-compete-with-bitcoin-54c97a92c6d4) which is now statistically validated by the low R-square which is not imporved by any significant magnitide by adjusting the resolution of data inputs. 
+Based on the results and sensitivity studies presented, Litecoin does not seem to be developing what the author considers a convincing or competitive monetary premium. This is consistent with the [original screening analysis](https://medium.com/@_Checkmatey_/monetary-premiums-can-altcoins-compete-with-bitcoin-54c97a92c6d4) that this study provides additional rigor behind the low R-squared value. It is noted that the model fit is not improved by any significant magnitide through adjusting the resolution of data inputs.
 
-It is the authors opinion that Litecoin does not display a convincing relationship between stock-to-flow scarcity and market valuation.
+It is the authors opinion that **Litecoin** does not display a convincing relationship between stock-to-flow scarcity and market valuation.
 
-## R-Square Development over time
+## R-Squared Development over time
 
-To quantify the relative model fits and account for different timescales of data considered in the analysis, the development of the R-square coefficient has been plotted against Stock-to-Flow. This shows the confidence in a S2F-Value relationship for **Bitcoin**, **Decred** has increased over time with a depression in the lead up to the point of 50% of supply mined. 
-
-For **Bitcoin** this is explained by the first halving event which increases S2F with no direct impact on value leading to an immediate undervaluation. For **Decred** this may reasonably be attributed to the generally low market engagement towards alt-coins during the pre-2020 halving **Bitcoin** bull market. Again, **Litecoin** can be seen to perform poorly over it's entire trading history with a peak R-square value of around 0.46.
+To quantify the relative model fits and account for different timescales of data considered in the analysis, the R-squared coefficient has been calculated over a expanding dataset and then plotted against Stock-to-Flow. 
 
 ![R-Square Development](images/07_rsq_plot.png)
 
-By comparing the deviation of each protocols valuation from the model (full history) as a ratio to the standard model error, we can observe repeated fractals indicating undervaluation and overvaluation.
+Confidence in a S2F-Value relationship for **Bitcoin**, **Decred** has generally increased over time with a notable deviation in the lead up to the point of 50% of supply mined. This indicates a consistent demand is present for both protocols to absorb the relatively high coin inflation during the first four years and maintain or grow network valuation.
+
+For **Bitcoin** the drift at 50% mined is explained by the first halving event which increases S2F with no direct impact on value leading to an immediate undervaluation accoridng to the model. For **Decred** this may reasonably be attributed to the 2018-19 bear market conditions and generally low market engagement towards alt-coins during the pre-2020 halving **Bitcoin** bull market. 
+
+**Litecoin** can be seen to perform poorly over it's entire trading history with a peak R-squared value of around 0.46. This plot indicates that market valuation does not respond strongly following **Litecoin** halving events suggesting sustained accumulation is not taking place.
+
+By comparing the residuals and deviation of **Bitcoin** and **Decred** market value from the S2F model as a ratio of standard model error, we can observe repeated fractals indicating undervaluation and overvaluation.
 
 ![Standard Deviations](images/09_standard_deviations.png)
 
+Both protocols have seen a relative undervaluation at ±1.5 standard deviations from the model and has historically represented a period of maximum opportunity. Of note is that over-time, Bitcoins market value has shown to stabilise as the protocol grows in size and audience with each market cycle.
 
-## Projections
+![Residuals Plot](images/07_residuals_plot.png)
 
+## Conclusions
+
+This paper has compared the monetary policies and intrinsic scarcity properties of **Bitcoin** and **Decred** in the context of a stock-to-flow relationship.
+
+A suite of linear regression analyses and sensitivity studies have been performed for **Bitcoin**, **Decred** and **Litecoin** to provide mathematical rigor to the observed relationships.
+
+**Bitcoin** has clearly developed a strong monetary premium with extremely high R-squared values around 0.90 when considering daily pricing and blockchain data across its full history. Of note however is that at an equivalent age as Decred at the time of writing (3.67 years), the regressin model for **Bitcoin** has an R-squared value of 0.66 which is comparable to **Decreds** fit of 0.70. This suggests that a complete four year dataset and ideally two full market cycles are required to establish confidence in a Stock-to-Flow model.
+
+**Decred** in its nascent stage is developing a convincing monetary premium commeasurate with Bitcoin in its early years. Given the increased competition with other alt-coins for market share, this is quite a remarkable observation. A conclusion of this study is thaht there is an underlying source of buy demand for DCR which is certainly higher than that for **Litecoin** and even **Bitcoin** at the same age.
+
+Given the importance of the timescale of data considered for these models, this analysis must be revisited in 12 to 24 months to quantify whether **Decred** retains, improves or loses its observed monetary premium. Additional studies into the statistical rigor such as cointegration must be included at that time to validate the model.
+
+As a final projection of the path a head, all three protocols at the point of 50% issuance have interestingly attained a similar market value between $130M and $180M. 
+
+From this time, **Bitcoin** has continued to perform strongly whilst **Litecoin** has shown progressively weaker performance over time.
+
+**Decreds** is only just getting started having just crossed the point of 50% DCR issued.
 
 ![Market Cap vs Supply Issued](images/08_sply_mcap.png)
 
+The test for **Decred** is now which of these two paths it follows. Based on this analysis, it is the authors opinion that probabilities favor **Decred** following in **Bitcoins** footsteps on the path to becoming a global, immutable, digital, and secure sound money store of value protocol. 
+
+
+## Signature
+**Decred**
+> ![Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE](images/dcr_qr.png)
+
+> [Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE](https://explorer.dcrdata.org/address/Dsmx4zrTuS6UJxGHNutc5pwH73VHx7JN5XE)
+
+> Signed Message (Article Title): H1/texZCIp0fkCgaVccnsal4vr78KIikW6gwawrxC6VyajhsA1ZgUm/B+2wzUV84nkuXoUoo0baN32mOd5LEXXM=wo=
+
+**Bitcoin**
+>![3FJaqvbMUTPZ6f7rdca8tifS5PnVDFtN6P](images/btc_qr.png)
+
+>[3FJaqvbMUTPZ6f7rdca8tifS5PnVDFtN6P](https://blockstream.info/address/3FJaqvbMUTPZ6f7rdca8tifS5PnVDFtN6P)
+
+## References
+[1]  Modelling Bitcoin’s Value with Scarcity, https://medium.com/@100trillionUSD/modeling-bitcoins-value-with-scarcity-91fa0fc03e25 – Plan B, 2009
+
+[2] Modelling Bitcoins stock-to-flow and other metrics – various charts and analysis, https://twitter.com/100trillionUSD, Plan B, 2019 onwards.
+
+[3] Monetary premiums, can altcoins compete with Bitcoin?, https://medium.com/@_Checkmatey_/monetary-premiums-can-altcoins-compete-with-bitcoin-54c97a92c6d4, Checkmate, 2019
+
+[4] Reviewing “Modelling Bitcoin’s Value with Scarcity” —Part II: The hunt for cointegration, https://medium.com/burgercrypto-com/reviewing-modelling-bitcoins-value-with-scarcity-part-ii-the-hunt-for-cointegration-66a8dcedd7ef, BurgerCrypto.com, 2019
+
+[5] Falsifying Stock-to-Flow As a Model of Bitcoin Value, https://medium.com/@phraudsta/falsifying-stock-to-flow-as-a-model-of-bitcoin-value-b2d9e61f68af Nick, 2019
+
+[6] Introduction to Crypto-Accounting: An Analysis of Decred as an Accounting System, https://medium.com/@permabullnino/introduction-to-crypto-accounting-an-analysis-of-decred-as-an-accounting-system-4d3e67fce28, Permabull Nino, 2019
+
+[7] Decred’s hybrid protocol, a superior deterrent to majority attacks, https://medium.com/decred/decreds-hybrid-protocol-a-superior-deterrent-to-majority-attacks-9421bf486292, Zubair Zia, 2018
+
+[8] Comparing Double Spend Resistance: Decred VS Bitcoin — Part 1, https://medium.com/coinmonks/comparing-double-spend-resistance-decred-vs-bitcoin-part-1-330c8081b2a9, Fiach_Dubh
+, 2019
+
+[9] Does Satoshi have a million bitcoin?, https://blog.bitmex.com/satoshis-1-million-bitcoin/, BitMEX research, 2018
+
+[10] Bitcoin's Distribution was Fair, https://blog.picks.co/bitcoins-distribution-was-fair-e2ef7bbbc892, Dan Held, 2018
+
+[11] Decred documentation, https://docs.decred.org/
+
+[12] Coinmetrics Community Dataset, https://coinmetrics.io

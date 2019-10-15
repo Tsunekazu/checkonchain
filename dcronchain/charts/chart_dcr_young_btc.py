@@ -47,7 +47,7 @@ DCR_real['btc_blk'] = dcr_btc_blk_start + 0.5*DCR_real['blk']
 
 """##### Litecoin #####"""
 print('CALCULATING LITECOIN DATAFRAMES')
-LTC_sply = ltc_add_metrics().ltc_sply(1200000*2) #Theoretical Supply curve
+LTC_sply = ltc_add_metrics().ltc_sply(1200000*4) #Theoretical Supply curve
 LTC_real = ltc_add_metrics().ltc_real() #Actual Performance
 #Calculate BTC block height assuming LTC launched on same date (0.25x)
 LTC_sply['btc_blk'] = 0.25*LTC_sply['blk']
@@ -314,9 +314,9 @@ class dcrbtc_monetary_policy():
                 )
         fig.update_xaxes(dtick=0.1)
         fig.update_layout(title_text=title_data[0])
-        fig.update_layout(
-            paper_bgcolor='rgb(0,0,0)',
-            plot_bgcolor='rgb(0,0,0)')
+        #fig.update_layout(
+        #    paper_bgcolor='rgb(0,0,0)',
+        #    plot_bgcolor='rgb(0,0,0)')
         return fig
 
     def chart_dcrbtc_s2f_model(self):
