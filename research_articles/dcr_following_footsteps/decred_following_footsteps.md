@@ -87,46 +87,45 @@ For comparison, the same calculation will be undertaken for **Litecoin** which l
 
 The regression analysis has been undertaken as follows:
 
-1) Data is aquired for BTC, DCR and LTC from the coinmetrics.io community dataset. Early price data for Bitcoin is supplemented with data originally used in Plan B's model. Similarly, DCR data is supplemented with the genesis pricing of $0.49/DCR and early data from Bittrex not included in the coinmetrics dataset. Data is thus considered on a daily basis.
+1) Data is aquired for BTC, DCR and LTC from the coinmetrics.io community dataset. Early price data for Bitcoin is supplemented with [data originally used in Plan B's model](https://github.com/100trillionUSD/bitcoin). Similarly, DCR data is supplemented with the genesis pricing of $0.49/DCR and early data from Bittrex not included in the coinmetrics dataset. Data is thus considered on a daily basis.
 
 2) Calculate the daily annual inflation rate of native coins (assuming 365.25 days/yr) and the corresponding Stock-to-Flow ratio. Assuming a power-law relationship exists, the natural logarithm of both S2F and Market Cap are taken and used in linear regression models.
 
 3) Considering the quality of a regression analysis is dependant on the size and quality of the input dataset, an additional set of calculations are undertaken looking at the R-Squared coefficient ovet time. This aims to observe the quality of the Bitcoin model fit with due consideration of the age difference between **Bitcoin**, **Decred** and **Litecoin**. It is expected that if a sound monetary premium is developing, the model fit would improve as more market data comes to light leading to an increasing R-square coefficient.
 
-4) Results are presented normalised against Stock-to-Flow Ratio or the proportion of total supply issued to normalise for the age of each protocol. This compares the model on a like-for-like basis.
+4) Results are presented normalised against Stock-to-Flow Ratio or the proportion of total supply issued to normalise for the age of each protocol with commentary provided.
 
 The model spreadsheet is available [here](regression_analysis.xlsx) for inspection and verification.
 
-# Analysis Result
+# Analysis Results
 ## Stock-to-Flow Relationships
 
-The results of the linear regression analysis including model parameters and R-square fit coefficients are presented in the table and figure below. For Bitcoin and Litecoin, a second regression analysis considering only the first four years of data (pre-halving 1) to align with Plan B's original analysis which showed four years of data provided a very strong model fit.
+The results of the linear regression analysis including model parameters and R-squared fit coefficients are presented in the table and figure below. For Bitcoin and Litecoin, a second regression analysis is undertaken considering only the first four years of data (pre-halving #1) to align with Plan B's follow up analysis which showed four years of data provided a very strong model fit.
 
 By plotting the market valuation against stock-to-flow ratio in log-log space, we can verify visually that the linear regression calculation indeed matches the available market data for each protocol.
-
-There are a number of observations and considerations which must be taken into account when interpreting these results.
 
 ![Regression Analysis Results](images/05_regression_results.png)
 ![Regression Formula](images/05_regression_formula.png)
 ![Regression Analysis Plot](images/06_regression_plot.png)
 
-## Bitcoin
-All three **Bitcoin** regression models are reasonably consistent in fit and show an improved R-square coefficient as larger data-sets and more history is considered. Indeed the full history of Bitcoin very closely matches the model developed by Plan B.
+## ₿itcoin
+All three **Bitcoin** regression models show a consistent fit and generally agree with Plan B's model. A positive correlation exists between the R-squared coefficient and larger input data-sets with more price history. Indeed the full history of Bitcoin very closely matches the model developed by Plan B with an R-squared of 0.899.
 
-Plan Bs original model utilised monthly price data (first of each month) whereas this study considers the average daily close price data. Whilst the overall outcome is similar, the pre-halving model fit using the set of daily **Bitcoin** daily data provides an R-square value of only 0.6624, a marked reduction from ~0.90 when considering a monthly distribution of data for the full history.
+Plan Bs original model utilised monthly price data (first of each month) whereas this study considers the average daily close price data. Whilst the outcome is consistent, the pre-halving model using the set of daily **Bitcoin** data provides an R-squared value of only 0.6624, whilst the fit using monthly price data is 0.894. This highlights the importance of temporal distribution of input data which has shown to make statistically significant differences to the model fit.
 
-This highlights the importance of temporal distribution of the data which has shown to make statistically significant differences to the model fit. At halving events for example, there is a significant change to Bitcoin's Stock-to-flow ratio which is not immediately followed by an equivalent shift in network valuation. Therefore one must be cautious to select data that is not heavily weighted of skewed by data immediately after a halving event.
+At halving events there is a significant change to Bitcoin's Stock-to-flow ratio which is not immediately followed by an equivalent shift in network valuation. Therefore one must be cautious when selecting data to avoid heavily weighting the analysis by data immediately after a halving event.
 
-Nevertheless, given the full suite of price data for **Bitcoin** it is the authors opinion that Bitcoin has an undeniable monetary premium and indeed is an appropriate baseline to which other models should be compared. This analysis provides yet another independant verification that a strong relationship exists between stock-to-flow and network valuation for **Bitcoin**.
+Nevertheless, given the full suite of price data for **Bitcoin** it is the authors opinion that Bitcoin has an undeniable and quantifiable monetary premium and is indeed an appropriate baseline against which other models should be compared. This analysis provides yet another independant verification that a strong relationship exists between stock-to-flow and network valuation for **Bitcoin**.
 
 ## Decred
-**Decred** has shown a statistically significant relationship between Stock-to-Flow and market valuation with an R-square value of 0.70 considering only the first three years of price data. It may be seen that this relationship is comparable to **Bitcoins** at the time of the first halving with an R-square of 0.66.
 
-The early tail of the data plotted above speaks to the difference in market dynamics at the time when first price data first became available for each protocol. Despite high early inflation, **Decreds** tail is consistent around a market value of $5Million until the S2F ratio approaches 2.0 at which point price accelerates during the 2016-17 bull run. **Bitcoin** on the other hand experienced a far slower growth during the 2011-12 bull market with a smaller pool of participants. Early **Bitcoin** price data sources range from Laszlo's 10,000 BTC pizza to early Mt Gox pricing. 
+**Decred** has shown a statistically significant relationship between Stock-to-Flow and market valuation with an R-squared value of 0.70 considering only the first 3.67 years of price data. It can be seen that this relationship is a comparable fit to **Bitcoins** using data up to the time of the first halving with an R-squared of 0.66.
 
-It must therefore be noted that the gradient of these relationship is heavily weighted by this tail end especially during the first 3-4 years of life, an effect **Bitcoin** has overcome with its not 10+ years of price data. It remains to be seen whether **Decred** posts strong performance into the future which will refine whether the model remains statistically valid.
+The early tail (low S2F value) of the data plotted above speaks to the difference in market dynamics at the time when first price data first became available for each protocol. Despite high early inflation, **Decreds** tail is consistent around a market value of $5Million until the S2F ratio approaches ~2.0 at which point valuation accelerates during the 2016-17 bull run. **Bitcoin** on the other hand experienced a far slower growth during the 2011-12 bull market with a smaller pool of participants. Early **Bitcoin** price data sources range from Laszlo's 10,000 BTC pizza to early Mt Gox pricing leading to a lower relative value at similar S2F values.
 
-The overall shape of **Decred**s relationship with S2F appears to be oscillating around the mean regression line. **Decreds** relationship over time appears smoother than **Bitcoin** or **Litecoin**, potentially a result of the smooth issuance curve and lack of severe halving event supply shocks. 
+It must therefore be noted that the gradient of the **Decred** relationship is heavily weighted by this tail end especially during the first 3-4 years of life. **Decred** has only existed through a single **Bitcoin** bull-bear cycle and thus has a limited dataset whilst **Bitcoin** has largely overcome this effect with its now 10+ years of price data and multiple market cycles.
+
+The overall fractal of **Decreds** S2F relationship appears to oscillate around the mean regression line. **Decreds** relationship over time appears smoother than **Bitcoin** or **Litecoin**, likely a result of the smooth issuance curve and lack of severe halving event supply shocks. 
 
 This model must be revised in the next 12-24 months as it is likely the regression fit will be improved if **Decred** experiences strong market performance over this time. Similarly, poor future performance would negatively influence the regression fit.
 
